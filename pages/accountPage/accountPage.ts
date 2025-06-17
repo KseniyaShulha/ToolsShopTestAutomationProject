@@ -2,10 +2,10 @@ import { Page, expect } from '@playwright/test';
 import BasePage from '../basePage';
 
 
-export class AccountPage extends BasePage{
+export class AccountPage extends BasePage {
 
     // Constructor for the class
-    constructor(page: Page){
+    constructor(page: Page) {
         super(page)
     };
 
@@ -13,5 +13,5 @@ export class AccountPage extends BasePage{
     readonly dashboardNavigationMenu = this.page.locator(`[class="btn-group-vertical"]`)
 
     // Methods
-  
+
 }

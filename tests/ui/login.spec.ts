@@ -1,31 +1,34 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/auth/loginPage';
 import { HomePage } from '../../pages/homePage/homePage';
+import { AccountPage } from '../../pages/accountPage/accountPage';
 
-// User credentials for this test
-const email = 'customer@practicesoftwaretesting.com'
+const email = 'customer@practicesoftwaretesting.com';
 const password = 'welcome01'
 
 test('TOOLS-3 login as customer', async ({ page }) => {
   // Create instance of login page class
   const loginPage = new LoginPage(page);
+
+  // Create instance of home page class
   const homePage = new HomePage(page);
+
+  // Create instance of account page class
+  const accountPage = new AccountPage(page);
 
   console.log('Customer opens the home page');
   await page.goto('/');
-  
-  console.log('Customer clicks on login link');
+
   await homePage.clickSignInButton();
-  // await page.locator(`[href="/auth/login"]`).click();
 
   console.log('Customer enters email');
-  await page.locator(`[id="email"]`).fill(email);
+  await loginPage.fillEmailField();
 
   console.log('Verify that the email field is filled correctly');
   await expect(page.locator(`[id="email"]`)).toHaveValue(email);
 
   console.log('Customer enters password');
-  await page.locator(`[id="password"]`).fill(password);
+  await loginPage.fillPasswordField();
 
   console.log('Verify that the password field is filled correctly');
   await expect(page.locator(`[id="password"]`)).toHaveValue(password);
@@ -33,7 +36,7 @@ test('TOOLS-3 login as customer', async ({ page }) => {
   await loginPage.clickSubmitButton();
 
   console.log('Verify that the customers name apears in id menu');
-  await expect(page.locator(`[id="menu"]`)).toHaveText('Jane Doe');
+  expect(await homePage.userDropdownMenu).toHaveValue('Jane Doe');
 
   console.log('Verify that the customer was redirected to his/her account');
   await expect(page.url()).toContain('/account');
