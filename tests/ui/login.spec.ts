@@ -1,15 +1,22 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../pages/auth/loginPage';
+import { HomePage } from '../../pages/homePage/homePage';
 
-//user credentials for this test
+// User credentials for this test
 const email = 'customer@practicesoftwaretesting.com'
 const password = 'welcome01'
 
-test('login as customer', async ({ page }) => {
+test('TOOLS-3 login as customer', async ({ page }) => {
+  // Create instance of login page class
+  const loginPage = new LoginPage(page);
+  const homePage = new HomePage(page);
+
   console.log('Customer opens the home page');
   await page.goto('/');
   
   console.log('Customer clicks on login link');
-  await page.locator(`[href="/auth/login"]`).click();
+  await homePage.clickSignInButton();
+  // await page.locator(`[href="/auth/login"]`).click();
 
   console.log('Customer enters email');
   await page.locator(`[id="email"]`).fill(email);
@@ -23,8 +30,7 @@ test('login as customer', async ({ page }) => {
   console.log('Verify that the password field is filled correctly');
   await expect(page.locator(`[id="password"]`)).toHaveValue(password);
 
-  console.log('Customer clicks Login button');
-  await page.locator('.btnSubmit').click();
+  await loginPage.clickSubmitButton();
 
   console.log('Verify that the customers name apears in id menu');
   await expect(page.locator(`[id="menu"]`)).toHaveText('Jane Doe');
