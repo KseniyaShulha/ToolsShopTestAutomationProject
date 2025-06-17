@@ -10,7 +10,7 @@ export class AccountPage extends BasePage {
     };
 
     // Locators
-    readonly dashboardNavigationMenu = this.page.locator(`[class="btn-group-vertical"]`)
+    
 
     // Methods
 

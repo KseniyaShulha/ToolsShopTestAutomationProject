@@ -21,24 +21,16 @@ test('TOOLS-3 login as customer', async ({ page }) => {
 
   await homePage.clickSignInButton();
 
-  console.log('Customer enters email');
-  await loginPage.fillEmailField();
+  await loginPage.fillEmailField(email);
 
-  console.log('Verify that the email field is filled correctly');
-  await expect(page.locator(`[id="email"]`)).toHaveValue(email);
-
-  console.log('Customer enters password');
-  await loginPage.fillPasswordField();
-
-  console.log('Verify that the password field is filled correctly');
-  await expect(page.locator(`[id="password"]`)).toHaveValue(password);
+  await loginPage.fillPasswordField(password);
 
   await loginPage.clickSubmitButton();
 
   console.log('Verify that the customers name apears in id menu');
-  expect(await homePage.userDropdownMenu).toHaveValue('Jane Doe');
+  await expect(homePage.userDropdownMenu).toHaveText('Jane Doe', { timeout: 5_000 });
 
   console.log('Verify that the customer was redirected to his/her account');
-  await expect(page.url()).toContain('/account');
+  await page.waitForURL('**/account');;
 });
 

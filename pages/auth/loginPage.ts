@@ -17,20 +17,16 @@ export class LoginPage extends BasePage {
     // Methods
     async clickSubmitButton() {
         console.log('User clicks submit')
-        this.submitButton.click();
+        await this.submitButton.click();
     }
 
-    async fillEmailField() {
-        console.log('User fills in email field')
-        this.emailField.fill('customer@practicesoftwaretesting.com');
+    async fillEmailField(email) {
+        console.log(`User fills in email field: ${email}`)
+        await this.emailField.fill(email);
     }
 
-    async fillPasswordField() {
-        console.log('User fills in password field')
-        this.passwordField.fill('welcome01')
+    async fillPasswordField(password) {
+        console.log(`User fills in password field: ${password}`)
+        await this.passwordField.fill(password)
     }
-
-
 }
-
-
