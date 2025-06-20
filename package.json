@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/KseniyaShulha/ToolsShopTestAutomationProject#readme",
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@playwright/test": "^1.53.0",
     "@types/node": "^24.0.3"
   }

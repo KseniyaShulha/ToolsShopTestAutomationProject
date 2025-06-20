@@ -16,14 +16,13 @@ test('TOOLS-3 login as customer', async ({ page }) => {
   // Create instance of account page class
   const accountPage = new AccountPage(page);
 
-  console.log('Customer opens the home page');
-  await page.goto('/');
+  await homePage.openHomePage();
 
   await homePage.clickSignInButton();
 
-  await loginPage.fillEmailField(email);
+  await loginPage.fillInEmailField(email);
 
-  await loginPage.fillPasswordField(password);
+  await loginPage.fillInPasswordField(password);
 
   await loginPage.clickSubmitButton();
 
@@ -31,6 +30,5 @@ test('TOOLS-3 login as customer', async ({ page }) => {
   await expect(homePage.userDropdownMenu).toHaveText('Jane Doe', { timeout: 5_000 });
 
   console.log('Verify that the customer was redirected to his/her account');
-  await page.waitForURL('**/account');;
+  await page.waitForURL('**/account');
 });
-

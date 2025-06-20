@@ -13,5 +13,4 @@ export class AccountPage extends BasePage {
     
 
     // Methods
-
 }

@@ -13,6 +13,7 @@ export class LoginPage extends BasePage {
     readonly submitButton = this.page.locator('.btnSubmit');
     readonly emailField = this.page.locator(`[id="email"]`);
     readonly passwordField = this.page.locator(`[id="password"]`);
+    readonly registerButton = this.page.locator(`[href="/auth/register"]`)
 
     // Methods
     async clickSubmitButton() {
@@ -20,13 +21,19 @@ export class LoginPage extends BasePage {
         await this.submitButton.click();
     }
 
-    async fillEmailField(email) {
+    async fillInEmailField(email) {
         console.log(`User fills in email field: ${email}`)
         await this.emailField.fill(email);
     }
 
-    async fillPasswordField(password) {
+    async fillInPasswordField(password) {
         console.log(`User fills in password field: ${password}`)
         await this.passwordField.fill(password)
     }
-}
+
+    async clickRegisterButton(){
+        // Customer clicks on the register button
+        await this.registerButton.click();
+    }
+ }
+ 
