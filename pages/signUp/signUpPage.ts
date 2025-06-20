@@ -48,57 +48,46 @@ export class SignUpPage extends BasePage {
     }
 
     async fillInStreet(street) {
-        // Customer fills in street
         console.log(`Customer fills in street: ${street}`);
         await this.streetField.fill(street);
     }
 
     async fillInState(state) {
-        // Customer fills in state
         console.log(`Customer fills in state: ${state}`);
         await this.stateField.fill(state);
     }
 
     async fillInPostalCode(postalCode) {
-        // Customer fills in postal code
         console.log(`Customer fills in postal code: ${postalCode}`);
         await this.postalCodeField.fill(postalCode);
     }
 
     async fillInCity(city) {
-        // Customer fills in city
         console.log(`Customer fills in city: ${city}`);
         await this.cityField.fill(city);
     }
 
     async fillInCountry(country) {
-        // Customer fills in country
         console.log(`Customer fills in country: ${country}`);
         await this.page.selectOption('#country', country);
     }
 
     async fillInPhone(phone) {
-        // Customer fills in phone
         console.log(`Customer fills in phone: ${phone}`);
         await this.phoneField.fill(phone);
     }
 
     async fillInEmail(email) {
-        // Customer fills in email
         console.log(`Customer fills in email: ${email}`);
         await this.emailField.fill(email);
     }
 
     async fillInPassword(password) {
-        // Customer fills in password
         console.log(`Customer fills in password: ${password}`);
         await this.passwordField.fill(password);
     }
 
     async clickRegisterButton() {
-        // Customer clicks register button
         await this.registerButton.click();
     }
-
-
 }

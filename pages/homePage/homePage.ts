@@ -14,9 +14,13 @@ export class HomePage extends BasePage {
     readonly userDropdownMenu = this.page.locator(`[id="menu"]`);
 
     // Methods
+    async openHomePage() {
+        console.log('User opens home page')
+        await this.page.goto('/');
+    }
+
     async clickSignInButton() {
         console.log('User clicks sign in')
         this.signInbutton.click();
     }
-
 }

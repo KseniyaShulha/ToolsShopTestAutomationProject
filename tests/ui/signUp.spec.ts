@@ -1,24 +1,25 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, request, } from '@playwright/test';
 import { LoginPage } from '../../pages/auth/loginPage';
 import { HomePage } from '../../pages/homePage/homePage';
 import { AccountPage } from '../../pages/accountPage/accountPage';
 import { SignUpPage } from '../../pages/signUp/signUpPage';
+import { faker } from '@faker-js/faker';
 
 const userObj = {
-  firstName: 'Ivan',
-  lastName: 'Wolf',
-  dateOfBirth: '01.01.1990',
-  street: '123 Maple Avenue',
-  postalCode: '62704',
-  city: 'Springfield',
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
+  dateOfBirth: faker.date.birthdate(),
+  street: faker.location.streetAddress(),
+  postalCode: faker.location.zipCode(),
+  city: faker.location.city(),
   state: 'IL',
   country: 'AL',
-  phone: '12135558294',
-  email: `ivanwolf+${Date.now()}@gmail.com`,
-  password: 'ivanwolF#123',
+  phone: Date.now().toString(),
+  email: faker.internet.email(),
+  password: "1Qq!" + faker.internet.password({ length: 8 }),
 }
 
-test('TOOLS-6 sign up as customer', async ({ page }) => {
+test('TOOLS-6 sign up as customer', async ({ page, request }) => {
   // Create instance of login page class
   const loginPage = new LoginPage(page);
 
@@ -68,15 +69,17 @@ test('TOOLS-6 sign up as customer', async ({ page }) => {
   console.log('Verify that the customer was redirected to login page');
   await page.waitForURL('**/login');
 
-  await loginPage.fillInEmailField(userObj.email);
+  // Send login req
+  const response = await request.post("https://api.practicesoftwaretesting.com/users/login", {
+    data: {
+      email: userObj.email,
+      password: userObj.password,
+    }
+  });
+  expect(response.status()).toBe(200);
 
-  await loginPage.fillInPasswordField(userObj.password);
-
-  await loginPage.clickSubmitButton();
-
-  console.log('Verify that the customers name apears in id menu');
-  await expect(homePage.userDropdownMenu).toHaveText(userObj.firstName + " " + userObj.lastName, { timeout: 5_000 });
-
-  console.log('Verify that the customer was redirected to his/her account');
-  await page.waitForURL('**/account');
+  // Assert response
+  const data = await response.json();
+  console.log('response body', data);
+  await expect(data.access_token.length).toBeGreaterThan(10);
 });

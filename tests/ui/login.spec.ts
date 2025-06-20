@@ -16,8 +16,7 @@ test('TOOLS-3 login as customer', async ({ page }) => {
   // Create instance of account page class
   const accountPage = new AccountPage(page);
 
-  console.log('Customer opens the home page');
-  await page.goto('/');
+  await homePage.openHomePage();
 
   await homePage.clickSignInButton();
 
