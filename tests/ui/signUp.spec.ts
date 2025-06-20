@@ -1,25 +1,29 @@
-import { test, expect, request, } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/auth/loginPage';
 import { HomePage } from '../../pages/homePage/homePage';
 import { AccountPage } from '../../pages/accountPage/accountPage';
 import { SignUpPage } from '../../pages/signUp/signUpPage';
-import { faker } from '@faker-js/faker';
-
-const userObj = {
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
-  dateOfBirth: faker.date.birthdate(),
-  street: faker.location.streetAddress(),
-  postalCode: faker.location.zipCode(),
-  city: faker.location.city(),
-  state: 'IL',
-  country: 'AL',
-  phone: Date.now().toString(),
-  email: faker.internet.email(),
-  password: "1Qq!" + faker.internet.password({ length: 8 }),
-}
+import { testData_TOOLS_6 } from '../../testData/TOOLS-6/testData_TOOLS-6';
 
 test('TOOLS-6 sign up as customer', async ({ page, request }) => {
+  // Define function to verify that credentials are correct
+  async function loginApi(email, password) {
+    const response = await request.post("https://api.practicesoftwaretesting.com/users/login", {
+      data: {
+        email: email,
+        password: password,
+      }
+    });
+    expect(response.status()).toBe(200);
+
+    // Assert response
+    const data = await response.json();
+    console.log('response body', data);
+    await expect(data.access_token.length).toBeGreaterThan(10);
+
+    return data.access_token;
+  }
+
   // Create instance of login page class
   const loginPage = new LoginPage(page);
 
@@ -42,44 +46,32 @@ test('TOOLS-6 sign up as customer', async ({ page, request }) => {
   console.log('Verify that the customer was redirected to register page');
   await page.waitForURL('**/register');
 
-  await signUpPage.fillInFirstName(userObj.firstName);
+  await signUpPage.fillInFirstName(testData_TOOLS_6.firstName);
 
-  await signUpPage.fillInLastName(userObj.lastName);
+  await signUpPage.fillInLastName(testData_TOOLS_6.lastName);
 
-  await signUpPage.fillInDateOfBirth(userObj.dateOfBirth);
+  await signUpPage.fillInDateOfBirth(testData_TOOLS_6.dateOfBirth);
 
-  await signUpPage.fillInStreet(userObj.street);
+  await signUpPage.fillInStreet(testData_TOOLS_6.street);
 
-  await signUpPage.fillInPostalCode(userObj.postalCode);
+  await signUpPage.fillInPostalCode(testData_TOOLS_6.postalCode);
 
-  await signUpPage.fillInCity(userObj.city);
+  await signUpPage.fillInCity(testData_TOOLS_6.city);
 
-  await signUpPage.fillInState(userObj.state);
+  await signUpPage.fillInState(testData_TOOLS_6.state);
 
-  await signUpPage.fillInCountry(userObj.country);
+  await signUpPage.fillInCountry(testData_TOOLS_6.country);
 
-  await signUpPage.fillInPhone(userObj.phone);
+  await signUpPage.fillInPhone(testData_TOOLS_6.phone);
 
-  await signUpPage.fillInEmail(userObj.email);
+  await signUpPage.fillInEmail(testData_TOOLS_6.email);
 
-  await signUpPage.fillInPassword(userObj.password);
+  await signUpPage.fillInPassword(testData_TOOLS_6.password);
 
   await signUpPage.clickRegisterButton();
 
   console.log('Verify that the customer was redirected to login page');
   await page.waitForURL('**/login');
 
-  // Send login req
-  const response = await request.post("https://api.practicesoftwaretesting.com/users/login", {
-    data: {
-      email: userObj.email,
-      password: userObj.password,
-    }
-  });
-  expect(response.status()).toBe(200);
-
-  // Assert response
-  const data = await response.json();
-  console.log('response body', data);
-  await expect(data.access_token.length).toBeGreaterThan(10);
+  await loginApi(testData_TOOLS_6.email, testData_TOOLS_6.password);
 });
