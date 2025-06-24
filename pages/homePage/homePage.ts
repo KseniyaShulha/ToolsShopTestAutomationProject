@@ -9,7 +9,6 @@ export class HomePage extends BasePage {
 
   // Locators
   readonly signInbutton = this.page.locator(`[href="/auth/login"]`);
-  readonly userDropdownMenu = this.page.locator(`[id="menu"]`);
 
   // Methods
   async openHomePage() {
@@ -21,4 +20,8 @@ export class HomePage extends BasePage {
     console.log("User clicks sign in");
     this.signInbutton.click();
   }
+
+  // async headerSection() {
+  //   return new Header(this.page);
+  // }
 }

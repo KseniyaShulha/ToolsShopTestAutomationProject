@@ -1,32 +1,27 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../pages/auth/loginPage";
-import { HomePage } from "../../pages/homePage/homePage";
+import { AppPageObjects } from "../../pages/appPageObjects";
 
 const email = "customer@practicesoftwaretesting.com";
 const password = "welcome01";
 
 test("TOOLS-3 login as customer", async ({ page }) => {
-  // Create instance of login page class
-  const loginPage = new LoginPage(page);
+  // Create instance of AppPageObjects
+  const appPageObjects = new AppPageObjects(page);
 
-  // Create instance of home page class
-  const homePage = new HomePage(page);
+  await appPageObjects.homePage().openHomePage();
 
-  await homePage.openHomePage();
+  await appPageObjects.homePage().clickSignInButton();
 
-  await homePage.clickSignInButton();
+  await appPageObjects.loginPage().fillInEmailField(email);
 
-  await loginPage.fillInEmailField(email);
+  await appPageObjects.loginPage().fillInPasswordField(password);
 
-  await loginPage.fillInPasswordField(password);
-
-  await loginPage.clickSubmitButton();
+  await appPageObjects.loginPage().clickSubmitButton();
 
   console.log("Verify that the customers name apears in id menu");
-  await expect(homePage.userDropdownMenu).toHaveText("Jane Doe", {
-    timeout: 5_000,
-  });
+  expect(
+    await appPageObjects.headerSection().getDropdownLoginValue(),
+  ).toContain("Jane Doe");
 
-  console.log("Verify that the customer was redirected to his/her account");
-  await page.waitForURL("**/account");
+  await appPageObjects.accountPage().waitPageUrlLoaded('account');
 });

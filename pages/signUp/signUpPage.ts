@@ -1,25 +1,37 @@
-import { Page } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import BasePage from "../basePage";
 
 export class SignUpPage extends BasePage {
+  // Locators
+  private readonly firstNameField: Locator;
+  private readonly lastNameField: Locator;
+  private readonly dateOfBirthField: Locator;
+  private readonly streetField: Locator;
+  private readonly postalCodeField: Locator;
+  private readonly cityField: Locator;
+  private readonly stateField: Locator;
+  private readonly countryField: Locator;
+  private readonly phoneField: Locator;
+  private readonly emailField: Locator;
+  private readonly passwordField: Locator;
+  private readonly registerButton: Locator;
+
   // Constructor for the class
   constructor(page: Page) {
     super(page);
+    this.firstNameField = this.page.locator(`[id="first_name"]`);
+    this.lastNameField = this.page.locator(`[id="last_name"]`);
+    this.dateOfBirthField = this.page.locator("#dob");
+    this.streetField = this.page.locator(`[id="street"]`);
+    this.postalCodeField = this.page.locator(`[id="postal_code"]`);
+    this.cityField = this.page.locator(`[id="city"]`);
+    this.stateField = this.page.locator(`[id="state"]`);
+    this.countryField = this.page.locator(`[id="country"]`);
+    this.phoneField = this.page.locator(`[id="phone"]`);
+    this.emailField = this.page.locator(`[id="email"]`);
+    this.passwordField = this.page.locator(`[id="password"]`);
+    this.registerButton = this.page.locator(`[class="btnSubmit mb-3"]`);
   }
-
-  // Locators
-  readonly firstNameField = this.page.locator(`[id="first_name"]`);
-  readonly lastNameField = this.page.locator(`[id="last_name"]`);
-  readonly dateOfBirthField = this.page.locator("#dob");
-  readonly streetField = this.page.locator(`[id="street"]`);
-  readonly postalCodeField = this.page.locator(`[id="postal_code"]`);
-  readonly cityField = this.page.locator(`[id="city"]`);
-  readonly stateField = this.page.locator(`[id="state"]`);
-  readonly countryField = this.page.locator(`[id="country"]`);
-  readonly phoneField = this.page.locator(`[id="phone"]`);
-  readonly emailField = this.page.locator(`[id="email"]`);
-  readonly passwordField = this.page.locator(`[id="password"]`);
-  readonly registerButton = this.page.locator(`[class="btnSubmit mb-3"]`);
 
   // Methods
   async fillInFirstName(firstName) {
