@@ -23,5 +23,5 @@ test("TOOLS-3 login as customer", async ({ page }) => {
     await appPageObjects.headerSection().getDropdownLoginValue(),
   ).toContain("Jane Doe");
 
-  await appPageObjects.accountPage().waitPageUrlLoaded('account');
+  await appPageObjects.accountPage().waitPageUrlLoaded("account");
 });

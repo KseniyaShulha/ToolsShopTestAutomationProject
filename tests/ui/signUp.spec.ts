@@ -12,7 +12,7 @@ test("TOOLS-6 sign up as customer", async ({ page, request }) => {
 
   await appPageObjects.loginPage().clickRegisterButton();
 
-  await appPageObjects.signUpPage().waitPageUrlLoaded('register');
+  await appPageObjects.signUpPage().waitPageUrlLoaded("register");
 
   await appPageObjects.signUpPage().fillInFirstName(testData_TOOLS_6.firstName);
 
@@ -42,7 +42,7 @@ test("TOOLS-6 sign up as customer", async ({ page, request }) => {
 
   await appPageObjects.signUpPage().clickRegisterButton();
 
-  await appPageObjects.loginPage().waitPageUrlLoaded('login');
+  await appPageObjects.loginPage().waitPageUrlLoaded("login");
 
   // Confirm that its possible to login
   await loginApi(testData_TOOLS_6.email, testData_TOOLS_6.password, request);
