@@ -1,55 +1,48 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../../pages/auth/loginPage";
-import { HomePage } from "../../pages/homePage/homePage";
-import { SignUpPage } from "../../pages/signUp/signUpPage";
 import { testData_TOOLS_6 } from "../../testData/TOOLS-6/testData_TOOLS-6";
+import { AppPageObjects } from "../../pages/appPageObjects";
 
 test("TOOLS-6 sign up as customer", async ({ page, request }) => {
-  // Create instance of login page class
-  const loginPage = new LoginPage(page);
-
-  // Create instance of home page class
-  const homePage = new HomePage(page);
-
-  // Create instance of sign up page class
-  const signUpPage = new SignUpPage(page);
+  const appPageObjects = new AppPageObjects(page);
 
   console.log("Customer opens the home page");
-  await page.goto("/");
+  await appPageObjects.homePage().openHomePage();
 
-  await homePage.clickSignInButton();
+  await appPageObjects.homePage().clickSignInButton();
 
-  await loginPage.clickRegisterButton();
+  await appPageObjects.loginPage().clickRegisterButton();
 
-  console.log("Verify that the customer was redirected to register page");
-  await page.waitForURL("**/register");
+  await appPageObjects.signUpPage().waitPageUrlLoaded('register');
 
-  await signUpPage.fillInFirstName(testData_TOOLS_6.firstName);
+  await appPageObjects.signUpPage().fillInFirstName(testData_TOOLS_6.firstName);
 
-  await signUpPage.fillInLastName(testData_TOOLS_6.lastName);
+  await appPageObjects.signUpPage().fillInLastName(testData_TOOLS_6.lastName);
 
-  await signUpPage.fillInDateOfBirth(testData_TOOLS_6.dateOfBirth);
+  await appPageObjects
+    .signUpPage()
+    .fillInDateOfBirth(testData_TOOLS_6.dateOfBirth);
 
-  await signUpPage.fillInStreet(testData_TOOLS_6.street);
+  await appPageObjects.signUpPage().fillInStreet(testData_TOOLS_6.street);
 
-  await signUpPage.fillInPostalCode(testData_TOOLS_6.postalCode);
+  await appPageObjects
+    .signUpPage()
+    .fillInPostalCode(testData_TOOLS_6.postalCode);
 
-  await signUpPage.fillInCity(testData_TOOLS_6.city);
+  await appPageObjects.signUpPage().fillInCity(testData_TOOLS_6.city);
 
-  await signUpPage.fillInState(testData_TOOLS_6.state);
+  await appPageObjects.signUpPage().fillInState(testData_TOOLS_6.state);
 
-  await signUpPage.fillInCountry(testData_TOOLS_6.country);
+  await appPageObjects.signUpPage().fillInCountry(testData_TOOLS_6.country);
 
-  await signUpPage.fillInPhone(testData_TOOLS_6.phone);
+  await appPageObjects.signUpPage().fillInPhone(testData_TOOLS_6.phone);
 
-  await signUpPage.fillInEmail(testData_TOOLS_6.email);
+  await appPageObjects.signUpPage().fillInEmail(testData_TOOLS_6.email);
 
-  await signUpPage.fillInPassword(testData_TOOLS_6.password);
+  await appPageObjects.signUpPage().fillInPassword(testData_TOOLS_6.password);
 
-  await signUpPage.clickRegisterButton();
+  await appPageObjects.signUpPage().clickRegisterButton();
 
-  console.log("Verify that the customer was redirected to login page");
-  await page.waitForURL("**/login");
+  await appPageObjects.loginPage().waitPageUrlLoaded('login');
 
   // Confirm that its possible to login
   await loginApi(testData_TOOLS_6.email, testData_TOOLS_6.password, request);
