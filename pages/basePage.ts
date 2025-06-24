@@ -17,7 +17,7 @@ export default abstract class BasePage {
     return new Footer(this.page);
   }
 
-  async waitPageUrlLoaded(url: string){
+  async waitPageUrlLoaded(url: string) {
     console.log(`Verify that the customer was redirected to ${url} page`);
     await this.page.waitForURL(`**/${url}`);
   }
