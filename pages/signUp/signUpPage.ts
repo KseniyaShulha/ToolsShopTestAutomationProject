@@ -101,6 +101,7 @@ export class SignUpPage extends BasePage {
   }
 
   async clickRegisterButton() {
+    console.log("User clicks on registration button");
     await this.registerButton.click();
   }
 }

@@ -34,7 +34,7 @@ export class LoginPage extends BasePage {
   }
 
   async clickRegisterButton() {
-    // Customer clicks on the register button
+    console.log("User clicks registration button");
     await this.registerButton.click();
   }
 }
