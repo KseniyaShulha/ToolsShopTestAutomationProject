@@ -23,11 +23,35 @@ export default [
     },
     rules: {
       ...typescriptConfigs.recommended.rules,
-      ...playwright.configs['flat/recommended'].rules,
+      ...playwright.configs["flat/recommended"].rules,
       ...prettierConfig.rules,
+
       "prettier/prettier": "warn",
       "no-console": "warn",
-      "@typescript-eslint/no-explicit-any": "off"
+      "@typescript-eslint/no-explicit-any": "off",
+
+      // Require return types for functions and module boundaries
+      "@typescript-eslint/explicit-function-return-type": [
+        "error",
+        {
+          allowExpressions: false,
+          allowTypedFunctionExpressions: true,
+          allowHigherOrderFunctions: true
+        }
+      ],
+      "@typescript-eslint/explicit-module-boundary-types": "error",
+
+      // Require type annotations for parameters and properties
+      "@typescript-eslint/typedef": [
+        "error",
+        {
+          arrowParameter: true,
+          memberVariableDeclaration: true,
+          propertyDeclaration: true,
+          parameter: true
+          // variableDeclaration intentionally omitted to skip const enforcement
+        }
+      ]
     }
   }
 ];

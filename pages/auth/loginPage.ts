@@ -18,23 +18,23 @@ export class LoginPage extends BasePage {
   }
 
   // Methods
-  async clickSubmitButton() {
+  async clickSubmitButton(): Promise<void> {
     console.log("User clicks submit");
     await this.submitButton.click();
   }
 
-  async fillInEmailField(email) {
-    console.log(`User fills in email field: ${email}`);
+  async fillInEmailField(email: string): Promise<void> {
+    console.log(`User fills in email field with: ${email}`);
     await this.emailField.fill(email);
   }
 
-  async fillInPasswordField(password) {
-    console.log(`User fills in password field: ${password}`);
+  async fillInPasswordField(password: string): Promise<void> {
+    console.log(`User fills in password field with: ${password}`);
     await this.passwordField.fill(password);
   }
 
-  async clickRegisterButton() {
-    // Customer clicks on the register button
+  async clickRegisterButton(): Promise<void> {
+    console.log("User clicks registration button");
     await this.registerButton.click();
   }
 }

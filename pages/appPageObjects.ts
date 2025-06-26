@@ -24,82 +24,82 @@ export class AppPageObjects extends BasePage {
   }
 
   // Methods
-  homePage() {
+  homePage(): HomePage {
     // Return instance of Homepage
     return new HomePage(this.page);
   }
 
-  loginPage() {
+  loginPage(): LoginPage {
     // Return instance of Loginpage
     return new LoginPage(this.page);
   }
 
-  signUpPage() {
+  signUpPage(): SignUpPage {
     // Return instance of SignUpPage
     return new SignUpPage(this.page);
   }
 
-  accountPage() {
+  accountPage(): AccountPage {
     // Return instance of AccountPage
     return new AccountPage(this.page);
   }
 
-  itemPage() {
+  itemPage(): ItemPage {
     // Return instance of ItemPage
     return new ItemPage(this.page);
   }
 
-  shoppingCartPage() {
+  shoppingCartPage(): ShoppingCartPage {
     // Return instance of ShoppingCartPage
     return new ShoppingCartPage(this.page);
   }
 
-  checkoutPage() {
+  checkoutPage(): CheckoutPage {
     // Return instance of CheckoutPage
     return new CheckoutPage(this.page);
   }
 
-  categoriePage() {
+  categoriePage(): CategoriePage {
     // Return instance of CategoriePage
     return new CategoriePage(this.page);
   }
 
-  rentalPage() {
+  rentalPage(): RentalsPage {
     // Return instance of RentalsPage
     return new RentalsPage(this.page);
   }
 
-  navigationBarPage() {
+  navigationBarPage(): NavigationBarPage {
     // Return instance of NavigationBarPage
     return new NavigationBarPage(this.page);
   }
 
-  contactPage() {
+  contactPage(): ContactPage {
     // Return instance of ContactPage
     return new ContactPage(this.page);
   }
 
-  forgotPasswordPage() {
+  forgotPasswordPage(): ForgotPasswordPage {
     // Return instance of ForgotPasswordPage
     return new ForgotPasswordPage(this.page);
   }
 
-  favoritesPage() {
+  favoritesPage(): FavoritesPage {
     // Return instance of FavoritesPage
     return new FavoritesPage(this.page);
   }
 
-  profilePage() {
+  profilePage(): ProfilePage {
     // Return instance of ProfilePage
     return new ProfilePage(this.page);
   }
 
-  invoicesPage() {
+  invoicesPage(): InvoicesPage {
     // Return instance of InvoicesPage
     return new InvoicesPage(this.page);
   }
 
-  messagesPage() {
+  messagesPage(): MessagesPage {
     // Return instance of MessagesPage
     return new MessagesPage(this.page);
   }

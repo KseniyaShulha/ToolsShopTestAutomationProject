@@ -9,15 +9,15 @@ export default abstract class BasePage {
     this.page = page;
   }
 
-  headerSection() {
+  headerSection(): Header {
     return new Header(this.page);
   }
 
-  footerSection() {
+  footerSection(): Footer {
     return new Footer(this.page);
   }
 
-  async waitPageUrlLoaded(url: string) {
+  async waitPageUrlLoaded(url: string): Promise<void> {
     console.log(`Verify that the customer was redirected to ${url} page`);
     await this.page.waitForURL(`**/${url}`);
   }

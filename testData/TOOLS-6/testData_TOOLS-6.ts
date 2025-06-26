@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-export const testData_TOOLS_6 = {
+export const testData_TOOLS_6: any = {
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   dateOfBirth: faker.date.birthdate(),
