@@ -17,21 +17,22 @@ export class Header {
   }
 
   // Methods
-  async assertItemAddedToCartMessageOccure() {
+  async assertItemAddedToCartMessageAppeared(): Promise<void> {
+    console.log("Assert item added to cart message appeared");
     await expect(this.itemAddedToCartMessage).toBeVisible();
   }
 
-  async getDropdownLoginValue() {
-    // Take text content from user dropdown menu
+  async getDropdownLoginValue(): Promise<string | null> {
+    console.log("Get text from login dropdown");
     return this.userDropdownMenu.textContent();
   }
 
-  async clickHomeInHeader() {
+  async clickHomeInHeader(): Promise<void> {
     console.log("User clicks home in the header");
     await this.homePageButton.click();
   }
 
-  async clickShoppingCartIcon() {
+  async clickShoppingCartIcon(): Promise<void> {
     console.log("User clicks on shopping cart icon");
     await this.shoppingCartIcon.click();
   }

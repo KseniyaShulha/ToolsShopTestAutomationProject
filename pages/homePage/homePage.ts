@@ -10,22 +10,22 @@ export class HomePage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.signInbutton = this.page.locator(`[href="/auth/login"]`);
-    this.itemChoice = page.locator('[class="card-img-top"]').first();
+    this.itemChoice = page.locator('[class="card-img-top"]');
   }
 
   // Methods
-  async openHomePage() {
+  async openHomePage(): Promise<void> {
     console.log("User opens home page");
     await this.page.goto("/");
   }
 
-  async clickSignInButton() {
+  async clickSignInButton(): Promise<void> {
     console.log("User clicks sign in");
     this.signInbutton.click();
   }
 
-  async choiceOfTheItem() {
-    console.log("User chooses an item");
-    this.itemChoice.click();
+  async chooseFirstItem(): Promise<void> {
+    console.log("User chooses the first item");
+    this.itemChoice.first().click();
   }
 }

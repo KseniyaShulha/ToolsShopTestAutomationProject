@@ -1,11 +1,11 @@
 import { faker } from "@faker-js/faker";
 
-export const testData_TOOLS_9 = {
+export const testData_TOOLS_9: any = {
   billingData: {
     street: faker.location.streetAddress(),
     city: faker.location.city(),
-    state: "AL",
-    country: "Austria",
+    state: faker.location.state(),
+    country: faker.location.country(),
     postcode: faker.location.zipCode(),
   },
   creditCard: {
@@ -13,5 +13,11 @@ export const testData_TOOLS_9 = {
     expirationDate: "12/2025",
     cvvCode: "123",
     cardHolderName: faker.person.fullName(),
+  },
+
+  userData: {
+    email: "customer@practicesoftwaretesting.com",
+    password: "welcome01",
+    fullName: "Jane Doe",
   },
 };

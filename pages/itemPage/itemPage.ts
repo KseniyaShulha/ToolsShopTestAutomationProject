@@ -12,7 +12,7 @@ export class ItemPage extends BasePage {
   }
 
   // Methods
-  async clickAddToShoppingCartButton() {
+  async clickAddToShoppingCartButton(): Promise<void> {
     console.log("User adds an item to the shopping cart");
     await this.addToShoppingCart.click();
   }

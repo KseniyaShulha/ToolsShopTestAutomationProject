@@ -10,7 +10,11 @@ export class UserSteps {
     this.appPageObjects = new AppPageObjects(page);
   }
 
-  async loginUi(email: string, password: string, userFullName: string) {
+  async loginUi(
+    email: string,
+    password: string,
+    userFullName: string,
+  ): Promise<void> {
     // Customer logs in
     await this.appPageObjects.homePage().openHomePage();
 

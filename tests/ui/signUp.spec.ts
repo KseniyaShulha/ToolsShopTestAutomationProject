@@ -49,7 +49,11 @@ test("TOOLS-6 sign up as customer", async ({ page, request }) => {
 });
 
 // Define function to verify that credentials are correct
-async function loginApi(email, password, request) {
+async function loginApi(
+  email: string,
+  password: string,
+  request: any,
+): Promise<string | null> {
   const response = await request.post(
     "https://api.practicesoftwaretesting.com/users/login",
     {
