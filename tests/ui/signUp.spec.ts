@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { testData_TOOLS_6 } from "../../testData/TOOLS-6/testData_TOOLS-6";
+import { testData_TOOLS_6 } from "../../testData/testData_TOOLS-6";
 import { AppPageObjects } from "../../pages/appPageObjects";
 
 test("TOOLS-6 sign up as customer", async ({ page, request }) => {

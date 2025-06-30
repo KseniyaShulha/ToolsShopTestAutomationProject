@@ -33,4 +33,22 @@ export class UserSteps {
 
     await this.appPageObjects.accountPage().waitPageUrlLoaded("account");
   }
+
+  async addRandomItemFromHomePageToCart(): Promise<void> {
+    // Customer goes to home page
+    await this.appPageObjects.headerSection().clickHomeInHeader();
+
+    // Customer chooses random item on home page
+    await this.appPageObjects.homePage().chooseFirstItem();
+
+    // Customer adds item to shopping cart
+    await this.appPageObjects.itemPage().clickAddToShoppingCartButton();
+
+    // Customer goes to shopping cart
+    await this.appPageObjects
+      .headerSection()
+      .assertItemAddedToCartMessageAppeared();
+
+    await this.appPageObjects.headerSection().clickShoppingCartIcon();
+  }
 }
