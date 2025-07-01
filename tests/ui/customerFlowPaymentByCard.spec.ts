@@ -44,6 +44,7 @@ test("TOOLS-9 customer flow - payment by card", async ({ page }) => {
       testData_TOOLS_9.creditCard.cardHolderName,
     );
 
+  // Customer confirms payment
   await appPageObjects.checkoutPage().clickConfirmPaymentButton();
 
   // Expect  succsess message is visible

@@ -18,11 +18,11 @@ export const testData_TOOLS_9: any = {
   userData: {
     email: "customer@practicesoftwaretesting.com",
     password: "welcome01",
-    fullName: "Jane Doe",
+    fullName: "John Doe",
   },
 
   bankData: {
-    bankName: "World Bank",
+    bankName: faker.word.sample() + " bank",
     accountName: faker.finance.accountName(),
     accountNumber: faker.finance.accountNumber(),
   },
