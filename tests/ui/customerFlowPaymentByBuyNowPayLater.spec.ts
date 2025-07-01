@@ -34,7 +34,12 @@ test("TOOLS-12 customer flow - payment by cash on delivery", async ({
     );
 
   // Customer chooses paynment method
-  await appPageObjects.checkoutPage().selectPaymentMethod("cash-on-delivery");
+  await appPageObjects.checkoutPage().selectPaymentMethod("buy-now-pay-later");
+
+  // Customer chooses monthly installment
+  await appPageObjects
+    .checkoutPage()
+    .selectMonthlyInstallments("6 Monthly Installments");
 
   // Customer confirms payment
   await appPageObjects.checkoutPage().clickConfirmPaymentButton();

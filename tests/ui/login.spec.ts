@@ -21,7 +21,7 @@ test("TOOLS-3 login as customer", async ({ page }) => {
   console.log("Verify that the customers name apears in id menu");
   expect(
     await appPageObjects.headerSection().getDropdownLoginValue(),
-  ).toContain("John Doe");
+  ).toContain("Jane Doe");
 
   await appPageObjects.accountPage().waitPageUrlLoaded("account");
 });

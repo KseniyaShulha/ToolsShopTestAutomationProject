@@ -18,7 +18,7 @@ export const testData_TOOLS_9: any = {
   userData: {
     email: "customer@practicesoftwaretesting.com",
     password: "welcome01",
-    fullName: "John Doe",
+    fullName: "Jane Doe",
   },
 
   bankData: {

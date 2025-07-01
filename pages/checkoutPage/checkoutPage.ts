@@ -21,6 +21,7 @@ export class CheckoutPage extends BasePage {
   private readonly bankNameField: Locator;
   private readonly accountNameField: Locator;
   private readonly accountNumberField: Locator;
+  private readonly monthlyInstallmentsDropDown: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -148,6 +149,14 @@ export class CheckoutPage extends BasePage {
   async selectPaymentMethod(paymentMethod: string): Promise<void> {
     console.log(`User selects payment method to be: ${paymentMethod}`);
     await this.page.selectOption('select[id="payment-method"]', paymentMethod);
+  }
+
+  async selectMonthlyInstallments(monthlyInstallments: string): Promise<void> {
+    console.log(`User selects payment method to be: ${monthlyInstallments}`);
+    await this.page.selectOption(
+      `select[id="monthly_installments"]`,
+      monthlyInstallments,
+    );
   }
 
   async fillInBankName(bankName: string): Promise<void> {
