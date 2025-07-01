@@ -3,7 +3,7 @@ import { AppPageObjects } from "../../pages/appPageObjects";
 import { testData_TOOLS_9 } from "../../testData/testData_TOOLS-9";
 import { UserSteps } from "../../steps/steps";
 
-test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
+test("TOOLS-12 customer flow - payment by cash on delivery", async ({ page }) => {
   // Create instance of AppPageObjects
   const appPageObjects: AppPageObjects = new AppPageObjects(page);
   const steps: UserSteps = new UserSteps(page);
@@ -32,16 +32,7 @@ test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
     );
 
   // Customer chooses paynment method
-  await appPageObjects.checkoutPage().selectPaymentMethod("bank-transfer");
-
-  //Customer fills in bank data
-  await appPageObjects
-    .checkoutPage()
-    .fillInBankData(
-      testData_TOOLS_9.bankData.bankName,
-      testData_TOOLS_9.bankData.accountName,
-      testData_TOOLS_9.bankData.accountNumber,
-    );
+  await appPageObjects.checkoutPage().selectPaymentMethod("cash-on-delivery");
 
   // Customer confirms payment
   await appPageObjects.checkoutPage().clickConfirmPaymentButton();
