@@ -18,6 +18,9 @@ export class CheckoutPage extends BasePage {
   private readonly confirmPaymentButton: Locator;
   private readonly paymentSuccsessMessage: Locator;
   private readonly proceedButton3: Locator;
+  private readonly bankNameField: Locator;
+  private readonly accountNameField: Locator;
+  private readonly accountNumberField: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -40,9 +43,72 @@ export class CheckoutPage extends BasePage {
       '[data-test="payment-success-message"]',
     );
     this.proceedButton3 = this.page.locator('button[data-test="proceed-3"]');
+    this.bankNameField = this.page.locator('[id="bank_name"]');
+    this.accountNameField = this.page.locator('[id="account_name"]');
+    this.accountNumberField = this.page.locator('[id="account_number"]');
   }
 
   // Methods
+  async proceedToPayment(): Promise<void> {
+    // Customer clicks on the "proceed to checkout" button
+    await this.clickProceedButton(1);
+
+    // Customer clicks on the "proceed to checkout" button
+    await this.clickProceedButton(2);
+  }
+
+  async fillInBillingData(
+    street: string,
+    city: string,
+    state: string,
+    country: string,
+    postcode: string,
+  ): Promise<void> {
+    // Customer fills in billing data
+    await this.fillInStreetField(street);
+
+    await this.fillInCityField(city);
+
+    await this.fillInStateField(state);
+
+    await this.fillInCountryField(country);
+
+    await this.fillInPostalCodeField(postcode);
+
+    // Customer clicks on the "proceed to checkout" button
+    await this.clickProceedButton(3);
+  }
+
+  // Customer fills in Bank data
+  async fillInBankData(
+    bankName: string,
+    accountName: string,
+    accountNumber: string,
+  ): Promise<void> {
+    await this.fillInBankName(bankName);
+
+    await this.fillInAccountName(accountName);
+
+    await this.fillInAccountNumber(accountNumber);
+  }
+
+  // Customer fills in billing adress
+  async fillInCreditCardData(
+    creditCardNumber: string,
+    expirationDate: string,
+    cvvCode: string,
+    cardHolderName: string,
+  ): Promise<void> {
+    // Customer fills in credit card data
+    await this.fillInCreditCardNumberField(creditCardNumber);
+
+    await this.fillInCreditCardExpirationDateField(expirationDate);
+
+    await this.fillInCreditCardCvvCodeField(cvvCode);
+
+    await this.fillInCreditCardHolderNameField(cardHolderName);
+  }
+
   async clickProceedButton(step: number): Promise<void> {
     console.log(`User clicks on the proceed button ${step}`);
     if (step === 1) {
@@ -82,6 +148,21 @@ export class CheckoutPage extends BasePage {
   async selectPaymentMethod(paymentMethod: string): Promise<void> {
     console.log(`User selects payment method to be: ${paymentMethod}`);
     await this.page.selectOption('select[id="payment-method"]', paymentMethod);
+  }
+
+  async fillInBankName(bankName: string): Promise<void> {
+    console.log(`User fills in bank name field with: ${bankName}`);
+    await this.bankNameField.fill(bankName);
+  }
+
+  async fillInAccountName(accountName: string): Promise<void> {
+    console.log(`User fills in account name field with: ${accountName}`);
+    await this.accountNameField.fill(accountName);
+  }
+
+  async fillInAccountNumber(accountNumber: string): Promise<void> {
+    console.log(`User fills in account number field with: ${accountNumber}`);
+    await this.accountNumberField.fill(accountNumber);
   }
 
   async fillInCreditCardNumberField(cardNumber: string): Promise<void> {

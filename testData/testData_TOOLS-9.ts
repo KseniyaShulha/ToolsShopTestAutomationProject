@@ -20,4 +20,10 @@ export const testData_TOOLS_9: any = {
     password: "welcome01",
     fullName: "Jane Doe",
   },
+
+  bankData: {
+    bankName: "World Bank",
+    accountName: faker.finance.accountName(),
+    accountNumber: faker.finance.accountNumber(),
+  },
 };
