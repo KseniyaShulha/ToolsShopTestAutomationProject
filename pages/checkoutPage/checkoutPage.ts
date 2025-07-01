@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import BasePage from "../basePage";
+import { faker } from "@faker-js/faker";
 
 export class CheckoutPage extends BasePage {
   // Locators
@@ -157,6 +158,17 @@ export class CheckoutPage extends BasePage {
       `select[id="monthly_installments"]`,
       monthlyInstallments,
     );
+  }
+
+  async selectRandomMonthlyInstallments(): Promise<void> {
+    console.log(
+      "User chooses preferable monthly installment from monthly installments dropdown ",
+    );
+    const allOptionsArr = ["3", "6", "9", "12"];
+    const option = faker.helpers.arrayElement(allOptionsArr);
+    await this.selectMonthlyInstallments(option);
+
+    this.selectMonthlyInstallments(option);
   }
 
   async fillInBankName(bankName: string): Promise<void> {

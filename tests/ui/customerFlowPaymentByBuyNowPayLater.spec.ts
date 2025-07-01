@@ -14,7 +14,7 @@ test("TOOLS-12 customer flow - payment by cash on delivery", async ({
   await steps.loginUi(
     testData_TOOLS_9.userData.email,
     testData_TOOLS_9.userData.password,
-    testData_TOOLS_9.userData.fullName,
+    testData_TOOLS_9.userData.surname,
   );
 
   // Customer goes to home page, chooses an item, add it to shopping cart.
@@ -37,9 +37,7 @@ test("TOOLS-12 customer flow - payment by cash on delivery", async ({
   await appPageObjects.checkoutPage().selectPaymentMethod("buy-now-pay-later");
 
   // Customer chooses monthly installment
-  await appPageObjects
-    .checkoutPage()
-    .selectMonthlyInstallments("6 Monthly Installments");
+  await appPageObjects.checkoutPage().selectRandomMonthlyInstallments();
 
   // Customer confirms payment
   await appPageObjects.checkoutPage().clickConfirmPaymentButton();

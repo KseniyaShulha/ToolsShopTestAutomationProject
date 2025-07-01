@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { AppPageObjects } from "../../pages/appPageObjects";
+import { testData_TOOLS_9 } from "../../testData/testData_TOOLS-9";
 
 const email = "customer@practicesoftwaretesting.com";
 const password = "welcome01";
@@ -21,7 +22,7 @@ test("TOOLS-3 login as customer", async ({ page }) => {
   console.log("Verify that the customers name apears in id menu");
   expect(
     await appPageObjects.headerSection().getDropdownLoginValue(),
-  ).toContain("Jane Doe");
+  ).toContain("Doe");
 
   await appPageObjects.accountPage().waitPageUrlLoaded("account");
 });

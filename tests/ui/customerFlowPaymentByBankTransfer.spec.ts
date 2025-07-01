@@ -12,7 +12,7 @@ test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
   await steps.loginUi(
     testData_TOOLS_9.userData.email,
     testData_TOOLS_9.userData.password,
-    testData_TOOLS_9.userData.fullName,
+    testData_TOOLS_9.userData.surname,
   );
 
   // Customer goes to home page, chooses an item, add it to shopping cart.
