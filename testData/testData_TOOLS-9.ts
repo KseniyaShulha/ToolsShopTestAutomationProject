@@ -8,6 +8,7 @@ export const testData_TOOLS_9: any = {
     country: faker.location.country(),
     postcode: faker.location.zipCode(),
   },
+
   creditCard: {
     creditCardNumber: "4242-4242-4242-4242",
     expirationDate: "12/2025",
@@ -16,14 +17,8 @@ export const testData_TOOLS_9: any = {
   },
 
   userData: {
-    email: "customer@practicesoftwaretesting.com",
-    password: "welcome01",
-    surname: "Doe",
-  },
-
-  bankData: {
-    bankName: faker.word.sample() + " bank",
-    accountName: faker.finance.accountName(),
-    accountNumber: faker.finance.accountNumber(),
+    email: "customer3@practicesoftwaretesting.com",
+    password: "pass123",
+    surname: "Smith",
   },
 };
