@@ -13,7 +13,7 @@ export class UserSteps {
   async loginUi(
     email: string,
     password: string,
-    userFullName: string,
+    surname: string,
   ): Promise<void> {
     // Customer logs in
     await this.appPageObjects.homePage().openHomePage();
@@ -29,7 +29,7 @@ export class UserSteps {
     console.log("Verify that the customers name apears in id menu");
     expect(
       await this.appPageObjects.headerSection().getDropdownLoginValue(),
-    ).toContain(userFullName);
+    ).toContain(surname);
 
     await this.appPageObjects.accountPage().waitPageUrlLoaded("account");
   }

@@ -1,18 +1,18 @@
 import { test } from "@playwright/test";
 import { AppPageObjects } from "../../pages/appPageObjects";
-import { testData_TOOLS_9 } from "../../testData/testData_TOOLS-9";
+import { testData_TOOLS_14 } from "../../testData/testData_TOOLS-14";
 import { UserSteps } from "../../steps/steps";
 
-test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
+test("TOOLS-14 customer flow - payment by gift card", async ({ page }) => {
   // Create instance of AppPageObjects
   const appPageObjects: AppPageObjects = new AppPageObjects(page);
   const steps: UserSteps = new UserSteps(page);
 
   // Log in using steps.ts
   await steps.loginUi(
-    testData_TOOLS_9.userData.email,
-    testData_TOOLS_9.userData.password,
-    testData_TOOLS_9.userData.surname,
+    testData_TOOLS_14.userData.email,
+    testData_TOOLS_14.userData.password,
+    testData_TOOLS_14.userData.surname,
   );
 
   // Customer goes to home page, chooses an item, add it to shopping cart.
@@ -24,23 +24,25 @@ test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
   await appPageObjects
     .checkoutPage()
     .fillInBillingData(
-      testData_TOOLS_9.billingData.street,
-      testData_TOOLS_9.billingData.city,
-      testData_TOOLS_9.billingData.state,
-      testData_TOOLS_9.billingData.country,
-      testData_TOOLS_9.billingData.postcode,
+      testData_TOOLS_14.billingData.street,
+      testData_TOOLS_14.billingData.city,
+      testData_TOOLS_14.billingData.state,
+      testData_TOOLS_14.billingData.country,
+      testData_TOOLS_14.billingData.postcode,
     );
 
   // Customer chooses paynment method
-  await appPageObjects.checkoutPage().selectPaymentMethod("bank-transfer");
+  await appPageObjects.checkoutPage().selectPaymentMethod("gift-card");
 
-  //Customer fills in bank data
+  // Customer fills in gift card data
   await appPageObjects
     .checkoutPage()
-    .fillInBankData(
-      testData_TOOLS_9.bankData.bankName,
-      testData_TOOLS_9.bankData.accountName,
-      testData_TOOLS_9.bankData.accountNumber,
+    .fillInGiftCardNumberField(testData_TOOLS_14.giftCardData.giftCardNumber);
+
+  await appPageObjects
+    .checkoutPage()
+    .fillInGiftCardValidationCodeField(
+      testData_TOOLS_14.giftCardData.giftCardValidationCode,
     );
 
   // Customer confirms payment

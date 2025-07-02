@@ -23,6 +23,8 @@ export class CheckoutPage extends BasePage {
   private readonly accountNameField: Locator;
   private readonly accountNumberField: Locator;
   private readonly monthlyInstallmentsDropDown: Locator;
+  private readonly giftCardNumberField: Locator;
+  private readonly giftCardValidationCodeField: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -48,9 +50,29 @@ export class CheckoutPage extends BasePage {
     this.bankNameField = this.page.locator('[id="bank_name"]');
     this.accountNameField = this.page.locator('[id="account_name"]');
     this.accountNumberField = this.page.locator('[id="account_number"]');
+    this.giftCardNumberField = this.page.locator('[id="gift_card_number"]');
+    this.giftCardValidationCodeField = this.page.locator(
+      '[id="validation_code"]',
+    );
   }
 
   // Methods
+  async fillInGiftCardValidationCodeField(
+    validationCode: string,
+  ): Promise<void> {
+    // Customer fills in gift card validation code field
+    console.log(
+      `User fills in gift card validation code field with: ${validationCode}`,
+    );
+    await this.giftCardValidationCodeField.fill(validationCode);
+  }
+
+  async fillInGiftCardNumberField(giftCardNumber: string): Promise<void> {
+    // Customer fills in gift card number field
+    console.log(`User fills in gift card number field with: ${giftCardNumber}`);
+    await this.giftCardNumberField.fill(giftCardNumber);
+  }
+
   async proceedToPayment(): Promise<void> {
     // Customer clicks on the "proceed to checkout" button
     await this.clickProceedButton(1);
