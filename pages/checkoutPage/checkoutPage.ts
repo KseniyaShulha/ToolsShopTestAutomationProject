@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import BasePage from "../basePage";
+import { faker } from "@faker-js/faker";
 
 export class CheckoutPage extends BasePage {
   // Locators
@@ -21,6 +22,7 @@ export class CheckoutPage extends BasePage {
   private readonly bankNameField: Locator;
   private readonly accountNameField: Locator;
   private readonly accountNumberField: Locator;
+  private readonly monthlyInstallmentsDropDown: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -148,6 +150,25 @@ export class CheckoutPage extends BasePage {
   async selectPaymentMethod(paymentMethod: string): Promise<void> {
     console.log(`User selects payment method to be: ${paymentMethod}`);
     await this.page.selectOption('select[id="payment-method"]', paymentMethod);
+  }
+
+  async selectMonthlyInstallments(monthlyInstallments: string): Promise<void> {
+    console.log(`User selects payment method to be: ${monthlyInstallments}`);
+    await this.page.selectOption(
+      `select[id="monthly_installments"]`,
+      monthlyInstallments,
+    );
+  }
+
+  async selectRandomMonthlyInstallments(): Promise<void> {
+    console.log(
+      "User chooses preferable monthly installment from monthly installments dropdown ",
+    );
+    const allOptionsArr = ["3", "6", "9", "12"];
+    const option = faker.helpers.arrayElement(allOptionsArr);
+    await this.selectMonthlyInstallments(option);
+
+    this.selectMonthlyInstallments(option);
   }
 
   async fillInBankName(bankName: string): Promise<void> {
