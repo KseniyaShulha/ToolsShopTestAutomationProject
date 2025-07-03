@@ -51,4 +51,15 @@ export class UserSteps {
 
     await this.appPageObjects.headerSection().clickShoppingCartIcon();
   }
+
+  async signOut(): Promise<void> {
+    // Customer clicks on user dropdown menu in the header
+    await this.appPageObjects.headerSection().clickUserDropdownMenu();
+
+    // Customer chooses sign out option
+    await this.appPageObjects.headerSection().clickSignOut();
+
+    console.log("Verify that the Sign in appears in the header");
+    await expect(this.page.locator('[data-test="nav-sign-in"]')).toBeVisible();
+  }
 }
