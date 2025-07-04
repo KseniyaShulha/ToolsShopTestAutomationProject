@@ -10,8 +10,8 @@ export const testData_TOOLS_13: any = {
   },
 
   userData: {
-    email: "customer@practicesoftwaretesting.com",
-    password: "welcome01",
-    surname: "Doe",
+    email: process.env.CUSTOMER_1_EMAIL,
+    password: process.env.CUSTOMER_1_PASSWORD,
+    surname: process.env.CUSTOMER_1_SURNAME,
   },
 };
