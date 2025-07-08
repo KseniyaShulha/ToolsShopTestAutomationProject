@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
-import { testData_TOOLS_20_signUp } from "../../testData/testData_api/testData_TOOLS_20_signUp";
+import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signUp";
 
 test("TOOLS-20 sign up as customer via api", async ({ request }) => {
   // Create instance of UserApi
@@ -29,8 +29,7 @@ test("TOOLS-20 sign up as customer via api", async ({ request }) => {
   expect(loginResponse.status()).toBe(200);
 
   const loginData = await loginResponse.json();
-  console.log("Login response:", loginData);
 
   // Assert login token to be defined
-  expect(loginData.access_token).toBeTruthy();
+  expect(loginData.access_token).toBeDefined();
 });

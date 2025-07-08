@@ -6,8 +6,8 @@ export const testData_TOOLS_20_signUp: any = {
   address: {
     street: faker.location.streetAddress(),
     city: faker.location.city(),
-    state: "IL",
-    country: "AL",
+    state: faker.location.state(),
+    country: faker.location.country(),
     postal_code: faker.location.zipCode(),
   },
   phone: Date.now().toString(),
