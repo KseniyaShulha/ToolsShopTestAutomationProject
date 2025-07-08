@@ -1,3 +1,4 @@
+import { Urls } from "./utils/urls";
 import { defineConfig, devices } from "@playwright/test";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -30,7 +31,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     trace: "retain-on-failure",
-    baseURL: "https://practicesoftwaretesting.com/",
+    baseURL: new Urls().getUrls().appUrl,
   },
 
   /* Configure projects for major browsers */
@@ -40,15 +41,15 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
 
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
+    // {
+    //   name: "firefox",
+    //   use: { ...devices["Desktop Firefox"] },
+    // },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+    // {
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"] },
+    // },
 
     /* Test against mobile viewports. */
     // {
