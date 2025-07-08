@@ -48,4 +48,22 @@ export class UsersApi extends BaseAPI {
 
     return response;
   }
+
+  async postSignUp(body: object, request: any = this.request) {
+    const url = this.apiUrl + this.path + "register";
+
+    console.log(
+      `Send POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+    );
+
+    // Send POST req
+    const response = await request.post(url, {
+      data: body,
+      headers: this.headersObj,
+    });
+
+    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+
+    return response;
+  }
 }
