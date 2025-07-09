@@ -32,10 +32,10 @@ for (const testDataObj of testDataArr) {
     // Assign body to var
     const responseBody = await loginResponse.json();
 
-    // Asserting response status is equal to 2**
+    // Assert response status is equal to 2**
     expect(loginResponse.status()).toBe(200);
 
-    // Asserting access token to be defined
+    // Assert access token to be defined
     expect(responseBody.access_token).toBeDefined();
   });
 }
