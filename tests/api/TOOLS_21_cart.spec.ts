@@ -21,7 +21,7 @@ test.describe("add item to cart", () => {
     );
   });
 
-  test("TOOLS-22 add item to cart", async ({ request }) => {
+  test("TOOLS-21 add item to cart", async ({ request }) => {
     // Create instance of UserApi
     const cartApi = new CartApi(request);
 
