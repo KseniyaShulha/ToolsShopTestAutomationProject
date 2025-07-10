@@ -16,9 +16,9 @@ export class Urls {
   }
 
   // Get URL based on env
-  getUrls() {
+  getUrls(): any {
     // Return object with defined urls
-    const urlObj = { apiUrl: this.apiUrl, appUrl: this.appUrl };
+    const urlObj: object = { apiUrl: this.apiUrl, appUrl: this.appUrl };
     console.log("Get env URLs: ", urlObj);
     return urlObj;
   }
