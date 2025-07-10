@@ -26,9 +26,10 @@ export class CartApi extends BaseAPI {
     });
 
     console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+
     return response;
   }
-  // Add add item to cart req
+  // Add item to cart POST req
 
   async postAddToCart(
     token: string,
@@ -49,7 +50,9 @@ export class CartApi extends BaseAPI {
       data: body,
       headers: this.headersObj,
     });
+
     console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+
     return response;
   }
 
@@ -64,10 +67,12 @@ export class CartApi extends BaseAPI {
     const response = await request.get(url, {
       headers: this.headersObj,
     });
+
     console.log(
       `Response ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
+
     return response;
   }
 }
