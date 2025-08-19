@@ -1,14 +1,29 @@
-import { request } from '@playwright/test';
+import { expect } from "@playwright/test";
+import { Urls } from "../utils/urls";
 
-export async function apiRequest(method: string, url: string, data?: any, token?: string) {
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
-  if (token) headers['Authorization'] = `Bearer ${token}`;
 
-  const response = await request.newContext().then(ctx => 
-    ctx[method.toLowerCase()](url, { data, headers })
+// Define function to verify that credentials are correct
+export async function loginApi(
+  email: string,
+  password: string,
+  request: any,
+): Promise<string | null> {
+  const response = await request.post(
+    new Urls().getUrls().appUrl + "/users/login",
+    {
+      data: {
+        email: email,
+        password: password,
+      },
+    },
   );
+  expect(response.status()).toBe(200);
 
-  return response;
+  // Assert response
+  const data = await response.json();
+  console.log("response body", data);
+  expect(data.access_token.length).toBeGreaterThan(10);
+
+  // Return token
+  return data.access_token;
 }

@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { testData_TOOLS_6 } from "../../testData/testData_TOOLS-6";
 import { AppPageObjects } from "../../pages/appPageObjects";
+import { loginApi } from "../../api/apiHelper";
 
 test("TOOLS-6 sign up as customer", async ({ page, request }) => {
   const appPageObjects = new AppPageObjects(page);
@@ -48,28 +49,4 @@ test("TOOLS-6 sign up as customer", async ({ page, request }) => {
   await loginApi(testData_TOOLS_6.email, testData_TOOLS_6.password, request);
 });
 
-// Define function to verify that credentials are correct
-async function loginApi(
-  email: string,
-  password: string,
-  request: any,
-): Promise<string | null> {
-  const response = await request.post(
-    "https://api.practicesoftwaretesting.com/users/login",
-    {
-      data: {
-        email: email,
-        password: password,
-      },
-    },
-  );
-  expect(response.status()).toBe(200);
 
-  // Assert response
-  const data = await response.json();
-  console.log("response body", data);
-  expect(data.access_token.length).toBeGreaterThan(10);
-
-  // Return token
-  return data.access_token;
-}
