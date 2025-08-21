@@ -66,4 +66,50 @@ export class UsersApi extends BaseAPI {
 
     return response;
   }
+
+  async putUpdateUserData(
+    body: object,
+    token: string,
+    userID: string,
+    request: any = this.request,
+  ) {
+    const url = this.apiUrl + this.path + userID;
+    console.log(
+      `Send PUT ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+    );
+
+    // Add header Authorization with token
+    this.headersObj["Authorization"] = `Bearer ${token}`;
+
+    // Send req
+    const response = await request.put(url, {
+      data: body,
+      headers: this.headersObj,
+    });
+
+    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+
+    return response;
+  }
+
+  async getUser(token: string, userId: string, request: any = this.request) {
+    const url = this.apiUrl + this.path + userId;
+
+    console.log(`Send GET ${url}`);
+
+    // Add header Authorization with token
+    this.headersObj["Authorization"] = `Bearer ${token}`;
+
+    // Send req
+    const response = await request.get(url, {
+      headers: this.headersObj,
+    });
+
+    console.log(
+      `Response ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
+
+    return response;
+  }
 }
