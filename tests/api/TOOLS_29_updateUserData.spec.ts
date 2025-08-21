@@ -25,7 +25,7 @@ test.describe("PUT/users", async () => {
     // Save user ID from the response body in var
     userID = responseBody.id;
 
-    // Clone email and password
+    // Assign email and password
     clonedTestDataObj.email = testData_TOOLS_20_signUp.email;
     clonedTestDataObj.password = testData_TOOLS_20_signUp.password;
   });
