@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
-import { loginApi } from "../../api/helperApi";
+import { loginApi } from "../../api/apiHelper";
 
 let token: any;
 

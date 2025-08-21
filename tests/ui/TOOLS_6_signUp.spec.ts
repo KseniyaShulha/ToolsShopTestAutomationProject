@@ -46,7 +46,11 @@ test("TOOLS-6 sign up as customer", async ({ page, request }) => {
   await appPageObjects.loginPage().waitPageUrlLoaded("login");
 
   // Confirm that its possible to login
-  await loginApi(testData_TOOLS_6.email, testData_TOOLS_6.password, request);
+  await loginApi(
+    {
+      email: testData_TOOLS_6.email,
+      password: testData_TOOLS_6.password,
+    },
+    request,
+  );
 });
-
-
