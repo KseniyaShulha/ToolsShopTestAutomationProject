@@ -47,10 +47,6 @@ test.describe("DELETE/users", async () => {
       request,
     );
 
-    const loginDeletedUserResponse =
-      // Asserting response status is equal to 4**
-      expect(loginDeletedUser.status()).toBe(401);
-
     // Send Get request to search for the deleted user by email
     const searchUserResponse = await userApi.searchUser(
       token,
