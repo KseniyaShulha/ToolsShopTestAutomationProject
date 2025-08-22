@@ -57,7 +57,10 @@ test.describe("DELETE/users", async () => {
       createdUserEmail,
     );
 
-    // Asserting response status is equal to 2**
-    await expect(searchUserResponse).toBeOK();
+    // Asserting response status data is equal to be []
+    const responseBody = await searchUserResponse.json();
+
+    console.log("Response body", responseBody)
+    expect(responseBody.data).toStrictEqual([]);
   });
 });
