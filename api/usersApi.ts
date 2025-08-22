@@ -112,4 +112,40 @@ export class UsersApi extends BaseAPI {
 
     return response;
   }
+
+  async deleteUser(token: string, userId: string, request: any = this.request) {
+    const url = this.apiUrl + this.path + userId;
+
+    console.log(`Send DELETE ${url}`);
+
+    // Add header Authorization with token
+    this.headersObj["Authorization"] = `Bearer ${token}`;
+
+    // Send req
+    const response = await request.delete(url, {
+      headers: this.headersObj,
+    });
+
+    return response;
+  }
+
+  async searchUser(token: string, q: string, request: any = this.request) {
+    const url = `${this.apiUrl}${this.path}search?q=${encodeURIComponent(q)}`;
+
+    console.log(`Send GET ${url}`);
+
+    // Add header Authorization with token
+    this.headersObj["Authorization"] = `Bearer ${token}`;
+
+    // Send req
+    const response = await request.get(url, {
+      headers: this.headersObj,
+    });
+
+    console.log(
+      `Response ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
+    return response;
+  }
 }
