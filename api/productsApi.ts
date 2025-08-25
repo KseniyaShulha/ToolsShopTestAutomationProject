@@ -37,9 +37,7 @@ export class ProductsApi extends BaseAPI {
     const keys = Object.keys(responseData.responseStructure);
 
     // Assert response lentgh to be equal the length of response structure (number of keys)
-    expect(keys.length).toBe(
-      Object.keys(response).length,
-    );
+    expect(keys.length).toBe(Object.keys(response).length);
 
     // Ittarate keys and check that the number of keys from response body and their type is equal response structure
     for (const key of keys) {
@@ -51,5 +49,39 @@ export class ProductsApi extends BaseAPI {
     }
     // Assert response data length to be greater than or equal 0
     expect.soft(response.data.length).toBeGreaterThanOrEqual(0);
+  }
+
+  assertResponseStructureAndTypesForSingleProduct(response) {
+    const keys = Object.keys(responseData.responseDataSingleProduct);
+
+    // Assert response lentgh to be equal the length of response structure (number of keys)
+    expect(keys.length).toBe(Object.keys(response).length);
+
+    // Ittarate keys and check that the number of keys from response body and their type is equal response structure
+    for (const key of keys) {
+      console.log("Checking key: ", key);
+      expect.soft(response).toHaveProperty(key);
+      expect
+        .soft(typeof response[key])
+        .toBe(typeof responseData.responseDataSingleProduct[key]);
+    }
+  }
+
+  async getProductByID(productId: string, request: any = this.request) {
+    const url = this.apiUrl + this.path + "/" + productId;
+
+    console.log(`Send GET ${url}`);
+
+    // Send get request to get products list
+    const response = await request.get(url, {
+      headers: this.headersObj,
+    });
+
+    console.log(
+      `Response ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
+
+    return response;
   }
 }

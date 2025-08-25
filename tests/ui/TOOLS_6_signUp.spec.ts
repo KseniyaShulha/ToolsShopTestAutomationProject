@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import { testData_TOOLS_6 } from "../../testData/testData_TOOLS-6";
 import { AppPageObjects } from "../../pages/appPageObjects";
 import { loginApi } from "../../api/apiHelper";
