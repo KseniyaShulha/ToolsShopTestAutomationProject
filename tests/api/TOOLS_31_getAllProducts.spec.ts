@@ -17,7 +17,7 @@ test("TOOLS-31 Get all products", async ({ request }) => {
   const responseBody = await getAllProductsResponse.json();
 
   // Assert received response body has the same body structure as a template response structure
-  productsApi.assertResponseStructure(responseBody);
+  productsApi.assertResponseStructureAndTypes(responseBody);
 
   // Assert the key "current page" has the value "1"
   expect(responseBody.current_page).toBe(1);
