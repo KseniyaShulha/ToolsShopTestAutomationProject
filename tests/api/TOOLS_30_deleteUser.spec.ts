@@ -7,7 +7,6 @@ let token: any;
 let userID: any;
 let createdUserEmail: any;
 let createdUserpassword: any;
-let q: any;
 
 test.describe("DELETE/users", async () => {
   test.beforeEach(async ({ request }) => {
@@ -56,7 +55,6 @@ test.describe("DELETE/users", async () => {
     // Asserting response status data is equal to be []
     const responseBody = await searchUserResponse.json();
 
-    console.log("Response body", responseBody)
     expect(responseBody.data).toStrictEqual([]);
   });
 });

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { loginApi } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { testData_TOOLS_21 } from "../../testData/testData_TOOLS_21";
-import { ProductsApi } from "../../api/productApi";
+import { ProductsApi } from "../../api/productsApi";
 
 let token: any;
 const testData_addToCart: any = {
@@ -15,7 +15,7 @@ test.describe("add item to cart", () => {
     const productApi = new ProductsApi(request);
 
     // Send GET req and save response in var
-    const getProductResponse = await productApi.getProduct();
+    const getProductResponse = await productApi.getProducts();
 
     // Save response body in var
     const getProductResponseBody = await getProductResponse.json();
