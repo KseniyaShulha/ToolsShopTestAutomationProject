@@ -37,15 +37,6 @@ test.describe("DELETE/users", async () => {
     // Asserting response status is equal to 2**
     await expect(deleteUserResponse).toBeOK();
 
-    // Try to login as the deleted user
-    const loginDeletedUser = await userApi.postLogin(
-      {
-        email: createdUserEmail,
-        password: createdUserpassword,
-      },
-      request,
-    );
-
     // Send Get request to search for the deleted user by email
     const searchUserResponse = await userApi.searchUser(
       token,
