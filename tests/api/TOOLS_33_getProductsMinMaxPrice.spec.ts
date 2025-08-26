@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
+import { testData_TOOLS_33 } from "../../testData/testData_TOOLS_33"
 
 test("TOOLS-33 GET products/?p=params&between=min,max price", async ({
   request,
@@ -7,39 +8,24 @@ test("TOOLS-33 GET products/?p=params&between=min,max price", async ({
   // Create instance of ProductsApi
   const productsApi = new ProductsApi(request);
 
-  // Send get request with querry params and save response in var
-  const getAllProductsWithMinPriceResponse = await productsApi.getProducts(
-    "?page=1&between=price,0,5",
-  );
+  for (const price of testData_TOOLS_33) {
+    console.log(`Check scenario for min: ${price.min}, max: ${price.max}`);
+    // Send get request with querry params and save response in var
+    const getAllProductsResponse = await productsApi.getProducts(
+      `?page=1&between=price,${price.min},${price.max}`,
+    );
 
-  // Asserting response status is equal to 2**
-  await expect(getAllProductsWithMinPriceResponse).toBeOK();
+    // Asserting response status is equal to 2**
+    await expect(getAllProductsResponse).toBeOK();
 
-  //Save response body in json in var
-  const minPriceResponseBody = await getAllProductsWithMinPriceResponse.json();
+    //Save response body in json in var
+    const minPriceResponseBody = await getAllProductsResponse.json();
 
-  expect(minPriceResponseBody).toHaveProperty("data");
+    expect(minPriceResponseBody).toHaveProperty("data");
 
-  // Itterate over response body data to check the price to be less or equal 5
-  for (const product of minPriceResponseBody.data) {
-    expect.soft(product.price).toBeLessThanOrEqual(5);
-  }
-
-  // Send get request with querry params and save response in var
-  const getAllProductswithMaxPriceResponse = await productsApi.getProducts(
-    "?page=1&between=price,150,200",
-  );
-
-  // Asserting response status is equal to 2**
-  await expect(getAllProductswithMaxPriceResponse).toBeOK();
-
-  //Save response body in json in var
-  const maxPriceResponseBody = await getAllProductswithMaxPriceResponse.json();
-  
-  expect(maxPriceResponseBody).toHaveProperty("data");
-
-  // Itterate over response body data to check the price to be greater or equal 150
-  for (const product of maxPriceResponseBody.data) {
-    expect.soft(product.price).toBeGreaterThanOrEqual(150);
+    // Itterate over response body data to check the price to be less or equal 5
+    for (const product of minPriceResponseBody.data) {
+      expect.soft(product.price).toBeLessThanOrEqual(price.max);
+    }
   }
 });
