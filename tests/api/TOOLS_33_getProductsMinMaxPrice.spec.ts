@@ -9,7 +9,7 @@ test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
   const productsApi = new ProductsApi(request);
 
   for (const price of testData_TOOLS_33) {
-    console.log(`Check scenario for min: ${price.min}, max: ${price.max}`);
+    console.log(`\n\nCheck scenario for min: ${price.min}, max: ${price.max}`);
     // Send get request with querry params and save response in var
     const getAllProductsResponse = await productsApi.getProducts(
       `?page=1&between=price,${price.min},${price.max}`,
@@ -19,13 +19,14 @@ test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
     await expect(getAllProductsResponse).toBeOK();
 
     //Save response body in json in var
-    const minPriceResponseBody = await getAllProductsResponse.json();
+    const ResponseBody = await getAllProductsResponse.json();
 
-    expect(minPriceResponseBody).toHaveProperty("data");
+    expect(ResponseBody).toHaveProperty("data");
 
     // Itterate over response body data to check the price to be less or equal 5
-    for (const product of minPriceResponseBody.data) {
+    for (const product of ResponseBody.data) {
       expect.soft(product.price).toBeLessThanOrEqual(price.max);
     }
+    console.log('=============================');
   }
-});
+  });
