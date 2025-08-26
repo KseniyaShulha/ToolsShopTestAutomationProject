@@ -10,7 +10,7 @@ const testData_addToCart: any = {
   quantity: 2,
 };
 
-test.describe("add item to cart", () => {
+test.describe("Add item to cart", () => {
   test.beforeEach(async ({ request }) => {
     const productApi = new ProductsApi(request);
 
@@ -41,7 +41,7 @@ test.describe("add item to cart", () => {
     );
   });
 
-  test("TOOLS-21 add item to cart", async ({ request }) => {
+  test("TOOLS-21 POST carts/itemId", async ({ request }) => {
     // Create instance of UserApi
     const cartApi = new CartApi(request);
 

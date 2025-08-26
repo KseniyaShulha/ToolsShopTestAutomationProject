@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
 import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signUp";
 
-test("TOOLS-20 sign up as customer via api", async ({ request }) => {
+test("TOOLS-20 POST users/register", async ({ request }) => {
   // Create instance of UserApi
   const userApi = new UsersApi(request);
 

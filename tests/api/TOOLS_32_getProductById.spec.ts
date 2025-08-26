@@ -17,7 +17,7 @@ test.describe("Get product by ID", async () => {
     productId = responseBody.data[0].id;
   });
 
-  test("TOOLS-32 Get product by id", async () => {
+  test("TOOLS-32 GET products/productId", async () => {
     // Send get request with querry params and save response in var
     const getProductByIDResponse = await productsApi.getProductByID(productId);
 

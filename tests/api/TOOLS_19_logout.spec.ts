@@ -16,7 +16,7 @@ test.describe("logout", () => {
     );
   });
 
-  test("TOOLS-19 Logout", async ({ request }) => {
+  test("TOOLS-19 GET users/logout", async ({ request }) => {
     // Create instance of UserApi
     const userApi = new UsersApi(request);
 

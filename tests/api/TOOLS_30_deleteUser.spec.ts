@@ -27,7 +27,7 @@ test.describe("DELETE/users", async () => {
     );
   });
 
-  test("TOOLS-30 delete user", async ({ request }) => {
+  test("TOOLS-30 DELETE users/userId", async ({ request }) => {
     // Create instance of UserApi
     const userApi = new UsersApi(request);
 

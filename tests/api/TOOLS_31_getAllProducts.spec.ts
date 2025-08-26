@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
 
-test("TOOLS-31 Get all products", async ({ request }) => {
+test("TOOLS-31 GET products/?p=params", async ({ request }) => {
   // Create instance of ProductsApi
   const productsApi = new ProductsApi(request);
 
