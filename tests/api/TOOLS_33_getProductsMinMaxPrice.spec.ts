@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
-import { testData_TOOLS_33 } from "../../testData/testData_TOOLS_33"
+import { testData_TOOLS_33 } from "../../testData/testData_TOOLS_33";
 
 test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
   request,
@@ -19,14 +19,14 @@ test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
     await expect(getAllProductsResponse).toBeOK();
 
     //Save response body in json in var
-    const ResponseBody = await getAllProductsResponse.json();
+    const responseBody = await getAllProductsResponse.json();
 
-    expect(ResponseBody).toHaveProperty("data");
+    expect(responseBody).toHaveProperty("data");
 
     // Itterate over response body data to check the price to be less or equal 5
-    for (const product of ResponseBody.data) {
+    for (const product of responseBody.data) {
       expect.soft(product.price).toBeLessThanOrEqual(price.max);
     }
-    console.log('=============================');
+    console.log("=============================");
   }
-  });
+});
