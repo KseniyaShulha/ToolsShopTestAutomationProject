@@ -30,7 +30,7 @@ test.describe("PUT/users", async () => {
     clonedTestDataObj.password = testData_TOOLS_20_signUp.password;
   });
 
-  test("TOOLS-29 updateUserData", async ({ request }) => {
+  test("TOOLS-29 PUT users/userId", async ({ request }) => {
     // Create instance of UserApi
     const userApi = new UsersApi(request);
 

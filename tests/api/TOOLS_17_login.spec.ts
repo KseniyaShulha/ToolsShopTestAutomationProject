@@ -4,14 +4,14 @@ import { UsersApi } from "../../api/usersApi";
 // Test data for TOOLS-17 & TOOLS-18
 const testDataArr = [
   {
-    testName: "TOOLS-17 login via API as a customer",
+    testName: "TOOLS-17 POST users/login (customer)",
     creds: {
       email: process.env.CUSTOMER_2_EMAIL,
       password: process.env.CUSTOMER_2_PASSWORD,
     },
   },
   {
-    testName: "TOOLS-18 login via API as an admin",
+    testName: "TOOLS-18 POST users/login (admin)",
     creds: {
       email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD,
