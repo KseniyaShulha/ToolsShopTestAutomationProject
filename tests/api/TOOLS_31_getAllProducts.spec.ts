@@ -10,7 +10,7 @@ test("TOOLS-31 GET products/?p=params", async ({ request }) => {
     "?page=1&between=price,1,100",
   );
 
-  // Asserting response status is equal to 2**
+  // Assert response status is equal to 2**
   await expect(getAllProductsResponse).toBeOK();
 
   // Save response body to var
