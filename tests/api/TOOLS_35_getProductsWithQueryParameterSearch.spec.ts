@@ -19,17 +19,6 @@ test.describe("GET/products with query parameter search", async () => {
   });
 
     test("TOOLS-35 GET products/search?q=", async ({ request }) => {
-      // Send GET request with query parameter search and save response in var
-      const getProductsBySearchResponse = await productsApi.getProducts(
-        `/search?q=${encodeURIComponent(product.name)}`,
-      );
-
-      // Assert response status is equal to 2**
-      await expect(getProductsBySearchResponse).toBeOK();
-
-      //Save response body in json in var
-      const responseBody = await getProductsBySearchResponse.json();
-
       const searchCombinations = [
         product.name,
         product.name.split(" ")[0],
