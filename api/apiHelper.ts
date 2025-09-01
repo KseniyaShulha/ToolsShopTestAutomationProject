@@ -1,10 +1,10 @@
-import { expect } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import { UsersApi } from "./usersApi";
 
 // Define function to verify that credentials are correct
 export async function loginApi(
   body: object,
-  request: any,
+  request: APIRequestContext,
 ): Promise<string | null> {
   const userApi = new UsersApi(request);
   // Send post request /users/register and storing the response in variable
@@ -21,7 +21,7 @@ export async function loginApi(
 
 export async function signUpApi(
   body: object,
-  request: any,
+  request: APIRequestContext,
 ): Promise<any | null> {
   const userApi = new UsersApi(request);
   // Send post request /users/register and storing the response in variable

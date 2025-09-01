@@ -1,6 +1,5 @@
-import { APIRequestContext, Request } from "@playwright/test";
+import { APIRequestContext, APIResponse } from "@playwright/test";
 import BaseAPI from "./baseAPI";
-import { UsersApi } from "./usersApi";
 
 export class CartApi extends BaseAPI {
   protected path: string;
@@ -13,7 +12,10 @@ export class CartApi extends BaseAPI {
     this.path = "carts";
   }
 
-  async postCreateCart(token: string, request: any = this.request) {
+  async postCreateCart(
+    token: string,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path;
 
     console.log(`Send POST ${url}`);
@@ -36,7 +38,7 @@ export class CartApi extends BaseAPI {
     body: object,
     itemId: string,
     request: any = this.request,
-  ) {
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + "/" + itemId;
 
     console.log(
@@ -56,7 +58,11 @@ export class CartApi extends BaseAPI {
     return response;
   }
 
-  async getCart(token: string, itemId: string, request: any = this.request) {
+  async getCart(
+    token: string,
+    itemId: string,
+    request: any = this.request,
+  ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "/" + itemId;
 
     console.log(`Send GET ${url} with a body`);
@@ -72,6 +78,29 @@ export class CartApi extends BaseAPI {
       `Response ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
+
+    return response;
+  }
+
+  async putUpdateQuantity(
+    token: string,
+    cartId: string,
+    body: object,
+    request: any = this.request,
+  ): Promise<Response> {
+    const url = `${this.apiUrl}${this.path}/${cartId}/product/quantity`;
+
+    console.log(`Send PUT ${url} with quantity: ${body}`);
+
+    // Add header Authorization with token
+    this.headersObj["Authorization"] = `Bearer ${token}`;
+
+    const response = await request.put(url, {
+      data: body,
+      headers: this.headersObj,
+    });
+
+    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
 
     return response;
   }

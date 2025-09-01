@@ -5,10 +5,6 @@ import { testData_TOOLS_21 } from "../../testData/testData_TOOLS_21";
 import { ProductsApi } from "../../api/productsApi";
 
 let token: any;
-const testData_addToCart: any = {
-  product_id: "01JZSS0Q11M5E1MVGWQJ7P7QS2",
-  quantity: 2,
-};
 
 test.describe("Add item to cart", () => {
   test.beforeEach(async ({ request }) => {
@@ -77,7 +73,7 @@ test.describe("Add item to cart", () => {
     const getCartResponse = await cartApi.getCart(token, cartId);
 
     // Assert response status is equal to 2**
-    expect(getCartResponse.status()).toBe(200);
+    await expect(getCartResponse).toBeOK();
 
     // Save response body in var
     const getCartResponseBody = await getCartResponse.json();
