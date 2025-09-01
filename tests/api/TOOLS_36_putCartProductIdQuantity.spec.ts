@@ -13,16 +13,14 @@ test.describe("Cart API - Update quantity", () => {
     productApi = new ProductsApi(request);
     cartApi = new CartApi(request);
 
-    // Send GET request to find the item in stock
+    // Send GET request to get list of all products
     const getProductResponse = await productApi.getProducts();
     const getProductResponseBody = await getProductResponse.json();
+
+    // Find product in stock
     const productId = getProductResponseBody.data.find(
       (data) => data.in_stock === true,
     ).id;
-
-    console.log("===============================");
-    console.log("productId", productId);
-
     expect(productId).toBeDefined();
 
     testData_TOOLS_36 = {
@@ -41,12 +39,16 @@ test.describe("Cart API - Update quantity", () => {
 
     // Create a cart
     const createCartResponse: any = await cartApi.postCreateCart(token);
+
+    // Assert response status is equal to 2**
     expect(createCartResponse.status()).toBe(201);
+
+    // Save response body in var
     const createCartResponseBody = await createCartResponse.json();
+
+    // Save cartId
     cartId = createCartResponseBody.id;
     expect(cartId).toBeDefined();
-    console.log("cartId", cartId);
-    console.log("===============================");
 
     // Put a product to a cart
     const addToCartResponse: any = await cartApi.postAddToCart(
@@ -54,12 +56,9 @@ test.describe("Cart API - Update quantity", () => {
       testData_TOOLS_36,
       cartId,
     );
+
+    // Assert response status is equal to 2**
     expect(addToCartResponse.status()).toBe(200);
-    console.log(
-      "addToCartResponse",
-      JSON.stringify(addToCartResponse, null, 2),
-    );
-    console.log("===============================");
   });
 
   test("TOOLS-36 PUT carts/cartId/itemId/quantity", async () => {
@@ -75,16 +74,22 @@ test.describe("Cart API - Update quantity", () => {
       newQuantity,
     );
 
+    // Assert response status is equal to 2**
     expect(updateResponse.status()).toBe(200);
 
     const updateBody = await updateResponse.json();
     console.log("Updated cart:", updateBody);
 
-    // Assert the quantity of product has changed
+    // Send GET request to check the cart
     const getCartResponse = await cartApi.getCart(token, cartId);
+
+    // Assert response status is equal to 2**
     expect(getCartResponse.status()).toBe(200);
+
+    // Save response body
     const getCartBody = await getCartResponse.json();
 
+    // Assert the quantity of product has changed
     expect(getCartBody.cart_items[0].quantity).toBe(newQuantity.quantity);
   });
 });
