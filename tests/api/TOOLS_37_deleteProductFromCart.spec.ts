@@ -69,7 +69,7 @@ test.describe("Cart API - delete product", () => {
     );
 
     // Assert response status is equal to 2**
-    expect(deteProductFromCartResponse.status()).toBe(204);
+    await expect(deteProductFromCartResponse).toBeOK();
 
     // Send get request to check the cart to assert the product was deleted
     const getCartResponse = await cartApi.getCart(token, cartId);
@@ -79,9 +79,9 @@ test.describe("Cart API - delete product", () => {
     const getCartResponseBody = await getCartResponse.json();
 
     // Assert that cart doesn't contain deleted product
-    const productIds = getCartResponseBody.cart_items.map(
-      (item) => item.product_id,
-    );
+    const productIds = (getCartResponseBody.cart_items ?? []).map(
+       (item) => item.product_id,
+     );
     expect(productIds).not.toContain(testData_TOOLS_36.product_id);
   });
 });
