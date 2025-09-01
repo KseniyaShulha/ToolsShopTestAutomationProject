@@ -1,0 +1,22 @@
+language: "en-US"
+early_access: false
+reviews:
+  profile: "focused"
+  request_changes_workflow: false
+  high_level_summary: false
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches: ["main"]
+  path_instructions:
+    - path: "tests/playwright/**/**.ts"
+      instructions: |
+        Only review Playwright end-to-end test logic. Focus on:
+        - Selectors and page interactions
+        - Waits and timing (avoid unnecessary `page.waitForTimeout`)
+        - Assertions correctness
+        - Test isolation (avoid shared state)
+        - Proper use of fixtures and async handling
+chat:
+  auto_reply: false
