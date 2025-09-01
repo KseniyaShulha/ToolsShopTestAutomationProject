@@ -104,4 +104,25 @@ export class CartApi extends BaseAPI {
 
     return response;
   }
+
+  async deleteProductFromCart(
+    token: string,
+    cartId: string,
+    productIdToDelete: string,
+    request: any = this.request,
+  ): Promise<Response> {
+    const url = `${this.apiUrl}${this.path}/${cartId}/product/${productIdToDelete}`;
+
+    console.log(`Send DELETE ${url}`);
+
+    // Add header Authorization with token
+    this.headersObj["Authorization"] = `Bearer ${token}`;
+
+    const response = await request.delete(url, {
+      headers: this.headersObj,
+    });
+
+    console.log(`Response ${url}: `, response);
+    return response;
+  }
 }
