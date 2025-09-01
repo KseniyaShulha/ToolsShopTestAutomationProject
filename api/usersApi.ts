@@ -1,4 +1,4 @@
-import { APIRequestContext, Request } from "@playwright/test";
+import { APIRequestContext } from "@playwright/test";
 import BaseAPI from "./baseAPI";
 
 export class UsersApi extends BaseAPI {
@@ -13,7 +13,10 @@ export class UsersApi extends BaseAPI {
   }
 
   // Login req
-  async postLogin(body: object, request: any = this.request) {
+  async postLogin(
+    body: object,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + "login";
 
     console.log(
@@ -31,7 +34,10 @@ export class UsersApi extends BaseAPI {
     return response;
   }
 
-  async getLogout(token: string, request: any = this.request) {
+  async getLogout(
+    token: string,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + "logout";
 
     console.log(`Send GET ${url}`);
@@ -49,7 +55,10 @@ export class UsersApi extends BaseAPI {
     return response;
   }
 
-  async postSignUp(body: object, request: any = this.request) {
+  async postSignUp(
+    body: object,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + "register";
 
     console.log(
@@ -72,7 +81,7 @@ export class UsersApi extends BaseAPI {
     token: string,
     userID: string,
     request: any = this.request,
-  ) {
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + userID;
     console.log(
       `Send PUT ${url} with a body: ${JSON.stringify(body, null, 2)}`,
@@ -92,7 +101,11 @@ export class UsersApi extends BaseAPI {
     return response;
   }
 
-  async getUser(token: string, userId: string, request: any = this.request) {
+  async getUser(
+    token: string,
+    userId: string,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + userId;
 
     console.log(`Send GET ${url}`);
@@ -113,7 +126,11 @@ export class UsersApi extends BaseAPI {
     return response;
   }
 
-  async deleteUser(token: string, userId: string, request: any = this.request) {
+  async deleteUser(
+    token: string,
+    userId: string,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + userId;
 
     console.log(`Send DELETE ${url}`);
@@ -129,7 +146,11 @@ export class UsersApi extends BaseAPI {
     return response;
   }
 
-  async searchUser(token: string, q: string, request: any = this.request) {
+  async searchUser(
+    token: string,
+    q: string,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = `${this.apiUrl}${this.path}search?q=${encodeURIComponent(q)}`;
 
     console.log(`Send GET ${url}`);

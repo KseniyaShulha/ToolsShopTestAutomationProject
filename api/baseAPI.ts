@@ -1,9 +1,9 @@
 import { Urls } from "../utils/urls";
-import { APIRequest, APIRequestContext, Request } from "@playwright/test";
+import { APIRequestContext } from "@playwright/test";
 
 export default abstract class BaseAPI {
   protected apiUrl: string;
-  protected headersObj: object;
+  protected headersObj: Record<string, string> = {};
   protected request: APIRequestContext;
 
   constructor(request: APIRequestContext) {

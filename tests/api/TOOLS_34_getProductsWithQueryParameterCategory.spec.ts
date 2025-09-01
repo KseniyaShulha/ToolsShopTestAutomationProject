@@ -20,7 +20,7 @@ test.describe("GET/products with query parameter category", async () => {
     categoryId = responseBody.data[0].category.id;
   });
 
-  test("TOOLS-34 GET products/?by_category=", async ({ request }) => {
+  test("TOOLS-34 GET products/?by_category=", async () => {
     const getProductsByCategoryResponse = await productsApi.getProducts(
       `?by_category=${categoryId}`,
     );

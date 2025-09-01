@@ -1,4 +1,4 @@
-import { APIRequestContext, expect, Request } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import BaseAPI from "./baseAPI";
 import { responseData } from "./requestData/productsData";
 
@@ -15,7 +15,10 @@ export class ProductsApi extends BaseAPI {
     this.responseData = responseData;
   }
 
-  async getProducts(params: string = "?page=1", request: any = this.request) {
+  async getProducts(
+    params: string = "?page=1",
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + params;
 
     console.log(`Send GET ${url}`);
@@ -33,7 +36,7 @@ export class ProductsApi extends BaseAPI {
     return response;
   }
 
-  assertResponseStructureAndTypes(response) {
+  assertResponseStructureAndTypes(response: APIRequestContext): void {
     const keys = Object.keys(responseData.responseStructure);
 
     // Assert response lentgh to be equal the length of response structure (number of keys)
@@ -48,10 +51,12 @@ export class ProductsApi extends BaseAPI {
         .toBe(typeof responseData.responseStructure[key]);
     }
     // Assert response data length to be greater than or equal 0
-    expect.soft(response.data.length).toBeGreaterThanOrEqual(0);
+    expect.soft(response["data"].length).toBeGreaterThanOrEqual(0);
   }
 
-  assertResponseStructureAndTypesForSingleProduct(response) {
+  assertResponseStructureAndTypesForSingleProduct(
+    response: APIRequestContext,
+  ): void {
     const keys = Object.keys(responseData.responseDataSingleProduct);
 
     // Assert response lentgh to be equal the length of response structure (number of keys)
@@ -67,7 +72,10 @@ export class ProductsApi extends BaseAPI {
     }
   }
 
-  async getProductByID(productId: string, request: any = this.request) {
+  async getProductByID(
+    productId: string,
+    request: any = this.request,
+  ): Promise<Response> {
     const url = this.apiUrl + this.path + "/" + productId;
 
     console.log(`Send GET ${url}`);
