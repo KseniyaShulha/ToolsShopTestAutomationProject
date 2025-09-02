@@ -38,7 +38,7 @@ test.describe("Add item to cart", () => {
   });
 
   test("TOOLS-21 POST carts/itemId", async ({ request }) => {
-    // Create instance of UserApi
+    // Create instance of CartApi
     const cartApi = new CartApi(request);
 
     // Send POST req for creating cart and save response in var
