@@ -1,4 +1,4 @@
-import { APIRequestContext, APIResponse, expect } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import { UsersApi } from "./usersApi";
 import { ProductsApi } from "./productsApi";
 import { CartApi } from "./cartApi";

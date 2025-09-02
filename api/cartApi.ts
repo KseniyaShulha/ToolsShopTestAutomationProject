@@ -61,7 +61,7 @@ export class CartApi extends BaseAPI {
   async getCart(
     token: string,
     itemId: string,
-    request: any = this.request,
+    request: APIRequestContext = this.request,
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "/" + itemId;
 
@@ -86,8 +86,8 @@ export class CartApi extends BaseAPI {
     token: string,
     cartId: string,
     body: object,
-    request: any = this.request,
-  ): Promise<Response> {
+    request: APIRequestContext = this.request,
+  ): Promise<APIResponse> {
     const url = `${this.apiUrl}${this.path}/${cartId}/product/quantity`;
 
     console.log(`Send PUT ${url} with quantity: ${body}`);

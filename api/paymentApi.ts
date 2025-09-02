@@ -1,4 +1,4 @@
-import { APIRequestContext, expect } from "@playwright/test";
+import { APIRequestContext, APIResponse, expect } from "@playwright/test";
 import BaseAPI from "./baseAPI";
 import { responseData } from "./requestData/paymentData";
 
@@ -17,8 +17,8 @@ export class PaymentApi extends BaseAPI {
   async postCheckPayment(
     paymentMethod: string,
     paymentDetails: object,
-    request: any = this.request,
-  ): Promise<Response> {
+    request: APIRequestContext = this.request,
+  ): Promise<APIResponse> {
     const url = this.apiUrl + this.path;
 
     const body = {
