@@ -15,6 +15,10 @@ test("TOOLS-38 POST /payment/check", async ({ request }) => {
 
   console.log("postCheckPaymentResponse", postCheckPaymentResponse);
 
+  const postCheckPaymentResponseBody = await postCheckPaymentResponse.json();
   // Assert response status is equal to 2**
   expect(postCheckPaymentResponse.status()).toBe(200);
+
+  expect(postCheckPaymentResponseBody.message).toBe("Payment was successful");
+
 });
