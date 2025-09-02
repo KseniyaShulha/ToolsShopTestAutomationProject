@@ -1,9 +1,10 @@
-import { APIRequestContext } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import BaseAPI from "./baseAPI";
-import { faker } from "@faker-js/faker";
+import { responseData } from "./requestData/paymentData";
 
 export class PaymentApi extends BaseAPI {
   protected path: string;
+  response: any;
 
   // Constructor for the class
   constructor(request: APIRequestContext) {
@@ -24,6 +25,7 @@ export class PaymentApi extends BaseAPI {
       payment_method: paymentMethod,
       payment_details: paymentDetails,
     };
+
     console.log(
       `Send POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
     );
@@ -35,6 +37,13 @@ export class PaymentApi extends BaseAPI {
 
     console.log(`Response ${url}: `, JSON.stringify(await response.json()));
 
+    // Save response body in json
+    const postCheckPaymentResponseBody = await response.json();
+
+    // Assert message from response body to be strict equal response data
+    expect(postCheckPaymentResponseBody).toStrictEqual(
+      responseData.successPayment,
+    );
     return response;
   }
 }
