@@ -14,8 +14,8 @@ export class CartApi extends BaseAPI {
 
   async postCreateCart(
     token: string,
-    request: any = this.request,
-  ): Promise<Response> {
+    request: APIRequestContext = this.request,
+  ): Promise<APIResponse> {
     const url = this.apiUrl + this.path;
 
     console.log(`Send POST ${url}`);
@@ -37,8 +37,8 @@ export class CartApi extends BaseAPI {
     token: string,
     body: object,
     itemId: string,
-    request: any = this.request,
-  ): Promise<Response> {
+    request: APIRequestContext = this.request,
+  ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "/" + itemId;
 
     console.log(

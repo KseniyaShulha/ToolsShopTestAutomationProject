@@ -14,4 +14,9 @@ test("TOOLS-38 POST /payment/check", async ({ request }) => {
 
   // Assert response status is equal to 2**
   expect(postCheckPaymentResponse.status()).toBe(200);
+
+  // Assert message from response body to be strict equal response data
+  expect(postCheckPaymentResponse).toStrictEqual(
+    paymentApi.responseData.successPayment
+  );
 });
