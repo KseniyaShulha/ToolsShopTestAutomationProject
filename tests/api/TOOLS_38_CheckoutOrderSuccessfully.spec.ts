@@ -1,25 +1,18 @@
 import { test, expect, APIResponse } from "@playwright/test";
 import { PaymentApi } from "../../api/paymentApi";
-import { faker } from "@faker-js/faker";
+import { testData_TOOLS_38_39 } from "../../testData/testData_TOOLS_38&39";
 
 // Test data for TOOLS-38 & TOOLS-39
 const testDataArr = [
   {
     testName: "TOOLS-38 POST /payment/check_bankTransfer",
     payment_method: "bank-transfer",
-    payment_details: {
-      bank_name: "Test bank",
-      account_name: faker.finance.accountName(),
-      account_number: faker.finance.accountNumber(),
-    },
+    payment_details: testData_TOOLS_38_39[0],
   },
   {
     testName: "TOOLS-39 POST /payment/check_giftCard",
     payment_method: "gift-card",
-    payment_details: {
-      gift_card_number: faker.string.alphanumeric(),
-      validation_code: faker.string.alphanumeric(),
-    },
+    payment_details: testData_TOOLS_38_39[1],
   },
 ];
 
