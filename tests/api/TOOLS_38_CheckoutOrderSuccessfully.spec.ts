@@ -1,17 +1,46 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, APIResponse } from "@playwright/test";
 import { PaymentApi } from "../../api/paymentApi";
-import { testData_TOOLS_38 } from "../../testData/testData_TOOLS_38";
+import { faker } from "@faker-js/faker";
 
-test("TOOLS-38 POST /payment/check", async ({ request }) => {
-  // Create instance of PaymentApi
-  const paymentApi = new PaymentApi(request);
+// Test data for TOOLS-38 & TOOLS-39
+const testDataArr = [
+  {
+    testName: "TOOLS-38 POST /payment/check_bankTransfer",
+    payment_method: "bank-transfer",
+    payment_details: {
+      bank_name: "Test bank",
+      account_name: faker.finance.accountName(),
+      account_number: faker.finance.accountNumber(),
+    },
+  },
+  {
+    testName: "TOOLS-39 POST /payment/check_giftCard",
+    payment_method: "gift-card",
+    payment_details: {
+      gift_card_number: faker.string.alphanumeric(),
+      validation_code: faker.string.alphanumeric(),
+    },
+  },
+];
 
-  // Save response in var
-  const postCheckPaymentResponse: any = await paymentApi.postCheckPayment(
-    "bank-transfer",
-    testData_TOOLS_38.payment_details,
-  );
+// Iterate over test data
+for (const testDataObj of testDataArr) {
+  // Run test based on test data
+  test(testDataObj.testName, async ({ request }) => {
+    // Create instance of UserApi
+    const paymentApi = new PaymentApi(request);
 
-  // Assert response status is equal to 2**
-  expect(postCheckPaymentResponse.status()).toBe(200);
-});
+    // Save response in var
+    const postCheckPaymentResponse: APIResponse =
+      await paymentApi.postCheckPayment(
+        testDataObj.payment_method,
+        testDataObj.payment_details,
+      );
+    // Assert response status is equal to 2**
+    expect(postCheckPaymentResponse.status()).toBe(200);
+
+    const responseBody = await postCheckPaymentResponse.json();
+
+    expect(responseBody).toStrictEqual(paymentApi.responseData.successPayment);
+  });
+}

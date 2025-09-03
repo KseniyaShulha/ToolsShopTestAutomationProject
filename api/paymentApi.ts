@@ -5,6 +5,7 @@ import { responseData } from "./requestData/paymentData";
 export class PaymentApi extends BaseAPI {
   protected path: string;
   response: any;
+  responseData: any;
 
   // Constructor for the class
   constructor(request: APIRequestContext) {
@@ -12,6 +13,7 @@ export class PaymentApi extends BaseAPI {
 
     // Define common path for each req of class
     this.path = "payment/check";
+    this.responseData = responseData;
   }
 
   async postCheckPayment(
@@ -37,13 +39,6 @@ export class PaymentApi extends BaseAPI {
 
     console.log(`Response ${url}: `, JSON.stringify(await response.json()));
 
-    // Save response body in json
-    const postCheckPaymentResponseBody = await response.json();
-
-    // Assert message from response body to be strict equal response data
-    expect(postCheckPaymentResponseBody).toStrictEqual(
-      responseData.successPayment,
-    );
     return response;
   }
 }
