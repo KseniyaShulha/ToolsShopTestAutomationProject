@@ -1,30 +1,26 @@
 import { test, expect } from "@playwright/test";
-import { loginApi } from "../../api/apiHelper";
+import {
+  createCartAndAddProduct,
+  getRandomProductInStock,
+  loginApi,
+} from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
-import { ProductsApi } from "../../api/productsApi";
 
 let token: any;
 let cartId: string;
-let productApi: any, cartApi;
-let testData_TOOLS_36: any;
+let cartApi: any;
+let testData_TOOLS_36: any, product;
 
 test.describe("Cart API - delete product", () => {
   test.beforeEach(async ({ request }) => {
-    productApi = new ProductsApi(request);
+    // Create instance of CartApi
     cartApi = new CartApi(request);
 
-    // Send GET request to get list of all products
-    const getProductResponse = await productApi.getProducts();
-    const getProductResponseBody = await getProductResponse.json();
-
-    // Find product in stock
-    const productId = getProductResponseBody.data.find(
-      (data) => data.in_stock === true,
-    ).id;
-    expect(productId).toBeDefined();
+    // Find product in stock and save it in var
+    product = await getRandomProductInStock(request);
 
     testData_TOOLS_36 = {
-      product_id: productId,
+      product_id: product.id,
       quantity: 2,
     };
 
@@ -37,28 +33,8 @@ test.describe("Cart API - delete product", () => {
       request,
     );
 
-    // Create a cart
-    const createCartResponse: any = await cartApi.postCreateCart(token);
-
-    // Assert response status is equal to 2**
-    expect(createCartResponse.status()).toBe(201);
-
-    // Save response body in var
-    const createCartResponseBody = await createCartResponse.json();
-
-    // Save cartId
-    cartId = createCartResponseBody.id;
-    expect(cartId).toBeDefined();
-
-    // Put a product to a cart
-    const addToCartResponse: any = await cartApi.postAddToCart(
-      token,
-      testData_TOOLS_36,
-      cartId,
-    );
-
-    // Assert response status is equal to 2**
-    expect(addToCartResponse.status()).toBe(200);
+    // Create cart and add product to cart
+    cartId = await createCartAndAddProduct(token, product.id, 2, request);
   });
 
   test("TOOLS-37 DELETE carts/cartId/product/{productId}", async () => {
@@ -69,7 +45,7 @@ test.describe("Cart API - delete product", () => {
     );
 
     // Assert response status is equal to 2**
-    await expect(deteProductFromCartResponse).toBeOK();
+    expect(deteProductFromCartResponse.status()).toBe(204);
 
     // Send get request to check the cart to assert the product was deleted
     const getCartResponse = await cartApi.getCart(token, cartId);
@@ -79,9 +55,6 @@ test.describe("Cart API - delete product", () => {
     const getCartResponseBody = await getCartResponse.json();
 
     // Assert that cart doesn't contain deleted product
-    const productIds = (getCartResponseBody.cart_items ?? []).map(
-       (item) => item.product_id,
-     );
-    expect(productIds).not.toContain(testData_TOOLS_36.product_id);
+    expect(getCartResponseBody.cart_items.length).toBe(0);
   });
 });

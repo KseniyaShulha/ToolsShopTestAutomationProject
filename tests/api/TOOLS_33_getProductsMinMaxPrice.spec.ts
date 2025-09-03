@@ -26,7 +26,9 @@ test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
     // Itterate over response body data to check the price to be less or equal 5
     for (const product of responseBody.data) {
       expect.soft(product.price).toBeLessThanOrEqual(price.max);
+      expect.soft(product.price).toBeGreaterThanOrEqual(price.min);
     }
+
     console.log("=============================");
   }
 });

@@ -1,4 +1,4 @@
-import { APIRequestContext } from "@playwright/test";
+import { APIRequestContext, APIResponse } from "@playwright/test";
 import BaseAPI from "./baseAPI";
 import { responseData } from "./requestData/productsData";
 
@@ -17,8 +17,8 @@ export class CategoryApi extends BaseAPI {
 
   async getProducts(
     params: string = "?page=1",
-    request: any = this.request,
-  ): Promise<Response> {
+    request: APIRequestContext = this.request,
+  ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + params;
 
     console.log(`Send GET ${url}`);
