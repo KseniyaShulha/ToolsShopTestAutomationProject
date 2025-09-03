@@ -57,7 +57,7 @@ export class UsersApi extends BaseAPI {
 
   async postSignUp(
     body: object,
-   request: APIRequestContext = this.request,
+    request: APIRequestContext = this.request,
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "register";
 
