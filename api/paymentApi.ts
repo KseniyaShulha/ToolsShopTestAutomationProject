@@ -1,6 +1,6 @@
 import { APIRequestContext, APIResponse, expect } from "@playwright/test";
 import BaseAPI from "./baseAPI";
-import { responseData } from "./requestData/paymentData";
+import { responseData } from "./responseData/paymentData";
 
 export class PaymentApi extends BaseAPI {
   protected path: string;

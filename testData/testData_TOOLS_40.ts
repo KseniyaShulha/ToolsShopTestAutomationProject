@@ -1,11 +1,5 @@
 import { faker } from "@faker-js/faker";
-
-const BANK_NAME_FIELD_ERROR =
-  "The payment details.bank name field is required.";
-const ACCOUNT_NAME_FIELD_ERROR =
-  "The payment details.account name field is required.";
-const ACCOUNT_NUMBER_FIELD_ERROR =
-  "The payment details.account number field is required.";
+import { responseData } from "../api/responseData/paymentData";
 
 export const testData_TOOLS_40: any = [
   {
@@ -17,7 +11,7 @@ export const testData_TOOLS_40: any = [
       account_number: faker.finance.accountNumber(),
     },
     expcetedStatus: 422,
-    errorMessage: BANK_NAME_FIELD_ERROR,
+    responseBody: responseData.emptyBankNameFieldError,
   },
   {
     scenarioName: "empty account name field",
@@ -28,7 +22,7 @@ export const testData_TOOLS_40: any = [
       account_number: faker.finance.accountNumber(),
     },
     expcetedStatus: 422,
-    errorMessage: ACCOUNT_NAME_FIELD_ERROR,
+    responseBody: responseData.emptyAccountNameFieldError,
   },
   {
     scenarioName: "empty account number field",
@@ -39,6 +33,6 @@ export const testData_TOOLS_40: any = [
       account_number: "",
     },
     expcetedStatus: 422,
-    errorMessage: ACCOUNT_NUMBER_FIELD_ERROR,
+    responseBody: responseData.emptyAaccountNumberFieldError,
   },
 ];

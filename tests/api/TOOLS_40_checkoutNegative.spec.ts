@@ -2,14 +2,14 @@ import { test, expect, APIResponse } from "@playwright/test";
 import { PaymentApi } from "../../api/paymentApi";
 import { testData_TOOLS_40 } from "../../testData/testData_TOOLS_40";
 
-test("TOOLS_26 POST users/login (negative)", async ({ request }) => {
+test("TOOLS_40 POST /api/payment/check (negative)", async ({ request }) => {
   // Create instance of UserApi
   const paymentApi = new PaymentApi(request);
 
   for (const testDataObj of testData_TOOLS_40) {
     console.log("Testing with: ", testDataObj.scenarioName);
 
-    // Send post request /users/login and storing the response in variable
+    // Send post request /api/payment/check and storing the response in variable
     const postCheckPaymentResponse: APIResponse = await paymentApi.postCheckPayment(
       testDataObj.payment_method,
       testDataObj.payment_details,
@@ -24,6 +24,6 @@ test("TOOLS_26 POST users/login (negative)", async ({ request }) => {
       .toBe(testDataObj.expcetedStatus);
 
     //Assert error message
-    expect.soft(responseBody.message).toBe(testDataObj.errorMessage);
+    expect.soft(responseBody).toStrictEqual(testDataObj.responseBody);
   }
 });

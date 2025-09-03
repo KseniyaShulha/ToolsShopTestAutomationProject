@@ -8,12 +8,12 @@ const testDataArr = [
   {
     testName: "TOOLS-38 POST /payment/check_bankTransfer",
     payment_method: "bank-transfer",
-    payment_details: testData_TOOLS_38,
+    payment_details: testData_TOOLS_38.payment_details,
   },
   {
     testName: "TOOLS-39 POST /payment/check_giftCard",
     payment_method: "gift-card",
-    payment_details: testData_TOOLS_39,
+    payment_details: testData_TOOLS_39.payment_details,
   },
 ];
 
