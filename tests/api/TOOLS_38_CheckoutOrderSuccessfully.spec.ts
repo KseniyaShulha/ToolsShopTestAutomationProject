@@ -1,18 +1,19 @@
 import { test, expect, APIResponse } from "@playwright/test";
 import { PaymentApi } from "../../api/paymentApi";
-import { testData_TOOLS_38_39 } from "../../testData/testData_TOOLS_38&39";
+import { testData_TOOLS_38 } from "../../testData/testData_TOOLS_38";
+import { testData_TOOLS_39 } from "../../testData/testData_TOOLS_39";
 
 // Test data for TOOLS-38 & TOOLS-39
 const testDataArr = [
   {
     testName: "TOOLS-38 POST /payment/check_bankTransfer",
     payment_method: "bank-transfer",
-    payment_details: testData_TOOLS_38_39[0],
+    payment_details: testData_TOOLS_38,
   },
   {
     testName: "TOOLS-39 POST /payment/check_giftCard",
     payment_method: "gift-card",
-    payment_details: testData_TOOLS_38_39[1],
+    payment_details: testData_TOOLS_39,
   },
 ];
 
