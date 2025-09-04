@@ -10,10 +10,11 @@ test("TOOLS_40 POST /api/payment/check (negative)", async ({ request }) => {
     console.log("Testing with: ", testDataObj.scenarioName);
 
     // Send post request /api/payment/check and storing the response in variable
-    const postCheckPaymentResponse: APIResponse = await paymentApi.postCheckPayment(
-      testDataObj.payment_method,
-      testDataObj.payment_details,
-    );
+    const postCheckPaymentResponse: APIResponse =
+      await paymentApi.postCheckPayment(
+        testDataObj.payment_method,
+        testDataObj.payment_details,
+      );
 
     // Assign body to var
     const responseBody = await postCheckPaymentResponse.json();
