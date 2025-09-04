@@ -18,7 +18,7 @@ export const responseData = {
       ],
     },
   },
-  emptyAaccountNumberFieldError: {
+  emptyAcccountNumberFieldError: {
     message: "The payment details.account number field is required.",
     errors: {
       "payment_details.account_number": [

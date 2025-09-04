@@ -33,6 +33,6 @@ export const testData_TOOLS_40: any = [
       account_number: "",
     },
     expcetedStatus: 422,
-    responseBody: responseData.emptyAaccountNumberFieldError,
+    responseBody: responseData.emptyAcccountNumberFieldError,
   },
 ];
