@@ -15,14 +15,16 @@ export class InvoicesApi extends BaseAPI {
     this.responseData = responseData;
   }
 
-  async PostCreateInvoice(
+  async postCreateInvoice(
     token: string,
     body: object,
     request: APIRequestContext = this.request,
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path;
 
-    console.log(`\nSend POST ${url}`);
+     console.log(
+      `\nSend POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+    );
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -33,7 +35,8 @@ export class InvoicesApi extends BaseAPI {
     });
 
     console.log(
-      `\nSend POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
     );
 
     return response;
@@ -45,7 +48,7 @@ export class InvoicesApi extends BaseAPI {
     // Assert response lentgh to be equal the length of response structure (number of keys)
     expect(keys.length).toBe(Object.keys(response).length);
 
-    // Ittarate keys and check that the number of keys from response body and their type is equal response structure
+    // Itarate keys and check that the number of keys from response body and their type is equal response structure
     for (const key of keys) {
       console.log("\nChecking key: ", key);
       expect.soft(response).toHaveProperty(key);

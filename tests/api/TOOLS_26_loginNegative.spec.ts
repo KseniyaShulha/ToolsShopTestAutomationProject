@@ -9,7 +9,7 @@ test("TOOLS_26 POST users/login (negative)", async ({ request }) => {
   for (const testDataObj of testData_TOOLS_26) {
     console.log("\nTesting with: ", testDataObj.scenarioName);
 
-    // Send post request /users/login and storing the response in variable
+    // Send post request /users/login and store the response in variable
     const loginResponse: any = await userApi.postLogin(testDataObj.body);
 
     // Assign body to var
