@@ -15,17 +15,17 @@ export class HomePage extends BasePage {
 
   // Methods
   async openHomePage(): Promise<void> {
-    console.log("User opens home page");
+    console.log("\nUser opens home page");
     await this.page.goto("/");
   }
 
   async clickSignInButton(): Promise<void> {
-    console.log("User clicks sign in");
+    console.log("\nUser clicks sign in");
     this.signInbutton.click();
   }
 
   async chooseFirstItem(): Promise<void> {
-    console.log("User chooses the first item");
+    console.log("\nUser chooses the first item");
     this.itemChoice.first().click();
   }
 }

@@ -15,7 +15,7 @@ test.describe("GET/products with query parameter search", async () => {
     const responseBody = await getAllProductsResponse.json();
 
     product = responseBody.data.find((el) => el.name.includes(" "));
-    console.log("Product to test search: ", JSON.stringify(product, null, 2));
+    console.log("\nProduct to test search: ", JSON.stringify(product, null, 2));
   });
 
   test("TOOLS-35 GET products/search?q=", async () => {
@@ -26,7 +26,7 @@ test.describe("GET/products with query parameter search", async () => {
     ];
 
     for (const q of searchCombinations) {
-      console.log(`Searching by q: ${q}`);
+      console.log(`\nSearching by q: ${q}`);
 
       const getProductsBySearchResponse = await productsApi.getProducts(
         `/search?q=${encodeURIComponent(q)}`,
@@ -43,7 +43,7 @@ test.describe("GET/products with query parameter search", async () => {
         // Assert full names of products from response body to be full product name
         expect.soft(product.name).toContain(q);
       }
-      console.log("\n\n==============");
+      console.log("\n\n\n==============");
     }
   });
 });

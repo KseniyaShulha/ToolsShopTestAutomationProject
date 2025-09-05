@@ -21,7 +21,7 @@ export class CategoryApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + params;
 
-    console.log(`Send GET ${url}`);
+    console.log(`\nSend GET ${url}`);
 
     // Send get request to get products list
     const response = await request.get(url, {
@@ -29,7 +29,7 @@ export class CategoryApi extends BaseAPI {
     });
 
     console.log(
-      `Response ${url}: `,
+      `\nResponse ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
 

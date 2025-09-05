@@ -18,7 +18,7 @@ export class CartApi extends BaseAPI {
   ): Promise<Response> {
     const url = this.apiUrl + this.path;
 
-    console.log(`Send POST ${url}`);
+    console.log(`\nSend POST ${url}`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -27,7 +27,10 @@ export class CartApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }
@@ -42,7 +45,7 @@ export class CartApi extends BaseAPI {
     const url = this.apiUrl + this.path + "/" + itemId;
 
     console.log(
-      `Send POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+      `\nSend POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
     );
 
     // Add header Authorization with token
@@ -53,7 +56,10 @@ export class CartApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }
@@ -65,7 +71,7 @@ export class CartApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "/" + itemId;
 
-    console.log(`Send GET ${url} with a body`);
+    console.log(`\nSend GET ${url} with a body`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -75,7 +81,7 @@ export class CartApi extends BaseAPI {
     });
 
     console.log(
-      `Response ${url}: `,
+      `\nResponse ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
 
@@ -90,7 +96,7 @@ export class CartApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = `${this.apiUrl}${this.path}/${cartId}/product/quantity`;
 
-    console.log(`Send PUT ${url} with quantity: ${body}`);
+    console.log(`\nSend PUT ${url} with quantity: ${body}`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -100,7 +106,10 @@ export class CartApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }
@@ -114,7 +123,7 @@ export class CartApi extends BaseAPI {
     {
       const url = `${this.apiUrl}${this.path}/${cartId}/product/${productIdToDelete}`;
 
-      console.log(`Send DELETE ${url}`);
+      console.log(`\nSend DELETE ${url}`);
 
       const headers = { ...this.headersObj, Authorization: `Bearer ${token}` };
       const response = await request.delete(url, { headers });

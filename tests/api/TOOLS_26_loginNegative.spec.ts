@@ -7,7 +7,7 @@ test("TOOLS_26 POST users/login (negative)", async ({ request }) => {
   const userApi = new UsersApi(request);
 
   for (const testDataObj of testData_TOOLS_26) {
-    console.log("Testing with: ", testDataObj.scenarioName);
+    console.log("\nTesting with: ", testDataObj.scenarioName);
 
     // Send post request /users/login and storing the response in variable
     const loginResponse: any = await userApi.postLogin(testDataObj.body);
@@ -23,6 +23,6 @@ test("TOOLS_26 POST users/login (negative)", async ({ request }) => {
 
     // Assert access token to be not defined
     expect.soft(responseBody.access_token).not.toBeDefined();
-    console.log("========================================\n");
+    console.log("\n========================================\n");
   }
 });

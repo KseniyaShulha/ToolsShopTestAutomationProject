@@ -6,7 +6,7 @@ import { loginApi } from "../../api/apiHelper";
 test("TOOLS-6 sign up as customer", async ({ page, request }) => {
   const appPageObjects = new AppPageObjects(page);
 
-  console.log("Customer opens the home page");
+  console.log("\nCustomer opens the home page");
   await appPageObjects.homePage().openHomePage();
 
   await appPageObjects.homePage().clickSignInButton();

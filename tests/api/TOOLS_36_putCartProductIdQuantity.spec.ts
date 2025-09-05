@@ -78,7 +78,7 @@ test.describe("Cart API - Update quantity", () => {
     expect(updateResponse.status()).toBe(200);
 
     const updateBody = await updateResponse.json();
-    console.log("Updated cart:", updateBody);
+    console.log("\nUpdated cart:", updateBody);
 
     // Send GET request to check the cart
     const getCartResponse = await cartApi.getCart(token, cartId);

@@ -9,7 +9,9 @@ test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
   const productsApi = new ProductsApi(request);
 
   for (const price of testData_TOOLS_33) {
-    console.log(`\n\nCheck scenario for min: ${price.min}, max: ${price.max}`);
+    console.log(
+      `\n\n\nCheck scenario for min: ${price.min}, max: ${price.max}`,
+    );
     // Send get request with querry params and save response in var
     const getAllProductsResponse = await productsApi.getProducts(
       `?page=1&between=price,${price.min},${price.max}`,
@@ -29,6 +31,6 @@ test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
       expect.soft(product.price).toBeGreaterThanOrEqual(price.min);
     }
 
-    console.log("=============================");
+    console.log("\n=============================");
   }
 });

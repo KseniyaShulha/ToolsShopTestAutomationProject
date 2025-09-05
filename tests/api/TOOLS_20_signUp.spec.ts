@@ -14,7 +14,7 @@ test("TOOLS-20 POST users/register", async ({ request }) => {
 
   // Save response body
   const responseBody = await signUpResponse.json();
-  console.log("Sign-up response:", responseBody);
+  console.log("\nSign-up response:", responseBody);
 
   // Create loginBody var with creds
   const loginBody = {
