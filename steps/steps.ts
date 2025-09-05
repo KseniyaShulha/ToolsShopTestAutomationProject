@@ -26,7 +26,7 @@ export class UserSteps {
 
     await this.appPageObjects.loginPage().clickSubmitButton();
 
-    console.log("Verify that the customers name apears in id menu");
+    console.log("\nVerify that the customers name apears in id menu");
     expect(
       await this.appPageObjects.headerSection().getDropdownLoginValue(),
     ).toContain(surname);
@@ -59,7 +59,7 @@ export class UserSteps {
     // Customer chooses sign out option
     await this.appPageObjects.headerSection().clickSignOut();
 
-    console.log("Verify that the Sign in appears in the header");
+    console.log("\nVerify that the Sign in appears in the header");
     await expect(this.page.locator('[data-test="nav-sign-in"]')).toBeVisible();
   }
 }

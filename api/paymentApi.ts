@@ -29,7 +29,7 @@ export class PaymentApi extends BaseAPI {
     };
 
     console.log(
-      `Send POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+      `\nSend POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
     );
 
     const response = await request.post(url, {
@@ -37,7 +37,10 @@ export class PaymentApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `Response ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }

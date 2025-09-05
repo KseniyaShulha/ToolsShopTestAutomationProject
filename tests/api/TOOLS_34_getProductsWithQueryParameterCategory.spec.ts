@@ -14,9 +14,9 @@ test.describe("GET/products with query parameter category", async () => {
     );
 
     const responseBody = await getAllProductsResponse.json();
-    console.log("responseBody.category.id", responseBody.data[0].category.id);
+    console.log("\nresponseBody.category.id", responseBody.data[0].category.id);
 
-    console.log("=============================");
+    console.log("\n=============================");
     categoryId = responseBody.data[0].category.id;
   });
 

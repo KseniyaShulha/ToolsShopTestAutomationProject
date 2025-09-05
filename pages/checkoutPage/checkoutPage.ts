@@ -34,7 +34,7 @@ export class CheckoutPage extends BasePage {
     this.cityField = this.page.locator('[id="city"]');
     this.stateField = this.page.locator('[id="state"]');
     this.countryField = this.page.locator('[id="country"]');
-    this.postalCodeField = this.page.locator('[id="postal_code"]');
+    this.postalCodeField = this.page.locator('[placeholder="Your Postcode *"]');
     this.proceedButton2 = this.page.locator('[data-test="proceed-2"]');
     this.creditCardNumberField = this.page.locator('[id="credit_card_number"]');
     this.creditCardExpirationDateField = this.page.locator(
@@ -62,14 +62,16 @@ export class CheckoutPage extends BasePage {
   ): Promise<void> {
     // Customer fills in gift card validation code field
     console.log(
-      `User fills in gift card validation code field with: ${validationCode}`,
+      `\nUser fills in gift card validation code field with: ${validationCode}`,
     );
     await this.giftCardValidationCodeField.fill(validationCode);
   }
 
   async fillInGiftCardNumberField(giftCardNumber: string): Promise<void> {
     // Customer fills in gift card number field
-    console.log(`User fills in gift card number field with: ${giftCardNumber}`);
+    console.log(
+      `\nUser fills in gift card number field with: ${giftCardNumber}`,
+    );
     await this.giftCardNumberField.fill(giftCardNumber);
   }
 
@@ -134,7 +136,7 @@ export class CheckoutPage extends BasePage {
   }
 
   async clickProceedButton(step: number): Promise<void> {
-    console.log(`User clicks on the proceed button ${step}`);
+    console.log(`\nUser clicks on the proceed button ${step}`);
     if (step === 1) {
       await this.proceedButton1.click();
     } else if (step === 2) {
@@ -145,37 +147,37 @@ export class CheckoutPage extends BasePage {
   }
 
   async fillInStreetField(street: string): Promise<void> {
-    console.log(`User fills in street field with: ${street}`);
+    console.log(`\nUser fills in street field with: ${street}`);
     await this.streetField.fill(street);
   }
 
   async fillInCityField(city: string): Promise<void> {
-    console.log(`User fills in city field with: ${city}`);
+    console.log(`\nUser fills in city field with: ${city}`);
     await this.cityField.fill(city);
   }
 
   async fillInStateField(state: string): Promise<void> {
-    console.log(`User fills in state field with: ${state}`);
+    console.log(`\nUser fills in state field with: ${state}`);
     await this.stateField.fill(state);
   }
 
   async fillInCountryField(country: string): Promise<void> {
-    console.log(`User fills in country field with: ${country}`);
+    console.log(`\nUser fills in country field with: ${country}`);
     await this.countryField.fill(country);
   }
 
   async fillInPostalCodeField(postcode: string): Promise<void> {
-    console.log(`User fills in postal code field with: ${postcode}`);
+    console.log(`\nUser fills in postal code field with: ${postcode}`);
     await this.postalCodeField.fill(postcode);
   }
 
   async selectPaymentMethod(paymentMethod: string): Promise<void> {
-    console.log(`User selects payment method to be: ${paymentMethod}`);
+    console.log(`\nUser selects payment method to be: ${paymentMethod}`);
     await this.page.selectOption('select[id="payment-method"]', paymentMethod);
   }
 
   async selectMonthlyInstallments(monthlyInstallments: string): Promise<void> {
-    console.log(`User selects payment method to be: ${monthlyInstallments}`);
+    console.log(`\nUser selects payment method to be: ${monthlyInstallments}`);
     await this.page.selectOption(
       `select[id="monthly_installments"]`,
       monthlyInstallments,
@@ -194,22 +196,22 @@ export class CheckoutPage extends BasePage {
   }
 
   async fillInBankName(bankName: string): Promise<void> {
-    console.log(`User fills in bank name field with: ${bankName}`);
+    console.log(`\nUser fills in bank name field with: ${bankName}`);
     await this.bankNameField.fill(bankName);
   }
 
   async fillInAccountName(accountName: string): Promise<void> {
-    console.log(`User fills in account name field with: ${accountName}`);
+    console.log(`\nUser fills in account name field with: ${accountName}`);
     await this.accountNameField.fill(accountName);
   }
 
   async fillInAccountNumber(accountNumber: string): Promise<void> {
-    console.log(`User fills in account number field with: ${accountNumber}`);
+    console.log(`\nUser fills in account number field with: ${accountNumber}`);
     await this.accountNumberField.fill(accountNumber);
   }
 
   async fillInCreditCardNumberField(cardNumber: string): Promise<void> {
-    console.log(`User fills in credit card number field with: ${cardNumber}`);
+    console.log(`\nUser fills in credit card number field with: ${cardNumber}`);
     await this.creditCardNumberField.fill(cardNumber);
   }
 
@@ -217,30 +219,30 @@ export class CheckoutPage extends BasePage {
     expirationDate: string,
   ): Promise<void> {
     console.log(
-      `User fills in credit card expiration field with: ${expirationDate}`,
+      `\nUser fills in credit card expiration field with: ${expirationDate}`,
     );
     await this.creditCardExpirationDateField.fill(expirationDate);
   }
 
   async fillInCreditCardCvvCodeField(cvvCode: string): Promise<void> {
-    console.log(`User fills in cvv code field with: ${cvvCode}`);
+    console.log(`\nUser fills in cvv code field with: ${cvvCode}`);
     await this.creditCardCvvCodeField.fill(cvvCode);
   }
 
   async fillInCreditCardHolderNameField(cardHolderName: string): Promise<void> {
     console.log(
-      `User fills in credit card holder name field with: ${cardHolderName}`,
+      `\nUser fills in credit card holder name field with: ${cardHolderName}`,
     );
     await this.creditCardHolderNameField.fill(cardHolderName);
   }
 
   async clickConfirmPaymentButton(): Promise<void> {
-    console.log("User clicks on the confirm payment button");
+    console.log("\nUser clicks on the confirm payment button");
     await this.confirmPaymentButton.click();
   }
 
   async assertPaymentSuccsessMessageAppeared(): Promise<void> {
-    console.log("The payment is successfully confirmed via a message");
+    console.log("\nThe payment is successfully confirmed via a message");
     await expect(this.paymentSuccsessMessage).toBeVisible();
   }
 }

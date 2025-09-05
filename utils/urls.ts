@@ -19,7 +19,7 @@ export class Urls {
   getUrls(): any {
     // Return object with defined urls
     const urlObj: object = { apiUrl: this.apiUrl, appUrl: this.appUrl };
-    console.log("Get env URLs: ", urlObj);
+    console.log("\nGet env URLs: ", urlObj);
     return urlObj;
   }
 }

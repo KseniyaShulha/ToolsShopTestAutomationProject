@@ -20,32 +20,32 @@ export class Header {
 
   // Methods
   async clickUserDropdownMenu(): Promise<void> {
-    console.log("User clicks on user droddown menu");
+    console.log("\nUser clicks on user droddown menu");
     await this.userDropdownMenu.click();
   }
 
   async clickSignOut(): Promise<void> {
-    console.log("User clicks on sign out");
+    console.log("\nUser clicks on sign out");
     await this.signOutOption.click();
   }
 
   async assertItemAddedToCartMessageAppeared(): Promise<void> {
-    console.log("Assert item added to cart message appeared");
+    console.log("\nAssert item added to cart message appeared");
     await expect(this.itemAddedToCartMessage).toBeVisible();
   }
 
   async getDropdownLoginValue(): Promise<string | null> {
-    console.log("Get text from login dropdown");
+    console.log("\nGet text from login dropdown");
     return this.userDropdownMenu.textContent();
   }
 
   async clickHomeInHeader(): Promise<void> {
-    console.log("User clicks home in the header");
+    console.log("\nUser clicks home in the header");
     await this.homePageButton.click();
   }
 
   async clickShoppingCartIcon(): Promise<void> {
-    console.log("User clicks on shopping cart icon");
+    console.log("\nUser clicks on shopping cart icon");
     await this.shoppingCartIcon.click();
   }
 }

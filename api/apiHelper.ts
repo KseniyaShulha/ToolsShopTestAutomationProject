@@ -30,6 +30,7 @@ export async function signUpApi(
 
   // Send post request /users/register and storing the response in variable
   const signUpResponse: any = await userApi.postSignUp(body);
+
   await expect(signUpResponse).toBeOK();
 
   // Save response body
@@ -83,7 +84,7 @@ export async function createCartAndAddProduct(
   const cartId = createCartResponseBody.id;
   expect(cartId).toBeDefined();
 
-  console.log("cartId=================", cartId);
+  console.log("\ncartId=================", cartId);
   // Add a product to a cart
   const addToCartResponse: any = await cartApi.postAddToCart(
     token,

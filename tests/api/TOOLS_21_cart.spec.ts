@@ -64,7 +64,7 @@ test.describe("Add item to cart", () => {
     );
 
     const body = await addToCartResponse.json();
-    console.log("Response:", body);
+    console.log("\nResponse:", body);
 
     // Assert response status is equal to 2**
     expect(addToCartResponse.status()).toBe(200);

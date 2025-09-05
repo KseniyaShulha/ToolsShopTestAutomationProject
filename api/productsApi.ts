@@ -1,6 +1,6 @@
 import { APIRequestContext, APIResponse, expect } from "@playwright/test";
 import BaseAPI from "./baseAPI";
-import { responseData } from "./requestData/productsData";
+import { responseData } from "./responseData/productsData";
 
 export class ProductsApi extends BaseAPI {
   protected path: string;
@@ -21,7 +21,7 @@ export class ProductsApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + params;
 
-    console.log(`Send GET ${url}`);
+    console.log(`\nSend GET ${url}`);
 
     // Send get request to get products list
     const response = await request.get(url, {
@@ -29,7 +29,7 @@ export class ProductsApi extends BaseAPI {
     });
 
     console.log(
-      `Response ${url}: `,
+      `\nResponse ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
 
@@ -44,7 +44,7 @@ export class ProductsApi extends BaseAPI {
 
     // Ittarate keys and check that the number of keys from response body and their type is equal response structure
     for (const key of keys) {
-      console.log("Checking key: ", key);
+      console.log("\nChecking key: ", key);
       expect.soft(response).toHaveProperty(key);
       expect
         .soft(typeof response[key])
@@ -64,7 +64,7 @@ export class ProductsApi extends BaseAPI {
 
     // Ittarate keys and check that the number of keys from response body and their type is equal response structure
     for (const key of keys) {
-      console.log("Checking key: ", key);
+      console.log("\nChecking key: ", key);
       expect.soft(response).toHaveProperty(key);
       expect
         .soft(typeof response[key])
@@ -78,7 +78,7 @@ export class ProductsApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "/" + productId;
 
-    console.log(`Send GET ${url}`);
+    console.log(`\nSend GET ${url}`);
 
     // Send get request to get products list
     const response = await request.get(url, {
@@ -86,7 +86,7 @@ export class ProductsApi extends BaseAPI {
     });
 
     console.log(
-      `Response ${url}: `,
+      `\nResponse ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
 

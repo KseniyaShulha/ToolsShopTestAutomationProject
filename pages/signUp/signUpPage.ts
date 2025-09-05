@@ -36,18 +36,18 @@ export class SignUpPage extends BasePage {
   // Methods
   async fillInFirstName(firstName: string): Promise<void> {
     // Customer fills in First name
-    console.log(`Customer fills in first name field with: ${firstName}`);
+    console.log(`\nCustomer fills in first name field with: ${firstName}`);
     await this.firstNameField.fill(firstName);
   }
 
   async fillInLastName(lastName: string): Promise<void> {
     // Customer fills in Last name
-    console.log(`Customer fills in last name field with: ${lastName}`);
+    console.log(`\nCustomer fills in last name field with: ${lastName}`);
     await this.lastNameField.fill(lastName);
   }
 
   async fillInDateOfBirth(dateOfBirth: string): Promise<void> {
-    console.log(`Customer fills in dob field with: ${dateOfBirth}`);
+    console.log(`\nCustomer fills in dob field with: ${dateOfBirth}`);
     const dobInput: Locator = this.page.locator('input[formcontrolname="dob"]');
 
     await this.page.evaluate(
@@ -61,47 +61,47 @@ export class SignUpPage extends BasePage {
   }
 
   async fillInStreet(street: string): Promise<void> {
-    console.log(`Customer fills in street field with: ${street}`);
+    console.log(`\nCustomer fills in street field with: ${street}`);
     await this.streetField.fill(street);
   }
 
   async fillInState(state: string): Promise<void> {
-    console.log(`Customer fills in state field with: ${state}`);
+    console.log(`\nCustomer fills in state field with: ${state}`);
     await this.stateField.fill(state);
   }
 
   async fillInPostalCode(postalCode: string): Promise<void> {
-    console.log(`Customer fills in postal code field with: ${postalCode}`);
+    console.log(`\nCustomer fills in postal code field with: ${postalCode}`);
     await this.postalCodeField.fill(postalCode);
   }
 
   async fillInCity(city: string): Promise<void> {
-    console.log(`Customer fills in city field with: ${city}`);
+    console.log(`\nCustomer fills in city field with: ${city}`);
     await this.cityField.fill(city);
   }
 
   async fillInCountry(country: string): Promise<void> {
-    console.log(`Customer fills in country field with: ${country}`);
+    console.log(`\nCustomer fills in country field with: ${country}`);
     await this.page.selectOption("#country", country);
   }
 
   async fillInPhone(phone: string): Promise<void> {
-    console.log(`Customer fills in phone field with: ${phone}`);
+    console.log(`\nCustomer fills in phone field with: ${phone}`);
     await this.phoneField.fill(phone);
   }
 
   async fillInEmail(email: string): Promise<void> {
-    console.log(`Customer fills in email field with: ${email}`);
+    console.log(`\nCustomer fills in email field with: ${email}`);
     await this.emailField.fill(email);
   }
 
   async fillInPassword(password: string): Promise<void> {
-    console.log(`Customer fills in password field with: ${password}`);
+    console.log(`\nCustomer fills in password field with: ${password}`);
     await this.passwordField.fill(password);
   }
 
   async clickRegisterButton(): Promise<void> {
-    console.log("User clicks on registration button");
+    console.log("\nUser clicks on registration button");
     await this.registerButton.click();
   }
 }

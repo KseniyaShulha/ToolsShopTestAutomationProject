@@ -20,7 +20,7 @@ export class UsersApi extends BaseAPI {
     const url = this.apiUrl + this.path + "login";
 
     console.log(
-      `Send POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+      `\nSend POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
     );
 
     // Send POST req
@@ -29,7 +29,10 @@ export class UsersApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }
@@ -40,7 +43,7 @@ export class UsersApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "logout";
 
-    console.log(`Send GET ${url}`);
+    console.log(`\nSend GET ${url}`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -50,7 +53,10 @@ export class UsersApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }
@@ -62,7 +68,7 @@ export class UsersApi extends BaseAPI {
     const url = this.apiUrl + this.path + "register";
 
     console.log(
-      `Send POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+      `\nSend POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
     );
 
     // Send POST req
@@ -71,7 +77,10 @@ export class UsersApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }
@@ -84,7 +93,7 @@ export class UsersApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + userID;
     console.log(
-      `Send PUT ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+      `\nSend PUT ${url} with a body: ${JSON.stringify(body, null, 2)}`,
     );
 
     // Add header Authorization with token
@@ -96,7 +105,10 @@ export class UsersApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    console.log(`Response ${url}: `, JSON.stringify(await response.json()));
+    console.log(
+      `\nResponse ${url}: `,
+      JSON.stringify(await response.json(), null, 2),
+    );
 
     return response;
   }
@@ -108,7 +120,7 @@ export class UsersApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + userId;
 
-    console.log(`Send GET ${url}`);
+    console.log(`\nSend GET ${url}`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -119,7 +131,7 @@ export class UsersApi extends BaseAPI {
     });
 
     console.log(
-      `Response ${url}: `,
+      `\nResponse ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
 
@@ -133,7 +145,7 @@ export class UsersApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + userId;
 
-    console.log(`Send DELETE ${url}`);
+    console.log(`\nSend DELETE ${url}`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -153,7 +165,7 @@ export class UsersApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = `${this.apiUrl}${this.path}search?q=${encodeURIComponent(q)}`;
 
-    console.log(`Send GET ${url}`);
+    console.log(`\nSend GET ${url}`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -164,7 +176,7 @@ export class UsersApi extends BaseAPI {
     });
 
     console.log(
-      `Response ${url}: `,
+      `\nResponse ${url}: `,
       JSON.stringify(await response.json(), null, 2),
     );
     return response;

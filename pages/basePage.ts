@@ -18,7 +18,7 @@ export default abstract class BasePage {
   }
 
   async waitPageUrlLoaded(url: string): Promise<void> {
-    console.log(`Verify that the customer was redirected to ${url} page`);
+    console.log(`\nVerify that the customer was redirected to ${url} page`);
     await this.page.waitForURL(`**/${url}`);
   }
 }
