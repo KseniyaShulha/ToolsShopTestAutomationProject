@@ -15,7 +15,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.emptyCreditCardFieldError,
   },
   {
@@ -27,7 +27,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.emptyExpirationDateFieldError,
   },
   {
@@ -39,7 +39,7 @@ export const testData_TOOLS_42: any = [
       cvv: "",
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.emptyCvvFieldError,
   },
   {
@@ -51,7 +51,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: "",
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.emptyCardHolderNameFieldError,
   },
   {
@@ -63,7 +63,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatCreditCardFieldError,
   },
   {
@@ -75,7 +75,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatCreditCardFieldError,
   },
   {
@@ -87,7 +87,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatCreditCardFieldError,
   },
   {
@@ -99,7 +99,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatCreditCardFieldError,
   },
   {
@@ -111,7 +111,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatCreditCardFieldError,
   },
   {
@@ -123,7 +123,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatCreditCardFieldError,
   },
   {
@@ -135,7 +135,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidMonthFormatExpirationDateFieldError,
   },
   {
@@ -147,7 +147,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatExpirationDateFieldError,
   },
   {
@@ -159,7 +159,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatExpirationDateFieldError,
   },
   {
@@ -171,7 +171,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatExpirationDateFieldError,
   },
   {
@@ -183,7 +183,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatExpirationDateFieldError,
   },
   {
@@ -195,7 +195,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatExpirationDateFieldError,
   },
   {
@@ -207,7 +207,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.ExpiredExpirationDateFieldError,
   },
   {
@@ -219,7 +219,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatExpirationDateFieldError,
   },
   {
@@ -231,7 +231,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidFormatExpirationDateFieldError,
   },
   {
@@ -243,7 +243,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidMonthFormatExpirationDateFieldError,
   },
   {
@@ -255,7 +255,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.InvalidMonthFormatExpirationDateFieldError,
   },
   {
@@ -267,7 +267,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.ExpiredExpirationDateFieldError,
   },
   {
@@ -279,7 +279,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody:
       responseData.InvalidMonthAndYearFormatExpirationDateFieldError,
   },
@@ -292,7 +292,7 @@ export const testData_TOOLS_42: any = [
       cvv: "abc",
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.cvvFieldError,
   },
   {
@@ -304,7 +304,7 @@ export const testData_TOOLS_42: any = [
       cvv: "a23",
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.cvvFieldError,
   },
   {
@@ -316,7 +316,7 @@ export const testData_TOOLS_42: any = [
       cvv: "1",
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.cvvFieldError,
   },
   {
@@ -328,7 +328,7 @@ export const testData_TOOLS_42: any = [
       cvv: "12345",
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.cvvFieldError,
   },
   {
@@ -340,7 +340,7 @@ export const testData_TOOLS_42: any = [
       cvv: "1@$",
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.cvvFieldError,
   },
   {
@@ -352,7 +352,7 @@ export const testData_TOOLS_42: any = [
       cvv: "0",
       card_holder_name: VALID_CARD_HOLDER_NAME,
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.cvvFieldError,
   },
   {
@@ -364,7 +364,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: "123 123",
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.invalidCardHolderNameFieldError,
   },
   {
@@ -377,7 +377,7 @@ export const testData_TOOLS_42: any = [
       card_holder_name:
         "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.LongCardHolderNameFieldError,
   },
   {
@@ -389,7 +389,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: "0",
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.invalidCardHolderNameFieldError,
   },
   {
@@ -401,7 +401,7 @@ export const testData_TOOLS_42: any = [
       cvv: VALID_CVV,
       card_holder_name: "@!&*? @!&*?",
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.invalidCardHolderNameFieldError,
   },
 ];
