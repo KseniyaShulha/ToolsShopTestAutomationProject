@@ -1,6 +1,6 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import BaseAPI from "./baseAPI";
-import { responseData } from "./requestData/productsData";
+import { responseData } from "./responseData/productsData";
 
 export class CategoryApi extends BaseAPI {
   protected path: string;

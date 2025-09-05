@@ -1,4 +1,4 @@
-import { APIRequestContext, APIResponse, expect } from "@playwright/test";
+import { APIRequestContext, APIResponse } from "@playwright/test";
 import BaseAPI from "./baseAPI";
 import { responseData } from "./responseData/paymentData";
 

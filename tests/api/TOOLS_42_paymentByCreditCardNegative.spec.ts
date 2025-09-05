@@ -11,7 +11,7 @@ test("TOOLS_42 POST /api/payment/check by card (negative)", async ({
   for (const testDataObj of testData_TOOLS_42) {
     console.log("\nTesting with: ", testDataObj.scenarioName);
 
-    // Send post request /api/payment/check and storing the response in variable
+    // Send post request /api/payment/check and store the response in variable
     const postCheckPaymentResponse: APIResponse =
       await paymentApi.postCheckPayment(
         testDataObj.payment_method,
