@@ -14,6 +14,7 @@ export class UserSteps {
     email: string,
     password: string,
     surname: string,
+    isAdmin: boolean = false,
   ): Promise<void> {
     // Customer logs in
     await this.appPageObjects.homePage().openHomePage();
@@ -26,12 +27,16 @@ export class UserSteps {
 
     await this.appPageObjects.loginPage().clickSubmitButton();
 
-    console.log("\nVerify that the customers name apears in id menu");
+    console.log("\nVerify that the customer's name apears in id menu");
     expect(
       await this.appPageObjects.headerSection().getDropdownLoginValue(),
     ).toContain(surname);
 
-    await this.appPageObjects.accountPage().waitPageUrlLoaded("account");
+    if (isAdmin) {
+      await this.appPageObjects.accountPage().waitPageUrlLoaded("dashboard");
+    } else {
+      await this.appPageObjects.accountPage().waitPageUrlLoaded("account");
+    }
   }
 
   async addRandomItemFromHomePageToCart(): Promise<void> {

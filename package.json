@@ -31,6 +31,8 @@
     "typescript-eslint": "^8.34.1"
   },
   "dependencies": {
-    "dotenv": "^17.0.1"
+    "dayjs": "^1.11.18",
+    "dotenv": "^17.0.1",
+    "tabletojson": "^4.1.6"
   }
 }

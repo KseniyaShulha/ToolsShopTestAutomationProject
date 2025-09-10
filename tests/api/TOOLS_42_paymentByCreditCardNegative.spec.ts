@@ -24,7 +24,7 @@ test("TOOLS_42 POST /api/payment/check by card (negative)", async ({
     // Assert response status
     expect
       .soft(postCheckPaymentResponse.status())
-      .toBe(testDataObj.expcetedStatus);
+      .toBe(testDataObj.expectedStatus);
 
     // Assert error message
     expect.soft(responseBody).toStrictEqual(testDataObj.responseBody);

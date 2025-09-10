@@ -4,9 +4,10 @@ import { CartApi } from "../../api/cartApi";
 import { InvoicesApi } from "../../api/invoiceApi";
 import { testData_TOOLS_43 } from "../../testData/testData_TOOLS_43";
 
-let token: any;
+let token: string | null;
 let cartId: string;
-let cartApi: any, invoiceApi;
+let cartApi: any;
+let invoiceApi: any;
 
 test.describe("Cart API - create invoice", () => {
   test.beforeEach(async ({ request }) => {
@@ -40,7 +41,7 @@ test.describe("Cart API - create invoice", () => {
     invoiceApi = new InvoicesApi(request);
 
     // Send post request to /api/invoise and store the response in variable
-    const postCreateInvoiceResponse = await invoiceApi.PostCreateInvoice(
+    const postCreateInvoiceResponse = await invoiceApi.postCreateInvoice(
       token,
       testData_TOOLS_43,
     );

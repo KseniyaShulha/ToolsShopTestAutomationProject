@@ -7,6 +7,7 @@ export class Header {
   private readonly shoppingCartIcon: Locator;
   private readonly itemAddedToCartMessage: Locator;
   private readonly signOutOption: Locator;
+  private readonly ordersOption: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -16,12 +17,18 @@ export class Header {
     this.shoppingCartIcon = this.page.locator('a[href = "/checkout"]');
     this.itemAddedToCartMessage = this.page.locator(".toast-success");
     this.signOutOption = this.page.locator('[data-test="nav-sign-out"]');
+    this.ordersOption = this.page.locator('[href="/admin/orders"]');
   }
 
   // Methods
   async clickUserDropdownMenu(): Promise<void> {
-    console.log("\nUser clicks on user droddown menu");
+    console.log("\nUser clicks on user dropdown menu");
     await this.userDropdownMenu.click();
+  }
+
+  async clickOrdersAsAdmin(): Promise<void> {
+    console.log("\nAdmin clicks on orders from dropdown menu");
+    await this.ordersOption.click();
   }
 
   async clickSignOut(): Promise<void> {
