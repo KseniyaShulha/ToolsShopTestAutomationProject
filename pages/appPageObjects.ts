@@ -18,6 +18,9 @@ import { InvoicesPage } from "./invoicesPage/invoicesPage";
 import { MessagesPage } from "./messagesPage/messagesPage";
 
 export class AppPageObjects extends BasePage {
+  static homePage() {
+    throw new Error("Method not implemented.");
+  }
   // Constructor for the class
   constructor(page: Page) {
     super(page);

@@ -15,7 +15,7 @@ export class InvoicesApi extends BaseAPI {
     this.responseData = responseData;
   }
 
-  async PostCreateInvoice(
+  async postCreateInvoice(
     token: string,
     body: object,
     request: APIRequestContext = this.request,
