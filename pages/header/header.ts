@@ -1,12 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
 
 export class Header {
-  static clickOrdersAsAdmin() {
-    throw new Error("Method not implemented.");
-  }
-  static clickUserDropdownMenu() {
-    throw new Error("Method not implemented.");
-  }
+  
   private readonly page: Page;
   private readonly userDropdownMenu: Locator;
   private readonly homePageButton: Locator;
