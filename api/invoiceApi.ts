@@ -22,7 +22,9 @@ export class InvoicesApi extends BaseAPI {
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path;
 
-    console.log(`\nSend POST ${url}`);
+    console.log(
+      `\nSend POST ${url} with a body: ${JSON.stringify(body, null, 2)}`,
+    );
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;

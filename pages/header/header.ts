@@ -1,7 +1,6 @@
 import { Locator, Page, expect } from "@playwright/test";
 
 export class Header {
-  
   private readonly page: Page;
   private readonly userDropdownMenu: Locator;
   private readonly homePageButton: Locator;
@@ -23,7 +22,7 @@ export class Header {
 
   // Methods
   async clickUserDropdownMenu(): Promise<void> {
-    console.log("\nUser clicks on user droddown menu");
+    console.log("\nUser clicks on user dropdown menu");
     await this.userDropdownMenu.click();
   }
 

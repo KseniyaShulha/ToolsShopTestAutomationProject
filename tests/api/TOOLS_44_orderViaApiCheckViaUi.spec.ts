@@ -20,7 +20,7 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 let token: any;
 let cartId: string;
-let cartApi: any, invoiceApi, header, paymentApi;
+let invoiceApi: any, header, paymentApi;
 let product: any;
 
 test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
@@ -46,6 +46,8 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
     },
     request,
   );
+
+  expect(token).toBeTruthy();
 
   // Create cart and add product to cart
   cartId = await createCartAndAddProduct(token, product.id, 2, request);
@@ -112,6 +114,8 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
 
   // Convert table in json format
   const ordersTableContent = await ordersPage.getOrdersTableContent();
+
+  expect(ordersTableContent.length).toBeGreaterThan(0);
 
   // Assert invoice number from table to be the same as invoice number from response body
   expect.soft(ordersTableContent[0]["Invoice Number"]).toBe(invoiceNumber);

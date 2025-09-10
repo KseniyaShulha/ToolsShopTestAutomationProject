@@ -27,7 +27,7 @@ export class UserSteps {
 
     await this.appPageObjects.loginPage().clickSubmitButton();
 
-    console.log("\nVerify that the customers name apears in id menu");
+    console.log("\nVerify that the customer's name apears in id menu");
     expect(
       await this.appPageObjects.headerSection().getDropdownLoginValue(),
     ).toContain(surname);

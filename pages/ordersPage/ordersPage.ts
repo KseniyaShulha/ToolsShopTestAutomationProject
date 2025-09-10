@@ -7,8 +7,6 @@ export class OrdersPage extends BasePage {
   private readonly searchField: Locator;
   private readonly searchButton: Locator;
   private readonly ordersTable: Locator;
-  private readonly raw: Locator;
-  private readonly cell: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -16,8 +14,6 @@ export class OrdersPage extends BasePage {
     this.searchField = this.page.locator('[data-test="order-search-query"]');
     this.searchButton = this.page.locator('[data-test="order-search-submit"]');
     this.ordersTable = this.page.locator("table.table-hover");
-    this.raw = this.ordersTable.locator("tbody >> tr");
-    this.cell = this.raw.locator("td");
   }
 
   // Methods
@@ -31,7 +27,8 @@ export class OrdersPage extends BasePage {
     await this.searchButton.click();
   }
 
-  async getOrdersTableContent() {
+  async getOrdersTableContent(): Promise<Array<Record<string, string>>> {
+    await expect(this.ordersTable).toBeVisible();
     const tableHtml = await this.ordersTable.innerHTML();
 
     const tablesAsJson = Tabletojson.convert(`<table>${tableHtml}</table>`);
