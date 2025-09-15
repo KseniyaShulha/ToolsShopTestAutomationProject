@@ -13,7 +13,7 @@ export const testData_TOOLS_44_login: any = {
   userData: {
     email: process.env.ADMIN_EMAIL,
     password: process.env.ADMIN_PASSWORD,
-    surname: "Doe",
+    surname: process.env.ADMIN_SURNAME,
   },
 };
 
