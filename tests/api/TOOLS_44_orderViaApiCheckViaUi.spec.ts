@@ -108,7 +108,9 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   );
 
   // Convert table in json format
-  const [ordersTableContent] = await ordersPage.getOrdersTableContent();
+  const ordersTableArray = await ordersPage.getOrdersTableContent();
+  expect(ordersTableArray.length).toBeGreaterThan(0);
+  const ordersTableContent = ordersTableArray[0];
 
   // Assert invoice number from table to be the same as invoice number from response body
   expect.soft(ordersTableContent["Invoice Number"]).toBe(invoiceNumber);

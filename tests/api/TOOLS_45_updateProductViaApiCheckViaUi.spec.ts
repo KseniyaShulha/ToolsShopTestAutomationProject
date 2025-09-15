@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import { test, expect } from "@playwright/test";
+=======
+import { test, expect} from "@playwright/test";
+>>>>>>> Stashed changes
 import { CartApi } from "../../api/cartApi";
 import { UserSteps } from "../../steps/steps";
 import { loginApi } from "../../api/apiHelper";
@@ -7,7 +11,7 @@ import { AppPageObjects } from "../../pages/appPageObjects";
 import { ShoppingCartPage } from "../../pages/shoppingCart/shoppingCartPage";
 import { ProductsApi } from "../../api/productsApi";
 
-test("TOOLS-45 Update product quality via API and check quality via UI", async ({
+test("TOOLS-45 Update product quantity via API and check quantity via UI", async ({
   page,
   request,
 }) => {
@@ -99,7 +103,10 @@ test("TOOLS-45 Update product quality via API and check quality via UI", async (
     await shoppingCartPage.getShoppingCartTableContent();
   console.log("[shoppingCartTableContent]", shoppingCartTableContent);
 
-  // Asser the naumber of products in cart to strict equal qty from newQuantity
+  // Verify the cart is not empty
+  expect(shoppingCartTableContent.length).toBeGreaterThan(0);
+
+  // Assert the number of products in cart to strict equal qty from newQuantity
   expect(Number(shoppingCartTableContent[0]["Quantity"])).toStrictEqual(
     newQuantity.quantity,
   );

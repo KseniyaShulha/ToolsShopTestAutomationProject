@@ -2,12 +2,18 @@ import { Locator, Page, expect } from "@playwright/test";
 import BasePage from "../basePage";
 
 export class ShoppingCartPage extends BasePage {
+<<<<<<< Updated upstream
   // Locators
   private readonly shoppingCartTable: Locator;
   private readonly productTitleCell: Locator;
   private readonly tableRaw: any;
   private readonly headers: any;
 
+=======
+  getShoppingCartTableContent() {
+    throw new Error("Method not implemented.");
+  }
+>>>>>>> Stashed changes
   // Constructor for the class
   constructor(page: Page) {
     super(page);
@@ -18,31 +24,32 @@ export class ShoppingCartPage extends BasePage {
   }
 
   // Methods
-  async getShoppingCartTableContent() {
+  async getShoppingCartTableContent(): Promise<Array<Record<string, string>>> {
     await expect(this.shoppingCartTable).toBeVisible();
 
-    // Хедеры
+    // Headers
     const headers = await this.shoppingCartTable
       .locator("thead th")
       .allTextContents();
-    // Строки
+
+    // Rows
     const rows = this.shoppingCartTable.locator("tbody tr");
 
-    const result: any[] = [];
+    const result: Array<Record<string, string>> = [];
     const rowCount = await rows.count();
 
     for (let r = 0; r < rowCount; r++) {
       const row = rows.nth(r);
       const cells = row.locator("td");
 
-      const obj: any = {};
+      const obj: Record<string, string> = {};
       const cellCount = await cells.count();
 
       for (let i = 0; i < cellCount; i++) {
         const header = headers[i]?.trim() || `col_${i}`;
         const cell = cells.nth(i);
 
-        // Проверяем, есть ли input
+        // Check if there's an input element
         if ((await cell.locator("input").count()) > 0) {
           obj[header] = await cell.locator("input").inputValue();
         } else {
