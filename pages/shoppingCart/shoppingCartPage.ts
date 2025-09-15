@@ -5,9 +5,6 @@ export class ShoppingCartPage extends BasePage {
 <<<<<<< Updated upstream
   // Locators
   private readonly shoppingCartTable: Locator;
-  private readonly productTitleCell: Locator;
-  private readonly tableRaw: any;
-  private readonly headers: any;
 
 =======
   getShoppingCartTableContent() {
@@ -18,9 +15,6 @@ export class ShoppingCartPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.shoppingCartTable = this.page.locator('[class="table table-hover"]');
-    this.tableRaw = this.page.locator("tbody>tr");
-    this.productTitleCell = this.page.locator('[class="product-title"]');
-    this.headers = this.page.locator("thead");
   }
 
   // Methods

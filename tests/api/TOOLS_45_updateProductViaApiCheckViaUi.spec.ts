@@ -1,5 +1,5 @@
 <<<<<<< Updated upstream
-import { test, expect } from "@playwright/test";
+import { test, expect, APIResponse } from "@playwright/test";
 =======
 import { test, expect} from "@playwright/test";
 >>>>>>> Stashed changes
@@ -37,10 +37,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   const cartResponse = await page.waitForResponse(
     (resp) => resp.url().includes(`/carts/`) && resp.status() === 200,
   );
-  console.log(
-    "\nresponse =================================================",
-    cartResponse,
-  );
+  console.log(`\nCart response: status=${cartResponse.status()} url=${cartResponse.url()}`);;
 
   // Save response body in json
   const responseBody = await cartResponse.json();
@@ -56,7 +53,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   const productId = responseBody.cart_items[0].product_id;
 
   // Create body with product id and new quantity
-  const newQuantity: any = {
+  const newQuantity: { product_id: string; quantity: number } = {
     product_id: productId,
     quantity: 4,
   };
@@ -71,7 +68,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   );
 
   // Send PUT request to update quantity of product
-  const updateResponse: any = await cartApi.putUpdateQuantity(
+  const updateResponse: APIResponse = await cartApi.putUpdateQuantity(
     token,
     cartId,
     newQuantity,
@@ -81,7 +78,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   expect(updateResponse.status()).toBe(200);
 
   // Send request to get all products from page 1
-  const getProducts = await productApi.getProducts("?page=1");
+  const getProducts: APIResponse = await productApi.getProducts("?page=1");
 
   // Save response body in json
   const getProductsResponseBody = await getProducts.json();
