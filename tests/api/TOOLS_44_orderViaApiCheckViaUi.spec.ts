@@ -1,4 +1,4 @@
-import { test, expect, APIResponse } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import {
   createCartAndAddProduct,
   getRandomProductInStock,
@@ -18,28 +18,23 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
-let token: any;
-let cartId: string;
-let invoiceApi: any, header, paymentApi;
-let product: any;
 
 test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   page,
   request,
 }) => {
   // Create instance of CartApi and InvoiceApi
-  invoiceApi = new InvoicesApi(request);
   const steps: UserSteps = new UserSteps(page);
-  header = new Header(page);
-  paymentApi = new PaymentApi(request);
-  invoiceApi = new InvoicesApi(request);
+  const header = new Header(page);
+  const paymentApi = new PaymentApi(request);
+  const invoiceApi = new InvoicesApi(request);
   const ordersPage = new OrdersPage(page);
 
   // Find product in stock and save it in var
-  product = await getRandomProductInStock(request);
+  const product = await getRandomProductInStock(request);
 
   // Get token
-  token = await loginApi(
+  const token: any = await loginApi(
     {
       email: process.env.CUSTOMER_2_EMAIL,
       password: process.env.CUSTOMER_2_PASSWORD,
@@ -50,14 +45,14 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   expect(token).toBeTruthy();
 
   // Create cart and add product to cart
-  cartId = await createCartAndAddProduct(token, product.id, 2, request);
+  const cartId = await createCartAndAddProduct(token, product.id, 2, request);
 
   // Save response in var
-  const postCheckPaymentResponse: APIResponse =
-    await paymentApi.postCheckPayment(
-      testData_TOOLS_44.payment_method,
-      testData_TOOLS_44.payment_details,
-    );
+  const postCheckPaymentResponse = await paymentApi.postCheckPayment(
+    testData_TOOLS_44.payment_method,
+    testData_TOOLS_44.payment_details,
+  );
+
   // Assert response status is equal to 2**
   expect(postCheckPaymentResponse.status()).toBe(200);
 
@@ -82,7 +77,7 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   // Assert response status to be 201
   expect(postCreateInvoiceResponse.status()).toBe(201);
 
-  // Reassign invoice number
+  // Assign invoice number
   const invoiceNumber = responseBody.invoice_number;
 
   // Login as admin
@@ -113,21 +108,19 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   );
 
   // Convert table in json format
-  const ordersTableContent = await ordersPage.getOrdersTableContent();
-
-  expect(ordersTableContent.length).toBeGreaterThan(0);
+  const [ordersTableContent] = await ordersPage.getOrdersTableContent();
 
   // Assert invoice number from table to be the same as invoice number from response body
-  expect.soft(ordersTableContent[0]["Invoice Number"]).toBe(invoiceNumber);
+  expect.soft(ordersTableContent["Invoice Number"]).toBe(invoiceNumber);
 
   // Assert billing adress from table to be the same as billing street from response body
   expect
-    .soft(ordersTableContent[0]["Billing Address"])
+    .soft(ordersTableContent["Billing Address"])
     .toBe(responseBody.billing_street);
 
   // Convert invoice dates to dayjs format
   const d1 = responseBody.invoice_date;
-  const d2 = ordersTableContent[0]["Invoice Date"];
+  const d2 = ordersTableContent["Invoice Date"];
 
   const date1 = dayjs.utc(d1).format("YYYY-MM-DDTHH:mm");
   const date2 = dayjs.utc(d2, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DDTHH:mm");
@@ -137,6 +130,6 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
 
   // Assert total price from table to be the same as total price from response body
   expect
-    .soft(Number(ordersTableContent[0]["Total"].slice(1)))
+    .soft(Number(ordersTableContent["Total"].slice(1)))
     .toBe(responseBody.total);
 });

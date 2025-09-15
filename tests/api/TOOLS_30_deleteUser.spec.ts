@@ -6,7 +6,6 @@ import { signUpApi, loginApi } from "../../api/apiHelper";
 let token: any;
 let userID: any;
 let createdUserEmail: any;
-let createdUserpassword: any;
 
 test.describe("DELETE/users", async () => {
   test.beforeEach(async ({ request }) => {
@@ -15,7 +14,6 @@ test.describe("DELETE/users", async () => {
 
     userID = responseBody.id;
     createdUserEmail = responseBody.email;
-    createdUserpassword = testData_TOOLS_20_signUp.password;
 
     // Login with created credentials and save token
     token = await loginApi(
