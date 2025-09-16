@@ -2,16 +2,9 @@ import { Locator, Page, expect } from "@playwright/test";
 import BasePage from "../basePage";
 
 export class ShoppingCartPage extends BasePage {
-<<<<<<< Updated upstream
   // Locators
   private readonly shoppingCartTable: Locator;
 
-=======
-  getShoppingCartTableContent() {
-    throw new Error("Method not implemented.");
-  }
->>>>>>> Stashed changes
-  // Constructor for the class
   constructor(page: Page) {
     super(page);
     this.shoppingCartTable = this.page.locator('[class="table table-hover"]');

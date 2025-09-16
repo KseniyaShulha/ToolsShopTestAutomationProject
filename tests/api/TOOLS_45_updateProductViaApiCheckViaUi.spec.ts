@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import { test, expect, APIResponse } from "@playwright/test";
-=======
-import { test, expect} from "@playwright/test";
->>>>>>> Stashed changes
+import { test, expect } from "@playwright/test";
 import { CartApi } from "../../api/cartApi";
 import { UserSteps } from "../../steps/steps";
 import { loginApi } from "../../api/apiHelper";
@@ -33,11 +29,14 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   // Add random product in cart
   await steps.addRandomItemFromHomePageToCart();
 
-  // Wait for url and response with staus 200 and save response in var
+  // Wait for url and response with status 200 and save response in var
   const cartResponse = await page.waitForResponse(
     (resp) => resp.url().includes(`/carts/`) && resp.status() === 200,
   );
-  console.log(`\nCart response: status=${cartResponse.status()} url=${cartResponse.url()}`);;
+  console.log(
+    "\nresponse =================================================",
+    cartResponse,
+  );
 
   // Save response body in json
   const responseBody = await cartResponse.json();
@@ -68,7 +67,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   );
 
   // Send PUT request to update quantity of product
-  const updateResponse: APIResponse = await cartApi.putUpdateQuantity(
+  const updateResponse: any = await cartApi.putUpdateQuantity(
     token,
     cartId,
     newQuantity,
@@ -78,7 +77,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   expect(updateResponse.status()).toBe(200);
 
   // Send request to get all products from page 1
-  const getProducts: APIResponse = await productApi.getProducts("?page=1");
+  const getProducts = await productApi.getProducts("?page=1");
 
   // Save response body in json
   const getProductsResponseBody = await getProducts.json();
@@ -98,12 +97,8 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   // Convert shopping cart table in json format
   const shoppingCartTableContent =
     await shoppingCartPage.getShoppingCartTableContent();
-  console.log("[shoppingCartTableContent]", shoppingCartTableContent);
 
-  // Verify the cart is not empty
-  expect(shoppingCartTableContent.length).toBeGreaterThan(0);
-
-  // Assert the number of products in cart to strict equal qty from newQuantity
+  // Assert the naumber of products in cart to strict equal qty from newQuantity
   expect(Number(shoppingCartTableContent[0]["Quantity"])).toStrictEqual(
     newQuantity.quantity,
   );
