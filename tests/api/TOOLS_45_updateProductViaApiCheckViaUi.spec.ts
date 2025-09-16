@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 import { test, expect } from "@playwright/test";
-=======
-import { test, expect} from "@playwright/test";
->>>>>>> Stashed changes
 import { CartApi } from "../../api/cartApi";
 import { UserSteps } from "../../steps/steps";
 import { loginApi } from "../../api/apiHelper";
@@ -33,21 +29,13 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   // Add random product in cart
   await steps.addRandomItemFromHomePageToCart();
 
-  // Wait for url and response with staus 200 and save response in var
+  // Wait for url and response with status 200 and save response in var
   const cartResponse = await page.waitForResponse(
     (resp) => resp.url().includes(`/carts/`) && resp.status() === 200,
-  );
-  console.log(
-    "\nresponse =================================================",
-    cartResponse,
   );
 
   // Save response body in json
   const responseBody = await cartResponse.json();
-  console.log(
-    "\nresponseBody =================================================",
-    responseBody,
-  );
 
   // Save cart id in var
   const cartId = responseBody.cart_items[0].cart_id;
@@ -56,7 +44,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   const productId = responseBody.cart_items[0].product_id;
 
   // Create body with product id and new quantity
-  const newQuantity: any = {
+  const newQuantity: { product_id: string; quantity: number } = {
     product_id: productId,
     quantity: 4,
   };
@@ -101,12 +89,8 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   // Convert shopping cart table in json format
   const shoppingCartTableContent =
     await shoppingCartPage.getShoppingCartTableContent();
-  console.log("[shoppingCartTableContent]", shoppingCartTableContent);
 
-  // Verify the cart is not empty
-  expect(shoppingCartTableContent.length).toBeGreaterThan(0);
-
-  // Assert the number of products in cart to strict equal qty from newQuantity
+  // Assert the naumber of products in cart to strict equal qty from newQuantity
   expect(Number(shoppingCartTableContent[0]["Quantity"])).toStrictEqual(
     newQuantity.quantity,
   );
