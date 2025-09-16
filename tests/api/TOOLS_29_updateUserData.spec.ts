@@ -6,7 +6,7 @@ import { signUpApi, loginApi } from "../../api/apiHelper";
 
 let token: any;
 let userID: any;
-let clonedTestDataObj = { ...testData_TOOLS_29.body };
+let clonedTestDataObj: any = { ...testData_TOOLS_29.body };
 
 test.describe("PUT/users", async () => {
   test.beforeEach(async ({ request }) => {

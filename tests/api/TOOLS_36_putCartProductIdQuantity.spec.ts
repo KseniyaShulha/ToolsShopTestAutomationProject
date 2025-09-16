@@ -5,8 +5,9 @@ import { ProductsApi } from "../../api/productsApi";
 
 let token: any;
 let cartId: string;
-let productApi: any, cartApi;
+let productApi: any;
 let testData_TOOLS_36: any;
+let cartApi: any;
 
 test.describe("Cart API - Update quantity", () => {
   test.beforeEach(async ({ request }) => {
@@ -19,7 +20,7 @@ test.describe("Cart API - Update quantity", () => {
 
     // Find product in stock
     const productId = getProductResponseBody.data.find(
-      (data) => data.in_stock === true,
+      (data: any) => data.in_stock === true,
     ).id;
     expect(productId).toBeDefined();
 
@@ -92,4 +93,12 @@ test.describe("Cart API - Update quantity", () => {
     // Assert the quantity of product has changed
     expect(getCartBody.cart_items[0].quantity).toBe(newQuantity.quantity);
   });
+});
+
+// afterEach hook to delete cart
+test.afterEach(async ({ request }) => {
+  if (cartId) {
+    const cartApi = new CartApi(request);
+    await cartApi.deleteCart("", cartId, request);
+  }
 });
