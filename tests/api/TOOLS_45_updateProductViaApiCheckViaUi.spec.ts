@@ -33,17 +33,9 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   const cartResponse = await page.waitForResponse(
     (resp) => resp.url().includes(`/carts/`) && resp.status() === 200,
   );
-  console.log(
-    "\nresponse =================================================",
-    cartResponse,
-  );
 
   // Save response body in json
   const responseBody = await cartResponse.json();
-  console.log(
-    "\nresponseBody =================================================",
-    responseBody,
-  );
 
   // Save cart id in var
   const cartId = responseBody.cart_items[0].cart_id;
