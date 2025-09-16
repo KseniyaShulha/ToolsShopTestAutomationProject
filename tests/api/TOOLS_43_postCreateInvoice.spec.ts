@@ -5,7 +5,7 @@ import { InvoicesApi } from "../../api/invoiceApi";
 import { testData_TOOLS_43 } from "../../testData/testData_TOOLS_43";
 
 let token: string | null;
-let cartId: string;
+let cartId: string | null;
 let cartApi: any;
 let invoiceApi: any;
 
@@ -63,4 +63,11 @@ test.describe("Cart API - create invoice", () => {
     // Assert the "invoice_number" key's length to be greater than 0
     expect(responseBody.invoice_number.length).toBeGreaterThan(0);
   });
+});
+// afterEach hook to delete cart
+test.afterEach(async ({ request }) => {
+  if (cartId) {
+    const cartApi = new CartApi(request);
+    await cartApi.deleteCart("", cartId, request);
+  }
 });

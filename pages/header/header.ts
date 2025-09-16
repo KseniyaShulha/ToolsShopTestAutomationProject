@@ -8,6 +8,7 @@ export class Header {
   private readonly itemAddedToCartMessage: Locator;
   private readonly signOutOption: Locator;
   private readonly ordersOption: Locator;
+  private readonly usersOption: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -18,6 +19,7 @@ export class Header {
     this.itemAddedToCartMessage = this.page.locator(".toast-success");
     this.signOutOption = this.page.locator('[data-test="nav-sign-out"]');
     this.ordersOption = this.page.locator('[href="/admin/orders"]');
+    this.usersOption = this.page.locator('[href="/admin/users"]');
   }
 
   // Methods
@@ -54,5 +56,10 @@ export class Header {
   async clickShoppingCartIcon(): Promise<void> {
     console.log("\nUser clicks on shopping cart icon");
     await this.shoppingCartIcon.click();
+  }
+
+  async clickUsersAsAdmin(): Promise<void> {
+    console.log("\nAdmin clicks on users from dropdown menu");
+    await this.usersOption.click();
   }
 }

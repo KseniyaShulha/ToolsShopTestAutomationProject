@@ -7,7 +7,7 @@ import {
 import { CartApi } from "../../api/cartApi";
 
 let token: any;
-let cartId: string;
+let cartId: string | null;
 let cartApi: any;
 let testData_TOOLS_36: any, product;
 
@@ -57,4 +57,12 @@ test.describe("Cart API - delete product", () => {
     // Assert that cart doesn't contain deleted product
     expect(getCartResponseBody.cart_items.length).toBe(0);
   });
+});
+
+// afterEach hook to delete cart
+test.afterEach(async ({ request }) => {
+  if (cartId) {
+    const cartApi = new CartApi(request);
+    await cartApi.deleteCart("", cartId, request);
+  }
 });

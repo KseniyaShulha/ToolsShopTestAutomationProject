@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
 
-let product: any, productsApi;
+let product: any;
+let productsApi: ProductsApi;
 
 test.describe("GET/products with query parameter search", async () => {
   test.beforeEach(async ({ request }) => {
@@ -14,7 +15,7 @@ test.describe("GET/products with query parameter search", async () => {
     );
     const responseBody = await getAllProductsResponse.json();
 
-    product = responseBody.data.find((el) => el.name.includes(" "));
+    product = responseBody.data.find((el: any) => el.name.includes(" "));
     console.log("\nProduct to test search: ", JSON.stringify(product, null, 2));
   });
 
