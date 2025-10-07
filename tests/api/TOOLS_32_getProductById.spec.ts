@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
 
-let productId: any, productsApi;
+let productId: any;
+let productsApi: any;
 
 test.describe("Get product by ID", async () => {
   test.beforeEach(async ({ request }) => {

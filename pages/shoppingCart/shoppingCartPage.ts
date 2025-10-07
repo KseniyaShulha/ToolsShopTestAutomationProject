@@ -8,13 +8,6 @@ export class ShoppingCartPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.shoppingCartTable = this.page.locator('[class="table table-hover"]');
-  // Constructor for the class
-  constructor(page: Page) {
-    super(page);
-    this.shoppingCartTable = this.page.locator('[class="table table-hover"]');
-    this.tableRaw = this.page.locator("tbody>tr");
-    this.productTitleCell = this.page.locator('[class="product-title"]');
-    this.headers = this.page.locator("thead");
   }
 
   // Methods
@@ -55,5 +48,12 @@ export class ShoppingCartPage extends BasePage {
     }
 
     return result;
+  }
+
+  async waitForCartId(): Promise<Response> {
+    const response = await this.page.waitForResponse(
+      (resp: any) => resp.url().includes(`/carts/`) && resp.status() === 200,
+    );
+    return await response.json();
   }
 }

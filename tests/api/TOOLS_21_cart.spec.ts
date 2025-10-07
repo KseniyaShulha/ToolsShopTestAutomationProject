@@ -1,10 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { loginApi } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { testData_TOOLS_21 } from "../../testData/testData_TOOLS_21";
 import { ProductsApi } from "../../api/productsApi";
 
 let token: any;
+let cartId: any;
 
 test.describe("Add item to cart", () => {
   test.beforeEach(async ({ request }) => {
@@ -18,7 +19,7 @@ test.describe("Add item to cart", () => {
 
     // Search item in stock and save it in var productId
     const productId = getProductResponseBody.data.find(
-      (data) => data.in_stock === true,
+      (data: any) => data.in_stock === true,
     ).id;
 
     // Assert product id to be defined
@@ -51,7 +52,7 @@ test.describe("Add item to cart", () => {
     const createCartResponseBody = await createCartResponse.json();
 
     // Save cart id in var
-    const cartId = createCartResponseBody.id;
+    cartId = createCartResponseBody.id;
 
     // Assert cart id to be defined
     expect(cartId).toBeDefined();
@@ -88,4 +89,9 @@ test.describe("Add item to cart", () => {
       testData_TOOLS_21.quantity,
     );
   });
+});
+
+// afterEach hook to delete cart
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

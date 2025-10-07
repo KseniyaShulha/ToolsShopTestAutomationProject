@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { CartApi } from "../../api/cartApi";
 import { UserSteps } from "../../steps/steps";
 import { loginApi } from "../../api/apiHelper";
@@ -6,6 +6,8 @@ import { testData_TOOLS_45_login } from "../../testData/testData_TOOLS_45";
 import { AppPageObjects } from "../../pages/appPageObjects";
 import { ShoppingCartPage } from "../../pages/shoppingCart/shoppingCartPage";
 import { ProductsApi } from "../../api/productsApi";
+
+let cartId: string;
 
 test("TOOLS-45 Update product quantity via API and check quantity via UI", async ({
   page,
@@ -30,18 +32,13 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   await steps.addRandomItemFromHomePageToCart();
 
   // Wait for url and response with status 200 and save response in var
-  const cartResponse = await page.waitForResponse(
-    (resp) => resp.url().includes(`/carts/`) && resp.status() === 200,
-  );
-
-  // Save response body in json
-  const responseBody = await cartResponse.json();
+  const cartResponse: any = await shoppingCartPage.waitForCartId();
 
   // Save cart id in var
-  const cartId = responseBody.cart_items[0].cart_id;
+  cartId = cartResponse.cart_items[0].cart_id;
 
   // Save product id in var
-  const productId = responseBody.cart_items[0].product_id;
+  const productId = cartResponse.cart_items[0].product_id;
 
   // Create body with product id and new quantity
   const newQuantity: { product_id: string; quantity: number } = {
@@ -73,7 +70,6 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
 
   // Save response body in json
   const getProductsResponseBody = await getProducts.json();
-  console.log("\ngetProductsResponseBody", getProductsResponseBody);
 
   // Get the product with the same product id and save name in var
   const name = getProductsResponseBody.data.find(
@@ -97,4 +93,9 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
 
   // Assert item name from table to strict equal name var
   expect(shoppingCartTableContent[0]["Item"]).toStrictEqual(name);
+});
+
+// afterEach hook to delete cart
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

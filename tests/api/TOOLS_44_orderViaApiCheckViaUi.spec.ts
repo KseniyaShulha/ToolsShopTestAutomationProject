@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import {
   createCartAndAddProduct,
   getRandomProductInStock,
@@ -18,6 +18,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
+let cartId: any;
 
 test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   page,
@@ -45,7 +46,7 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   expect(token).toBeTruthy();
 
   // Create cart and add product to cart
-  const cartId = await createCartAndAddProduct(token, product.id, 2, request);
+  cartId = await createCartAndAddProduct(token, product.id, 2, request);
 
   // Save response in var
   const postCheckPaymentResponse = await paymentApi.postCheckPayment(
@@ -134,4 +135,9 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   expect
     .soft(Number(ordersTableContent["Total"].slice(1)))
     .toBe(responseBody.total);
+});
+
+// afterEach hook to delete cart
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

@@ -66,10 +66,10 @@ export class CartApi extends BaseAPI {
 
   async getCart(
     token: string,
-    itemId: string,
+    cartId: string,
     request: APIRequestContext = this.request,
   ): Promise<APIResponse> {
-    const url = this.apiUrl + this.path + "/" + itemId;
+    const url = this.apiUrl + this.path + "/" + cartId;
 
     console.log(`\nSend GET ${url} with a body`);
 
@@ -132,5 +132,23 @@ export class CartApi extends BaseAPI {
       );
       return response;
     }
+  }
+
+  async deleteCart(
+    token: string,
+    cartId: string,
+    request: APIRequestContext = this.request,
+  ): Promise<APIResponse> {
+    const url = this.apiUrl + this.path + "/" + cartId;
+    console.log(`\nSend DELETE ${url}`);
+
+    // Add header Authorization with token
+    this.headersObj["Authorization"] = `Bearer ${token}`;
+    const response = await request.delete(url, {
+      headers: this.headersObj,
+    });
+
+    console.log(`\nResponse ${url}:`, response.status());
+    return response;
   }
 }

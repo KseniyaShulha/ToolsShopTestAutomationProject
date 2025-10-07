@@ -1,11 +1,7 @@
-import { test, expect } from "@playwright/test";
-import { AppPageObjects } from "../../pages/appPageObjects";
+import { test, expect } from "../fixtures/fixtures";
 import { testData_login } from "../../testData/testData_login";
 
-test("TOOLS-3 login as customer", async ({ page }) => {
-  // Create instance of AppPageObjects
-  const appPageObjects = new AppPageObjects(page);
-
+test("TOOLS-3 login as customer", async ({ appPageObjects }) => {
   await appPageObjects.homePage().openHomePage();
 
   await appPageObjects.homePage().clickSignInButton();
