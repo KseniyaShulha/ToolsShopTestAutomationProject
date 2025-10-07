@@ -140,6 +140,7 @@ export class CartApi extends BaseAPI {
     request: APIRequestContext = this.request,
   ): Promise<APIResponse> {
     const url = this.apiUrl + this.path + "/" + cartId;
+    console.log(`\nSend DELETE ${url}`);
 
     // Add header Authorization with token
     this.headersObj["Authorization"] = `Bearer ${token}`;
@@ -147,14 +148,7 @@ export class CartApi extends BaseAPI {
       headers: this.headersObj,
     });
 
-    let body;
-    try {
-      body = await response.json();
-    } catch {
-      body = null; // handle empty response
-    }
-
-    console.log(`\nResponse ${url}:`, JSON.stringify(body, null, 2));
+    console.log(`\nResponse ${url}:`, response.status());
     return response;
   }
 }

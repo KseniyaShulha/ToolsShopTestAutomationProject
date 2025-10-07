@@ -52,7 +52,7 @@ export class ShoppingCartPage extends BasePage {
 
   async waitForCartId(): Promise<Response> {
     const response = await this.page.waitForResponse(
-      (resp) => resp.url().includes(`/carts/`) && resp.status() === 200,
+      (resp: any) => resp.url().includes(`/carts/`) && resp.status() === 200,
     );
     return await response.json();
   }

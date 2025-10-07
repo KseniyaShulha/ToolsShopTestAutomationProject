@@ -1,4 +1,4 @@
-import { Page, Locator, expect, APIResponse } from "@playwright/test";
+import { Page, Locator, expect } from "@playwright/test";
 import BasePage from "../basePage";
 import { Tabletojson } from "tabletojson";
 
@@ -44,7 +44,7 @@ export class AdminUsersPage extends BasePage {
 
   async waitForUsers(): Promise<Response> {
     const response = await this.page.waitForResponse(
-      (resp) => resp.url().includes(`/users/`) && resp.status() === 200,
+      (resp: any) => resp.url().includes(`/users/`) && resp.status() === 200,
     );
     return await response.json();
   }

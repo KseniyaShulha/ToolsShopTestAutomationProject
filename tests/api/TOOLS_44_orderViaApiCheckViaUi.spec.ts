@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import {
   createCartAndAddProduct,
   getRandomProductInStock,
@@ -16,10 +16,9 @@ import {
 import { OrdersPage } from "../../pages/ordersPage/ordersPage";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { CartApi } from "../../api/cartApi";
 
 dayjs.extend(utc);
-let cartId: string | undefined;
+let cartId: any;
 
 test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   page,
@@ -139,9 +138,6 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
 });
 
 // afterEach hook to delete cart
-test.afterEach(async ({ request }) => {
-  if (cartId) {
-    const cartApi = new CartApi(request);
-    await cartApi.deleteCart("", cartId, request);
-  }
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { CartApi } from "../../api/cartApi";
 import { UserSteps } from "../../steps/steps";
 import { loginApi } from "../../api/apiHelper";
@@ -7,7 +7,7 @@ import { AppPageObjects } from "../../pages/appPageObjects";
 import { ShoppingCartPage } from "../../pages/shoppingCart/shoppingCartPage";
 import { ProductsApi } from "../../api/productsApi";
 
-let cartId: string | undefined;
+let cartId: string;
 
 test("TOOLS-45 Update product quantity via API and check quantity via UI", async ({
   page,
@@ -96,9 +96,6 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
 });
 
 // afterEach hook to delete cart
-test.afterEach(async ({ request }) => {
-  if (cartId) {
-    const cartApi = new CartApi(request);
-    await cartApi.deleteCart("", cartId, request);
-  }
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

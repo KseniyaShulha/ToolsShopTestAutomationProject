@@ -1,11 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { loginApi } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { InvoicesApi } from "../../api/invoiceApi";
 import { testData_TOOLS_43 } from "../../testData/testData_TOOLS_43";
 
 let token: string | null;
-let cartId: string | null;
+let cartId: any;
 let cartApi: any;
 let invoiceApi: any;
 
@@ -64,10 +64,8 @@ test.describe("Cart API - create invoice", () => {
     expect(responseBody.invoice_number.length).toBeGreaterThan(0);
   });
 });
+
 // afterEach hook to delete cart
-test.afterEach(async ({ request }) => {
-  if (cartId) {
-    const cartApi = new CartApi(request);
-    await cartApi.deleteCart("", cartId, request);
-  }
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

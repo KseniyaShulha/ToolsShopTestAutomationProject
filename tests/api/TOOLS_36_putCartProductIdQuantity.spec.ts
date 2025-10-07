@@ -1,10 +1,10 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { loginApi } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { ProductsApi } from "../../api/productsApi";
 
 let token: any;
-let cartId: string;
+let cartId: any;
 let productApi: any;
 let testData_TOOLS_36: any;
 let cartApi: any;
@@ -96,9 +96,6 @@ test.describe("Cart API - Update quantity", () => {
 });
 
 // afterEach hook to delete cart
-test.afterEach(async ({ request }) => {
-  if (cartId) {
-    const cartApi = new CartApi(request);
-    await cartApi.deleteCart("", cartId, request);
-  }
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

@@ -1,15 +1,18 @@
-import { test, expect } from "@playwright/test";
-import { UsersApi } from "../../api/usersApi";
+import { test, expect } from "../fixtures/fixtures";
 import {
   testData_TOOLS_47_signUp,
   testData_47_login,
 } from "../../testData/testData_TOOLS_47";
-import { signUpApi, loginApi } from "../../api/apiHelper";
+import { signUpApi } from "../../api/apiHelper";
 import { UserSteps } from "../../steps/steps";
 import { Header } from "../../pages/header/header";
 import { AdminUsersPage } from "../../pages/adminUsers/adminUsers";
 
-test("TOOLS-47 Delete user via API check via UI", async ({ page, request }) => {
+test("TOOLS-47 Delete user via API check via UI", async ({
+  page,
+  request,
+  adminApi,
+}) => {
   const steps: UserSteps = new UserSteps(page);
   const header: Header = new Header(page);
   const adminUserspage = new AdminUsersPage(page);
@@ -47,18 +50,7 @@ test("TOOLS-47 Delete user via API check via UI", async ({ page, request }) => {
 
   expect(getUsersTableContent[0]["Id"]).toBe(userObj.id);
 
-  // Login with created credentials and save token
-  const token: any = await loginApi(
-    {
-      email: process.env.ADMIN_EMAIL,
-      password: process.env.ADMIN_PASSWORD,
-    },
-    request,
-  );
-
-  // Delete created user via API
-  const usersApi = new UsersApi(request);
-  const deleteResponse = await usersApi.deleteUser(token, userObj.id, request);
+  const deleteResponse = await adminApi.deleteUser(userObj.id);
   // Asserting response status is equal to 2**
   await expect(deleteResponse).toBeOK();
 

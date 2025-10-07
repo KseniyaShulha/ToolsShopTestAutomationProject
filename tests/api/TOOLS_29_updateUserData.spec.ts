@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { UsersApi } from "../../api/usersApi";
 import { testData_TOOLS_29 } from "../../testData/testData_TOOLS_29";
 import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signUp";
@@ -64,4 +64,9 @@ test.describe("PUT/users", async () => {
       }
     }
   });
+});
+
+// afterEach hook to delete cart
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteUser(userID);
 });

@@ -1,49 +1,36 @@
-import { test, expect } from "@playwright/test";
-import { UsersApi } from "../../api/usersApi";
+import { test, expect } from "../fixtures/fixtures";
 import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signUp";
-import { signUpApi, loginApi } from "../../api/apiHelper";
+import { signUpApi } from "../../api/apiHelper";
 
-let token: any;
 let userID: any;
 let createdUserEmail: any;
 
-test.describe("DELETE/users", async () => {
+test.describe("DELETE /users", async () => {
   test.beforeEach(async ({ request }) => {
-    // Send Post request to sign in
+    // Send Post request to sign up
     const responseBody = await signUpApi(testData_TOOLS_20_signUp, request);
 
     userID = responseBody.id;
     createdUserEmail = responseBody.email;
-
-    // Login with created credentials and save token
-    token = await loginApi(
-      {
-        email: process.env.ADMIN_EMAIL,
-        password: process.env.ADMIN_PASSWORD,
-      },
-      request,
-    );
   });
 
-  test("TOOLS-30 DELETE users/userId", async ({ request }) => {
-    // Create instance of UserApi
-    const userApi = new UsersApi(request);
-
+  test("TOOLS-30 DELETE users/userId", async ({ adminApi }) => {
     // Send put request /users/
-    const deleteUserResponse: any = await userApi.deleteUser(token, userID);
+    const deleteUserResponse: any = await adminApi.deleteUser(userID);
 
     // Asserting response status is equal to 2**
     await expect(deleteUserResponse).toBeOK();
 
     // Send Get request to search for the deleted user by email
-    const searchUserResponse = await userApi.searchUser(
-      token,
-      createdUserEmail,
-    );
+    const searchUserResponse = await adminApi.searchUser(createdUserEmail);
+
+    // Asserting response status is equal to 2**
+    await expect(searchUserResponse).toBeOK();
 
     // Asserting response status data is equal to be []
     const responseBody = await searchUserResponse.json();
 
-    expect(responseBody.data).toStrictEqual([]);
+    // Assert nothing found
+    expect(responseBody.total).toBe(0);
   });
 });

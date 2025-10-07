@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import {
   createCartAndAddProduct,
   getRandomProductInStock,
@@ -7,7 +7,7 @@ import {
 import { CartApi } from "../../api/cartApi";
 
 let token: any;
-let cartId: string | null;
+let cartId: any;
 let cartApi: any;
 let testData_TOOLS_36: any, product;
 
@@ -60,9 +60,6 @@ test.describe("Cart API - delete product", () => {
 });
 
 // afterEach hook to delete cart
-test.afterEach(async ({ request }) => {
-  if (cartId) {
-    const cartApi = new CartApi(request);
-    await cartApi.deleteCart("", cartId, request);
-  }
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });

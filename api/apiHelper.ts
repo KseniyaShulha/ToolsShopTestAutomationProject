@@ -51,7 +51,7 @@ export async function getRandomProductInStock(
 
   // Find product in stock
   const randomProduct = getProductResponseBody.data.find(
-    (data) => data.in_stock === true,
+    (data: any) => data.in_stock === true,
   );
   expect(randomProduct).toBeDefined();
 

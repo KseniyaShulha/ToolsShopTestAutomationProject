@@ -1,6 +1,8 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { UsersApi } from "../../api/usersApi";
 import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signUp";
+
+let userID: any;
 
 test("TOOLS-20 POST users/register", async ({ request }) => {
   // Create instance of UserApi
@@ -12,9 +14,10 @@ test("TOOLS-20 POST users/register", async ({ request }) => {
   );
   expect(signUpResponse.status()).toBe(201);
 
-  // Save response body
-  const responseBody = await signUpResponse.json();
-  console.log("\nSign-up response:", responseBody);
+  const signUpResponseBody = await signUpResponse.json();
+
+  userID = signUpResponseBody.id;
+  console.log("\nuserID: ", userID);
 
   // Create loginBody var with creds
   const loginBody = {
@@ -32,4 +35,9 @@ test("TOOLS-20 POST users/register", async ({ request }) => {
 
   // Assert login token to be defined
   expect(loginData.access_token).toBeDefined();
+});
+
+// afterEach hook to delete user
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteUser(userID);
 });

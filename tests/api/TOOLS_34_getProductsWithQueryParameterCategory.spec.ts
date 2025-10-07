@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
 
-let categoryId: any, productsApi;
+let categoryId: any;
+let productsApi: any;
 
 test.describe("GET/products with query parameter category", async () => {
   test.beforeEach(async ({ request }) => {

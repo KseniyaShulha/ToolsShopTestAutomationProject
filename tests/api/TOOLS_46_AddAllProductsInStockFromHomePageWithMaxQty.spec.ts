@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../fixtures/fixtures";
 import { CartApi } from "../../api/cartApi";
 import { UserSteps } from "../../steps/steps";
 import { testData_TOOLS_46_login } from "../../testData/testData_TOOLS_46";
@@ -7,15 +7,16 @@ import { ShoppingCartPage } from "../../pages/shoppingCart/shoppingCartPage";
 import { ProductsApi } from "../../api/productsApi";
 
 let cartId: any;
+let cartApi: any;
 
 test("TOOLS-46 Add each product from home page with in_stock true from homepage via API and check cart via UI", async ({
   page,
   request,
 }) => {
   // Create instances
-  const steps: UserSteps = new UserSteps(page);
+  const steps = new UserSteps(page);
   const appPageObjects = new AppPageObjects(page);
-  const cartApi = new CartApi(request);
+  cartApi = new CartApi(request);
   const shoppingCartPage = new ShoppingCartPage(page);
   const productApi = new ProductsApi(request);
 
@@ -35,6 +36,7 @@ test("TOOLS-46 Add each product from home page with in_stock true from homepage 
 
   // Save cart id in var
   cartId = cartResponse.cart_items[0].cart_id;
+
   // Send get products via API and save response body
   const getAllProductsFromHomePage = await productApi.getProducts();
 
@@ -90,9 +92,6 @@ test("TOOLS-46 Add each product from home page with in_stock true from homepage 
 });
 
 // afterEach hook to delete cart
-test.afterEach(async ({ request }) => {
-  if (cartId) {
-    const cartApi = new CartApi(request);
-    await cartApi.deleteCart("", cartId, request);
-  }
+test.afterEach(async ({ adminApi }) => {
+  await adminApi.deleteCart(cartId);
 });
