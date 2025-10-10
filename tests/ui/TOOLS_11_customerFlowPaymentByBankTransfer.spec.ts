@@ -2,18 +2,19 @@ import { test } from "@playwright/test";
 import { AppPageObjects } from "../../pages/appPageObjects";
 import { testData_TOOLS_11 } from "../../testData/testData_TOOLS-11";
 import { UserSteps } from "../../steps/steps";
+import { addCookies } from "../../ui/uiHelper";
 
-test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
+test("TOOLS-11 customer flow - payment by bank transfer", async ({
+  page,
+  context,
+}) => {
   // Create instance of AppPageObjects
   const appPageObjects: AppPageObjects = new AppPageObjects(page);
   const steps: UserSteps = new UserSteps(page);
 
-  // Log in using steps.ts
-  await steps.loginUi(
-    testData_TOOLS_11.userData.email,
-    testData_TOOLS_11.userData.password,
-    testData_TOOLS_11.userData.surname,
-  );
+  await addCookies(context, "customer3");
+
+  await page.goto("/");
 
   // Customer goes to home page, chooses an item, add it to shopping cart.
   await steps.addRandomItemFromHomePageToCart();
