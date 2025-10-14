@@ -1,7 +1,7 @@
 import { test, expect } from "../fixtures/fixtures";
 import { CartApi } from "../../api/cartApi";
 import { UserSteps } from "../../steps/steps";
-import { loginApi } from "../../api/apiHelper";
+import { getTokenFromJson } from "../../api/apiHelper";
 import { testData_TOOLS_45_login } from "../../testData/testData_TOOLS_45";
 import { AppPageObjects } from "../../pages/appPageObjects";
 import { ShoppingCartPage } from "../../pages/shoppingCart/shoppingCartPage";
@@ -47,13 +47,7 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   };
 
   // / Get token via API
-  const token: any = await loginApi(
-    {
-      email: process.env.CUSTOMER_2_EMAIL,
-      password: process.env.CUSTOMER_2_PASSWORD,
-    },
-    request,
-  );
+  const token = await getTokenFromJson("customer2");
 
   // Send PUT request to update quantity of product
   const updateResponse: any = await cartApi.putUpdateQuantity(

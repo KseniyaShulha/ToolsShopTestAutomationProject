@@ -2,17 +2,18 @@ import { test } from "@playwright/test";
 import { AppPageObjects } from "../../pages/appPageObjects";
 import { testData_TOOLS_13 } from "../../testData/testData_TOOLS-13";
 import { UserSteps } from "../../steps/steps";
-import { addCookies } from "../../ui/uiHelper";
+import path from "path";
+
+test.use({
+  storageState: path.resolve(__dirname, "../../.auth/customer1.json"),
+});
 
 test("TOOLS-13 customer flow - payment by cash on delivery", async ({
   page,
-  context,
 }) => {
   // Create instance of AppPageObjects
   const appPageObjects: AppPageObjects = new AppPageObjects(page);
   const steps: UserSteps = new UserSteps(page);
-
-  await addCookies(context, "customer3");
 
   await page.goto("/");
 

@@ -1,19 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
-import { loginApi } from "../../api/apiHelper";
+import { getTokenFromJson } from "../../api/apiHelper";
 
 let token: any;
 
 test.describe("logout", () => {
-  test.beforeEach(async ({ request }) => {
-    //
-    token = await loginApi(
-      {
-        email: process.env.ADMIN_EMAIL,
-        password: process.env.ADMIN_PASSWORD,
-      },
-      request,
-    );
+  test.beforeEach(async () => {
+    token = await getTokenFromJson("admin");
+
+    console.log("\nToken", token);
   });
 
   test("TOOLS-19 GET users/logout", async ({ request }) => {

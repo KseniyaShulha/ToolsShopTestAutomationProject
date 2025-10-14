@@ -1,5 +1,5 @@
 import { test as setup } from "@playwright/test";
-import { UserSteps } from "../steps/steps";
+import { loginApi } from "../api/apiHelper";
 import path from "path";
 import fs from "fs";
 
@@ -47,37 +47,33 @@ const setupDataArr = [
 
 // Iterate over setup data
 for (const setupDataObj of setupDataArr) {
-
   // Run test based on test data
-  setup(setupDataObj.setupName, async ({ page }) => {
-
+  setup(setupDataObj.setupName, async ({ request }) => {
     // Resolve a path to a file with cookies
     const cookiesPath = path.resolve(process.cwd(), setupDataObj.authFile);
 
     // Open the file and convert it into utf-8
     const raw = fs.readFileSync(cookiesPath, "utf-8");
 
-    // Save into object
-    const storageState = JSON.parse(raw);
+    // Convert file into obj
+    const rawObj = JSON.parse(raw);
 
-    if (Date.now > storageState["expires"]) {
-      const steps = new UserSteps(page);
+    console.log(JSON.stringify(rawObj, null, 2));
 
-      await steps.loginUi(
-        setupDataObj.creds.email,
-        setupDataObj.creds.password,
-        setupDataObj.surname,
-        setupDataObj.setupName.includes("Admin") ? true : false,
-      );
+    const token = await loginApi(setupDataObj.creds, request);
 
-      // Add cookies to browser context
-      await page.context().storageState({ path: setupDataObj.authFile });
+    console.log("Token", token);
 
-      console.log(`Cookies are set for the user ${setupDataObj.creds.email}`);
-    } else {
-      console.log(
-        `Existed cookies are valid for the user ${setupDataObj.creds.email}`,
-      );
-    }
+    rawObj["origins"][0]["localStorage"][0]["value"] = token;
+
+    console.log("updatedStorageObj", JSON.stringify(rawObj, null, 2));
+
+    fs.writeFileSync(
+      setupDataObj.authFile,
+      JSON.stringify(rawObj, null, 2),
+      "utf-8",
+    );
+
+    // process.env.setupDataObj
   });
 }
