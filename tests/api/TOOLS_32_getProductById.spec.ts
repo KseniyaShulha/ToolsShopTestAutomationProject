@@ -26,12 +26,16 @@ test.describe("Get product by ID", async () => {
     await expect(getProductByIDResponse).toBeOK();
 
     // Save response body to var
-    const responseBody = await getProductByIDResponse.json();
+    // const responseBody = await getProductByIDResponse.json();
 
     // Assert received response body has the same body structure as a template response data for single product
-    productsApi.assertResponseStructureAndTypesForSingleProduct(responseBody);
+    await productsApi.assertResponseStructureAndTypesForSingleProduct(
+      getProductByIDResponse,
+    );
 
     // Assert the key "current page" has the value "1"
-    expect(responseBody.id).toBe(productId);
+    // Optionally check returned ID
+    const body = await getProductByIDResponse.json();
+    expect(body.id).toBe(productId);
   });
 });

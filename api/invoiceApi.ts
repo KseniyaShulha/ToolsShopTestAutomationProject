@@ -43,6 +43,9 @@ export class InvoicesApi extends BaseAPI {
 
   assertResponseStructureAndTypes(response: APIRequestContext): void {
     const keys = Object.keys(responseData.responseStructure);
+    console.log("Response", JSON.stringify(response, null, 2));
+    console.log("Object.keys(response).length", Object.keys(response).length);
+    console.log("Keys", JSON.stringify(keys, null, 2));
 
     // Assert response lentgh to be equal the length of response structure (number of keys)
     expect(keys.length).toBe(Object.keys(response).length);
