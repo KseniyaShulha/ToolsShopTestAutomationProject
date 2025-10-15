@@ -2,7 +2,7 @@ import { test, expect } from "../fixtures/fixtures";
 import {
   createCartAndAddProduct,
   getRandomProductInStock,
-  loginApi,
+  getTokenFromJson,
 } from "../../api/apiHelper";
 import { InvoicesApi } from "../../api/invoiceApi";
 import { Header } from "../../pages/header/header";
@@ -35,13 +35,7 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
   const product = await getRandomProductInStock(request);
 
   // Get token
-  const token: any = await loginApi(
-    {
-      email: process.env.CUSTOMER_2_EMAIL,
-      password: process.env.CUSTOMER_2_PASSWORD,
-    },
-    request,
-  );
+  const token = await getTokenFromJson("customer2");
 
   expect(token).toBeTruthy();
 

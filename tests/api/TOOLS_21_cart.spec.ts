@@ -1,5 +1,5 @@
 import { test, expect } from "../fixtures/fixtures";
-import { loginApi } from "../../api/apiHelper";
+import { getTokenFromJson } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { testData_TOOLS_21 } from "../../testData/testData_TOOLS_21";
 import { ProductsApi } from "../../api/productsApi";
@@ -29,13 +29,7 @@ test.describe("Add item to cart", () => {
     testData_TOOLS_21.product_id = productId;
 
     // Save customer's token after login
-    token = await loginApi(
-      {
-        email: process.env.CUSTOMER_2_EMAIL,
-        password: process.env.CUSTOMER_2_PASSWORD,
-      },
-      request,
-    );
+    token = await getTokenFromJson("customer2");
   });
 
   test("TOOLS-21 POST carts/itemId", async ({ request }) => {

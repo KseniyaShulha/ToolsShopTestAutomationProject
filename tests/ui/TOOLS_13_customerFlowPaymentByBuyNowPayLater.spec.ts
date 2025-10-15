@@ -2,6 +2,11 @@ import { test } from "@playwright/test";
 import { AppPageObjects } from "../../pages/appPageObjects";
 import { testData_TOOLS_13 } from "../../testData/testData_TOOLS-13";
 import { UserSteps } from "../../steps/steps";
+import path from "path";
+
+test.use({
+  storageState: path.resolve(__dirname, "../../.auth/customer1.json"),
+});
 
 test("TOOLS-13 customer flow - payment by cash on delivery", async ({
   page,
@@ -10,12 +15,7 @@ test("TOOLS-13 customer flow - payment by cash on delivery", async ({
   const appPageObjects: AppPageObjects = new AppPageObjects(page);
   const steps: UserSteps = new UserSteps(page);
 
-  // Log in using steps.ts
-  await steps.loginUi(
-    testData_TOOLS_13.userData.email,
-    testData_TOOLS_13.userData.password,
-    testData_TOOLS_13.userData.surname,
-  );
+  await page.goto("/");
 
   // Customer goes to home page, chooses an item, add it to shopping cart.
   await steps.addRandomItemFromHomePageToCart();

@@ -1,5 +1,5 @@
 import { test, expect } from "../fixtures/fixtures";
-import { loginApi } from "../../api/apiHelper";
+import { getTokenFromJson } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { InvoicesApi } from "../../api/invoiceApi";
 import { testData_TOOLS_43 } from "../../testData/testData_TOOLS_43";
@@ -15,13 +15,7 @@ test.describe("Cart API - create invoice", () => {
     cartApi = new CartApi(request);
 
     // Get token
-    token = await loginApi(
-      {
-        email: process.env.CUSTOMER_2_EMAIL,
-        password: process.env.CUSTOMER_2_PASSWORD,
-      },
-      request,
-    );
+    token = await getTokenFromJson("customer2");
 
     // Send post request to /api/carts and store the response in variable
     const postCreateCartResponse = await cartApi.postCreateCart(token, request);

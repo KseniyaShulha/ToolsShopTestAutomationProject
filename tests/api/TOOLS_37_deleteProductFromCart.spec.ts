@@ -2,7 +2,7 @@ import { test, expect } from "../fixtures/fixtures";
 import {
   createCartAndAddProduct,
   getRandomProductInStock,
-  loginApi,
+  getTokenFromJson,
 } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 
@@ -25,13 +25,7 @@ test.describe("Cart API - delete product", () => {
     };
 
     // Get token
-    token = await loginApi(
-      {
-        email: process.env.CUSTOMER_2_EMAIL,
-        password: process.env.CUSTOMER_2_PASSWORD,
-      },
-      request,
-    );
+    token = await getTokenFromJson("customer2");
 
     // Create cart and add product to cart
     cartId = await createCartAndAddProduct(token, product.id, 2, request);

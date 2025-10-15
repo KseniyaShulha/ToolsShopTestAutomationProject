@@ -1,5 +1,5 @@
 import { test, expect } from "../fixtures/fixtures";
-import { loginApi } from "../../api/apiHelper";
+import { getTokenFromJson } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { ProductsApi } from "../../api/productsApi";
 
@@ -30,13 +30,7 @@ test.describe("Cart API - Update quantity", () => {
     };
 
     // Get token
-    token = await loginApi(
-      {
-        email: process.env.CUSTOMER_2_EMAIL,
-        password: process.env.CUSTOMER_2_PASSWORD,
-      },
-      request,
-    );
+    token = await getTokenFromJson("customer2");
 
     // Create a cart
     const createCartResponse: any = await cartApi.postCreateCart(token);
