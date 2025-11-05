@@ -4,20 +4,21 @@ import { testData_TOOLS_38 } from "../../testData/testData_TOOLS_38";
 import { testData_TOOLS_39 } from "../../testData/testData_TOOLS_39";
 import { testData_TOOLS_41 } from "../../testData/testData_TOOLS_41";
 
+test.describe("TOOLS_38_CheckoutOrderSuccessfully @api @smoke @regression @critical", () => {
 // Test data for TOOLS-38 & TOOLS-39
 const testDataArr = [
   {
-    testName: "TOOLS-38 POST /payment/check_bankTransfer",
+    testName: "POST /payment/check_bankTransfer",
     payment_method: "bank-transfer",
     payment_details: testData_TOOLS_38.payment_details,
   },
   {
-    testName: "TOOLS-39 POST /payment/check_giftCard",
+    testName: "POST /payment/check_giftCard",
     payment_method: "gift-card",
     payment_details: testData_TOOLS_39.payment_details,
   },
   {
-    testName: "TOOLS-41 POST /payment/check_creditCard",
+    testName: "POST /payment/check_creditCard",
     payment_method: "credit-card",
     payment_details: testData_TOOLS_41.payment_details,
   },
@@ -43,4 +44,6 @@ for (const testDataObj of testDataArr) {
 
     expect(responseBody).toStrictEqual(paymentApi.responseData.successPayment);
   });
-}
+};
+});
+

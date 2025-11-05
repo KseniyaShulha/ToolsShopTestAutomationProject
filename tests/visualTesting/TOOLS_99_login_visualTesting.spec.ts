@@ -1,8 +1,8 @@
 import { test, expect } from "../fixtures/fixtures";
 import { testData_login } from "../../testData/testData_login";
 
-test.describe("TOOLS_3_login @ui @smoke @regression @critical", () => {
-test("Login as customer", async ({ appPageObjects }) => {
+test.describe('TOOLS_99_login_visualTesting @ui @regression', () => {
+  test("Login as customer", async ({ appPageObjects,page }) => {
   await appPageObjects.homePage().openHomePage();
 
   await appPageObjects.homePage().clickSignInButton();
@@ -17,12 +17,8 @@ test("Login as customer", async ({ appPageObjects }) => {
 
   await appPageObjects.loginPage().clickSubmitButton();
 
-  console.log("\nVerify that the customers name apears in id menu");
-  expect(
-    await appPageObjects.headerSection().getDropdownLoginValue(),
-  ).toContain(testData_login.userData.surname);
-
-  await appPageObjects.accountPage().waitPageUrlLoaded("account");
+  const loginForm = await page.locator('[class="col-lg-6 auth-form"]')
+  await expect(loginForm).toHaveScreenshot()
 });
 });
 

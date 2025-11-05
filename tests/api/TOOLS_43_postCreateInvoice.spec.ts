@@ -9,7 +9,7 @@ let cartId: any;
 let cartApi: any;
 let invoiceApi: any;
 
-test.describe("Cart API - create invoice", () => {
+test.describe("TOOLS_43_postCreateInvoice @api @regression", () => {
   test.beforeEach(async ({ request }) => {
     // Create instance of CartApi
     cartApi = new CartApi(request);
@@ -30,7 +30,7 @@ test.describe("Cart API - create invoice", () => {
     testData_TOOLS_43.cart_id = cartId;
   });
 
-  test("TOOLS-37 POST api/invoice", async ({ request }) => {
+  test("POST api/invoice", async ({ request }) => {
     // Create instance of InvoiceApi
     invoiceApi = new InvoicesApi(request);
 
@@ -57,9 +57,11 @@ test.describe("Cart API - create invoice", () => {
     // Assert the "invoice_number" key's length to be greater than 0
     expect(responseBody.invoice_number.length).toBeGreaterThan(0);
   });
-});
-
-// afterEach hook to delete cart
+  
+    // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteCart(cartId);
 });
+});
+
+

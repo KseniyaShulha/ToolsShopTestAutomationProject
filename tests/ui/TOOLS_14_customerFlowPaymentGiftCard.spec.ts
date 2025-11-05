@@ -8,7 +8,8 @@ test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer2.json"),
 });
 
-test("TOOLS-14 customer flow - payment by gift card", async ({ page }) => {
+test.describe("TOOLS_14_customerFlowPaymentGiftCard @ui @regression", () => {
+test("Customer flow - payment by gift card", async ({ page }) => {
   // Create instance of AppPageObjects
   const appPageObjects: AppPageObjects = new AppPageObjects(page);
   const steps: UserSteps = new UserSteps(page);
@@ -51,3 +52,5 @@ test("TOOLS-14 customer flow - payment by gift card", async ({ page }) => {
   // Expect  succsess message is visible
   await appPageObjects.checkoutPage().assertPaymentSuccsessMessageAppeared();
 });
+});
+

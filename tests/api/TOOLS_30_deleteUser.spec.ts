@@ -5,7 +5,7 @@ import { signUpApi } from "../../api/apiHelper";
 let userID: any;
 let createdUserEmail: any;
 
-test.describe("DELETE /users", async () => {
+test.describe("TOOLS_30_deleteUser @api @regression", async () => {
   test.beforeEach(async ({ request }) => {
     // Send Post request to sign up
     const responseBody = await signUpApi(testData_TOOLS_20_signUp, request);
@@ -14,7 +14,7 @@ test.describe("DELETE /users", async () => {
     createdUserEmail = responseBody.email;
   });
 
-  test("TOOLS-30 DELETE users/userId", async ({ adminApi }) => {
+  test("DELETE users/userId", async ({ adminApi }) => {
     // Send put request /users/
     const deleteUserResponse: any = await adminApi.deleteUser(userID);
 

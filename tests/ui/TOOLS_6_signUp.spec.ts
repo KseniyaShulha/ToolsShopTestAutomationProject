@@ -3,7 +3,8 @@ import { testData_TOOLS_6 } from "../../testData/testData_TOOLS-6";
 import { AppPageObjects } from "../../pages/appPageObjects";
 import { loginApi } from "../../api/apiHelper";
 
-test("TOOLS-6 sign up as customer", async ({ page, request }) => {
+test.describe("TOOLS_6_signUp @ui @smoke @regression @critical", () => {
+test("Sign up as customer", async ({ page, request }) => {
   const appPageObjects = new AppPageObjects(page);
 
   console.log("\nCustomer opens the home page");
@@ -54,3 +55,5 @@ test("TOOLS-6 sign up as customer", async ({ page, request }) => {
     request,
   );
 });
+});
+

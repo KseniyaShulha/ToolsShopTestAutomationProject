@@ -7,7 +7,7 @@ import { ProductsApi } from "../../api/productsApi";
 let token: any;
 let cartId: any;
 
-test.describe("Add item to cart", () => {
+test.describe("TOOLS_21_cart @api @regression @critical", () => {
   test.beforeEach(async ({ request }) => {
     const productApi = new ProductsApi(request);
 
@@ -32,7 +32,7 @@ test.describe("Add item to cart", () => {
     token = await getTokenFromJson("customer2");
   });
 
-  test("TOOLS-21 POST carts/itemId", async ({ request }) => {
+  test("POST carts/itemId", async ({ request }) => {
     // Create instance of CartApi
     const cartApi = new CartApi(request);
 
@@ -83,9 +83,11 @@ test.describe("Add item to cart", () => {
       testData_TOOLS_21.quantity,
     );
   });
-});
 
-// afterEach hook to delete cart
+    // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteCart(cartId);
 });
+});
+
+

@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
 
-test("TOOLS-31 GET products/?p=params", async ({ request }) => {
+test.describe("TOOLS_31_getAllProducts @api @smoke @regression", () => {
+  test("GET products/?p=params", async ({ request }) => {
   // Create instance of ProductsApi
   const productsApi = new ProductsApi(request);
 
@@ -33,3 +34,5 @@ test("TOOLS-31 GET products/?p=params", async ({ request }) => {
   // Assert the key "to" has the value "9"
   expect(body.to).toBe(9);
 });
+});
+

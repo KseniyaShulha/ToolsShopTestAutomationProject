@@ -8,7 +8,7 @@ let token: any;
 let userID: any;
 let clonedTestDataObj: any = { ...testData_TOOLS_29.body };
 
-test.describe("PUT/users", async () => {
+test.describe("TOOLS_29_updateUserData @api @regression", async () => {
   test.beforeEach(async ({ request }) => {
     // Send Post request to sign in
     const responseBody = await signUpApi(testData_TOOLS_20_signUp, request);
@@ -30,7 +30,7 @@ test.describe("PUT/users", async () => {
     clonedTestDataObj.password = testData_TOOLS_20_signUp.password;
   });
 
-  test("TOOLS-29 PUT users/userId", async ({ request }) => {
+  test("PUT users/userId", async ({ request }) => {
     // Create instance of UserApi
     const userApi = new UsersApi(request);
 
@@ -61,12 +61,14 @@ test.describe("PUT/users", async () => {
       } else {
         // Assert value equality for other keys
         expect(clonedTestDataObj[key]).toBe(getUserResponseBody[key]);
-      }
-    }
+      };
+    };
   });
-});
-
-// afterEach hook to delete cart
+  
+    // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteUser(userID);
 });
+});
+
+

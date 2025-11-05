@@ -4,7 +4,7 @@ import { ProductsApi } from "../../api/productsApi";
 let productId: any;
 let productsApi: any;
 
-test.describe("Get product by ID", async () => {
+test.describe("TOOLS_32_getProductById @api @regression", async () => {
   test.beforeEach(async ({ request }) => {
     // Create instance of ProductsApi
     productsApi = new ProductsApi(request);
@@ -18,7 +18,7 @@ test.describe("Get product by ID", async () => {
     productId = responseBody.data[0].id;
   });
 
-  test("TOOLS-32 GET products/productId", async () => {
+  test("GET products/productId", async () => {
     // Send get request with querry params and save response in var
     const getProductByIDResponse = await productsApi.getProductByID(productId);
 

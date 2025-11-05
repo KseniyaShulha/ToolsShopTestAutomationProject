@@ -2,7 +2,8 @@ import { test, expect } from "../fixtures/fixtures";
 import { ProductsApi } from "../../api/productsApi";
 import { testData_TOOLS_33 } from "../../testData/testData_TOOLS_33";
 
-test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
+test.describe("TOOLS_33_getProductsMinMaxPrice @api @regression", () => {
+  test("GET products/?q=params&between=min,max price", async ({
   request,
 }) => {
   // Create instance of ProductsApi
@@ -34,3 +35,5 @@ test("TOOLS-33 GET products/?q=params&between=min,max price", async ({
     console.log("\n=============================");
   }
 });
+});
+

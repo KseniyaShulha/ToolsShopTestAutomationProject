@@ -8,7 +8,8 @@ test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer1.json"),
 });
 
-test("TOOLS-12 customer flow - payment by cash on delivery", async ({
+test.describe("TOOLS_12_customerFlowPaymentByCashOnDelivery @ui @regression", () => {
+  test("Customer flow - payment by cash on delivery", async ({
   page,
 }) => {
   // Create instance of AppPageObjects
@@ -42,3 +43,5 @@ test("TOOLS-12 customer flow - payment by cash on delivery", async ({
   // Expect  succsess message is visible
   await appPageObjects.checkoutPage().assertPaymentSuccsessMessageAppeared();
 });
+});
+

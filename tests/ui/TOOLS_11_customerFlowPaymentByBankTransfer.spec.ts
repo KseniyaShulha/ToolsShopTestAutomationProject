@@ -8,7 +8,8 @@ test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer2.json"),
 });
 
-test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
+test.describe("TOOLS_11_customerFlowPaymentByBankTransfer @ui @regression", () => {
+test("Customer flow - payment by bank transfer", async ({ page }) => {
   // Create instance of AppPageObjects
   const appPageObjects: AppPageObjects = new AppPageObjects(page);
   const steps: UserSteps = new UserSteps(page);
@@ -49,3 +50,5 @@ test("TOOLS-11 customer flow - payment by bank transfer", async ({ page }) => {
   // Expect  succsess message is visible
   await appPageObjects.checkoutPage().assertPaymentSuccsessMessageAppeared();
 });
+});
+

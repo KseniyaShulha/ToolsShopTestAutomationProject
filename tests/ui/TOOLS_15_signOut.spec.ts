@@ -6,12 +6,12 @@ test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer2.json"),
 });
 
-test.describe("auth ui", () => {
+test.describe("TOOLS_15_signOut @ui @regression", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
 
-  test("logOut", async ({ page }) => {
+  test("LogOut", async ({ page }) => {
     const steps: UserSteps = new UserSteps(page);
     await steps.signOut();
   });

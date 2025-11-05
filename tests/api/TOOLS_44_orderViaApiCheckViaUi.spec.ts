@@ -20,7 +20,8 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 let cartId: any;
 
-test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
+test.describe('TOOLS_44_orderViaApiCheckViaUi @api @integration @regression @critical', () => {
+  test("Proceed payment via API and check invoice via UI", async ({
   page,
   request,
 }) => {
@@ -131,7 +132,10 @@ test("TOOLS-44 Proceed payment via API and check invoice via UI", async ({
     .toBe(responseBody.total);
 });
 
-// afterEach hook to delete cart
+    // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteCart(cartId);
 });
+});
+
+

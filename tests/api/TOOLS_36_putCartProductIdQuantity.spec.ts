@@ -9,7 +9,7 @@ let productApi: any;
 let testData_TOOLS_36: any;
 let cartApi: any;
 
-test.describe("Cart API - Update quantity", () => {
+test.describe("TOOLS_36_putCartProductIdQuantity @api @regression", () => {
   test.beforeEach(async ({ request }) => {
     productApi = new ProductsApi(request);
     cartApi = new CartApi(request);
@@ -56,7 +56,7 @@ test.describe("Cart API - Update quantity", () => {
     expect(addToCartResponse.status()).toBe(200);
   });
 
-  test("TOOLS-36 PUT carts/cartId/itemId/quantity", async () => {
+  test("PUT carts/cartId/itemId/quantity", async () => {
     const newQuantity: any = {
       product_id: testData_TOOLS_36.product_id,
       quantity: 3,
@@ -87,9 +87,11 @@ test.describe("Cart API - Update quantity", () => {
     // Assert the quantity of product has changed
     expect(getCartBody.cart_items[0].quantity).toBe(newQuantity.quantity);
   });
-});
-
-// afterEach hook to delete cart
+  
+    // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteCart(cartId);
 });
+});
+
+

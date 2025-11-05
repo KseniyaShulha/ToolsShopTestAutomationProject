@@ -8,7 +8,8 @@ import { UserSteps } from "../../steps/steps";
 import { Header } from "../../pages/header/header";
 import { AdminUsersPage } from "../../pages/adminUsers/adminUsers";
 
-test("TOOLS-47 Delete user via API check via UI", async ({
+test.describe('TOOLS_47_deleteUserViaApiCheckViaUi @api @integration @regression', () => {
+test("Delete user via API check via UI", async ({
   page,
   request,
   adminApi,
@@ -72,3 +73,5 @@ test("TOOLS-47 Delete user via API check via UI", async ({
   const usersTable = await adminUserspage.getUsersTable();
   await expect(usersTable.locator("tbody")).toBeEmpty();
 });
+});
+

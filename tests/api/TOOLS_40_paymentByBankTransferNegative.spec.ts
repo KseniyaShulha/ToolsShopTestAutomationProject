@@ -2,7 +2,8 @@ import { test, expect, APIResponse } from "@playwright/test";
 import { PaymentApi } from "../../api/paymentApi";
 import { testData_TOOLS_40 } from "../../testData/testData_TOOLS_40";
 
-test("TOOLS_40 POST /api/payment/check (negative)", async ({ request }) => {
+test.describe("TOOLS_40_paymentByBankTransferNegative @api @negative @regression", () => {
+  test("POST /api/payment/check (negative)", async ({ request }) => {
   // Create instance of UserApi
   const paymentApi = new PaymentApi(request);
 
@@ -26,5 +27,6 @@ test("TOOLS_40 POST /api/payment/check (negative)", async ({ request }) => {
 
     //Assert error message
     expect.soft(responseBody).toStrictEqual(testDataObj.responseBody);
-  }
+  };
+});
 });

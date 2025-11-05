@@ -4,7 +4,7 @@ import { ProductsApi } from "../../api/productsApi";
 let product: any;
 let productsApi: ProductsApi;
 
-test.describe("GET/products with query parameter search", async () => {
+test.describe("TOOLS_35_getProductsWithQueryParameterSearch @api @regression", async () => {
   test.beforeEach(async ({ request }) => {
     // Create instance of ProductsApi
     productsApi = new ProductsApi(request);
@@ -19,7 +19,7 @@ test.describe("GET/products with query parameter search", async () => {
     console.log("\nProduct to test search: ", JSON.stringify(product, null, 2));
   });
 
-  test("TOOLS-35 GET products/search?q=", async () => {
+  test("GET products/search?q=", async () => {
     const searchCombinations = [
       product.name,
       product.name.split(" ")[0],

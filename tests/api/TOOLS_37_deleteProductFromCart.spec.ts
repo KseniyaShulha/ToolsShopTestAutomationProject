@@ -11,7 +11,7 @@ let cartId: any;
 let cartApi: any;
 let testData_TOOLS_36: any, product;
 
-test.describe("Cart API - delete product", () => {
+test.describe("TOOLS_37_deleteProductFromCart @api @regression", () => {
   test.beforeEach(async ({ request }) => {
     // Create instance of CartApi
     cartApi = new CartApi(request);
@@ -31,7 +31,7 @@ test.describe("Cart API - delete product", () => {
     cartId = await createCartAndAddProduct(token, product.id, 2, request);
   });
 
-  test("TOOLS-37 DELETE carts/cartId/product/{productId}", async () => {
+  test("DELETE carts/cartId/product/{productId}", async () => {
     const deteProductFromCartResponse = await cartApi.deleteProductFromCart(
       token,
       cartId,
@@ -51,9 +51,11 @@ test.describe("Cart API - delete product", () => {
     // Assert that cart doesn't contain deleted product
     expect(getCartResponseBody.cart_items.length).toBe(0);
   });
-});
 
-// afterEach hook to delete cart
+    // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteCart(cartId);
 });
+});
+
+

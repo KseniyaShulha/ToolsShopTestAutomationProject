@@ -4,7 +4,7 @@ import { ProductsApi } from "../../api/productsApi";
 let categoryId: any;
 let productsApi: any;
 
-test.describe("GET/products with query parameter category", async () => {
+test.describe("TOOLS_34_getProductsWithQueryParameterCategory @api @regression", async () => {
   test.beforeEach(async ({ request }) => {
     // Create instance of ProductsApi
     productsApi = new ProductsApi(request);
@@ -21,7 +21,7 @@ test.describe("GET/products with query parameter category", async () => {
     categoryId = responseBody.data[0].category.id;
   });
 
-  test("TOOLS-34 GET products/?by_category=", async () => {
+  test("GET products/?by_category=", async () => {
     const getProductsByCategoryResponse = await productsApi.getProducts(
       `?by_category=${categoryId}`,
     );

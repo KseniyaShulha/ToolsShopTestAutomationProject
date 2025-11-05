@@ -9,7 +9,8 @@ import { ProductsApi } from "../../api/productsApi";
 let cartId: any;
 let cartApi: any;
 
-test("TOOLS-46 Add each product from home page with in_stock true from homepage via API and check cart via UI", async ({
+test.describe('TOOLS_46_AddAllProductsInStockFromHomePageWithMaxQty @api @stress @regression', () => {
+test("Add each product from home page with in_stock true from homepage via API and check cart via UI", async ({
   page,
   request,
 }) => {
@@ -91,7 +92,10 @@ test("TOOLS-46 Add each product from home page with in_stock true from homepage 
   expect(shoppingCartTableContent.length).toBe(productsInStock.length);
 });
 
-// afterEach hook to delete cart
+  // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteCart(cartId);
 });
+});
+
+

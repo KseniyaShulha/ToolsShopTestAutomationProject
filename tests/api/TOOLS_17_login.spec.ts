@@ -1,17 +1,18 @@
 import { test, expect } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
 
-// Test data for TOOLS-17 & TOOLS-18
+test.describe("TOOLS_17_login @api @smoke @regression @critical", () => {
+ // Test data for TOOLS-17 & TOOLS-18
 const testDataArr = [
   {
-    testName: "TOOLS-17 POST users/login (customer)",
+    testName: "POST users/login (customer)",
     creds: {
       email: process.env.CUSTOMER_2_EMAIL,
       password: process.env.CUSTOMER_2_PASSWORD,
     },
   },
   {
-    testName: "TOOLS-18 POST users/login (admin)",
+    testName: "POST users/login (admin)",
     creds: {
       email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD,
@@ -38,4 +39,6 @@ for (const testDataObj of testDataArr) {
     // Assert access token to be defined
     expect(responseBody.access_token).toBeDefined();
   });
-}
+};
+});
+

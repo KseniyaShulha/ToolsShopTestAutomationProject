@@ -9,7 +9,8 @@ import { ProductsApi } from "../../api/productsApi";
 
 let cartId: string;
 
-test("TOOLS-45 Update product quantity via API and check quantity via UI", async ({
+test.describe('TOOLS_45_updateProductViaApiCheckViaUi @api @integration @regression', () => {
+  test("Update product quantity via API and check quantity via UI", async ({
   page,
   request,
 }) => {
@@ -89,7 +90,10 @@ test("TOOLS-45 Update product quantity via API and check quantity via UI", async
   expect(shoppingCartTableContent[0]["Item"]).toStrictEqual(name);
 });
 
-// afterEach hook to delete cart
+  // afterEach hook to delete cart
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteCart(cartId);
 });
+});
+
+

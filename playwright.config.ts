@@ -1,7 +1,7 @@
 import { Urls } from "./utils/urls";
 import { defineConfig, devices } from "@playwright/test";
-import * as dotenv from "dotenv";
-dotenv.config();
+
+require("dotenv").config();
 
 export default defineConfig({
   testDir: "./tests",
@@ -29,7 +29,6 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        // storageState: ".auth/customer2.json",
       },
       dependencies: ["setup"],
     },

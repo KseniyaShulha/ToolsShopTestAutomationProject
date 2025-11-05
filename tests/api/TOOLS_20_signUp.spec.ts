@@ -4,7 +4,8 @@ import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signU
 
 let userID: any;
 
-test("TOOLS-20 POST users/register", async ({ request }) => {
+test.describe("TOOLS_20_signUp @api @smoke @regression @critical", () => {
+test("POST users/register", async ({ request }) => {
   // Create instance of UserApi
   const userApi = new UsersApi(request);
 
@@ -37,7 +38,13 @@ test("TOOLS-20 POST users/register", async ({ request }) => {
   expect(loginData.access_token).toBeDefined();
 });
 
-// afterEach hook to delete user
+ // afterEach hook to delete user
 test.afterEach(async ({ adminApi }) => {
   await adminApi.deleteUser(userID);
 });
+});
+
+
+
+
+
