@@ -4,7 +4,7 @@ import { getTokenFromJson } from "../../api/apiHelper";
 
 let token: any;
 
-test.describe("TOOLS_19_logout @api @regression", () => {
+test.describe("TOOLS_19_logout", { tag: ["@api", "@regression"] }, () => {
   test.beforeEach(async () => {
     token = await getTokenFromJson("admin");
 

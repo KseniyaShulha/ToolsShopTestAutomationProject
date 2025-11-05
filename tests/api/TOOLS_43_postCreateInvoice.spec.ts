@@ -9,59 +9,64 @@ let cartId: any;
 let cartApi: any;
 let invoiceApi: any;
 
-test.describe("TOOLS_43_postCreateInvoice @api @regression", () => {
-  test.beforeEach(async ({ request }) => {
-    // Create instance of CartApi
-    cartApi = new CartApi(request);
+test.describe(
+  "TOOLS_43_postCreateInvoice",
+  { tag: ["@api", "@regression"] },
+  () => {
+    test.beforeEach(async ({ request }) => {
+      // Create instance of CartApi
+      cartApi = new CartApi(request);
 
-    // Get token
-    token = await getTokenFromJson("customer2");
+      // Get token
+      token = await getTokenFromJson("customer2");
 
-    // Send post request to /api/carts and store the response in variable
-    const postCreateCartResponse = await cartApi.postCreateCart(token, request);
+      // Send post request to /api/carts and store the response in variable
+      const postCreateCartResponse = await cartApi.postCreateCart(
+        token,
+        request,
+      );
 
-    // Save response body in json
-    const responseBody = await postCreateCartResponse.json();
+      // Save response body in json
+      const responseBody = await postCreateCartResponse.json();
 
-    console.log("\nResponseBody", responseBody);
+      console.log("\nResponseBody", responseBody);
 
-    // Save cart id from responce body in var and reassign it to cart_id from testData
-    cartId = responseBody.id;
-    testData_TOOLS_43.cart_id = cartId;
-  });
+      // Save cart id from responce body in var and reassign it to cart_id from testData
+      cartId = responseBody.id;
+      testData_TOOLS_43.cart_id = cartId;
+    });
 
-  test("POST api/invoice", async ({ request }) => {
-    // Create instance of InvoiceApi
-    invoiceApi = new InvoicesApi(request);
+    test("POST api/invoice", async ({ request }) => {
+      // Create instance of InvoiceApi
+      invoiceApi = new InvoicesApi(request);
 
-    // Send post request to /api/invoise and store the response in variable
-    const postCreateInvoiceResponse = await invoiceApi.postCreateInvoice(
-      token,
-      testData_TOOLS_43,
-    );
+      // Send post request to /api/invoise and store the response in variable
+      const postCreateInvoiceResponse = await invoiceApi.postCreateInvoice(
+        token,
+        testData_TOOLS_43,
+      );
 
-    // Save response body in json
-    const responseBody = await postCreateInvoiceResponse.json();
+      // Save response body in json
+      const responseBody = await postCreateInvoiceResponse.json();
 
-    console.log("\nResponseBody", responseBody);
+      console.log("\nResponseBody", responseBody);
 
-    // Assert response status to be 201
-    expect(postCreateInvoiceResponse.status()).toBe(201);
+      // Assert response status to be 201
+      expect(postCreateInvoiceResponse.status()).toBe(201);
 
-    // Assert received response body has the same body structure as a template response structure
-    invoiceApi.assertResponseStructureAndTypes(responseBody);
+      // Assert received response body has the same body structure as a template response structure
+      invoiceApi.assertResponseStructureAndTypes(responseBody);
 
-    // Assert the "id" key's length to be greater than 0
-    expect(responseBody.id.length).toBeGreaterThan(0);
+      // Assert the "id" key's length to be greater than 0
+      expect(responseBody.id.length).toBeGreaterThan(0);
 
-    // Assert the "invoice_number" key's length to be greater than 0
-    expect(responseBody.invoice_number.length).toBeGreaterThan(0);
-  });
-  
+      // Assert the "invoice_number" key's length to be greater than 0
+      expect(responseBody.invoice_number.length).toBeGreaterThan(0);
+    });
+
     // afterEach hook to delete cart
-test.afterEach(async ({ adminApi }) => {
-  await adminApi.deleteCart(cartId);
-});
-});
-
-
+    test.afterEach(async ({ adminApi }) => {
+      await adminApi.deleteCart(cartId);
+    });
+  },
+);
