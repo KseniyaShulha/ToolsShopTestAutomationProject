@@ -29,9 +29,9 @@ jobs:                                # Описываем задания (jobs),
       - name: Run tests              # Шаг запуска тестов
         run: CI=true npx playwright test --grep '@ci'    # Команда для запуска всех Playwright-тестов
 
-      # - name: Upload test report     # Шаг загрузки отчета о тестах
-      #   if: always()                 # Выполняем даже если предыдущие шаги упали
-      #   uses: actions/upload-artifact@v4  # Готовое действие для загрузки файлов-артефактов
-      #   with:                        # Настройки загрузки
-      #     name: playwright-report    # Имя артефакта
-      #     path: playwright-report/   # Путь к папке с отчетом Playwright
+      - name: Upload test report     # Шаг загрузки отчета о тестах
+        if: always()                 # Выполняем даже если предыдущие шаги упали
+        uses: actions/upload-artifact@v4  # Готовое действие для загрузки файлов-артефактов
+        with:                        # Настройки загрузки
+          name: playwright-report    # Имя артефакта
+          path: playwright-report/   # Путь к папке с отчетом Playwright
