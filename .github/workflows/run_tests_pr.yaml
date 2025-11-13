@@ -1,0 +1,37 @@
+name: Running automated tests on pr                # Название workflow — "Playwright Tests"
+
+on:                                  # Указываем, при каких событиях запускать workflow
+  push:                              # Запуск при push
+    branches: [ main ]               # Только при пушах в ветку main
+  pull_request:                      # И при создании pull request
+    branches: [ main ]               # Также только для ветки main
+
+jobs:                                # Описываем задания (jobs), которые будут выполняться
+  test:                              # Имя job — test
+    name: Run Playwright tests       # Человекочитаемое имя job
+    runs-on: ubuntu-latest           # Указываем, что запуск будет на последней версии Ubuntu
+
+    steps:                           # Последовательность шагов (steps) внутри job
+      - name: Checkout code          # Имя шага — "Checkout code"
+        uses: actions/checkout@v4    # Используем готовое действие для клонирования репозитория
+
+      - name: Setup Node.js          # Шаг установки Node.js
+        uses: actions/setup-node@v4  # Готовое действие от GitHub для установки Node.js
+        with:                        # Параметры для этого действия
+          node-version: 20           # Версия Node.js — 20
+
+      - name: Install dependencies   # Шаг установки зависимостей проекта
+        run: npm ci                  # Команда npm ci — быстрая установка зависимостей из package-lock.json
+
+      - name: Install Playwright browsers  # Шаг установки браузеров Playwright
+        run: npx playwright install --with-deps  # Устанавливаем браузеры и необходимые системные зависимости
+
+      - name: Run tests              # Шаг запуска тестов
+        run: npx playwright test --grep 'TOOLS-17'    # Команда для запуска всех Playwright-тестов
+
+      # - name: Upload test report     # Шаг загрузки отчета о тестах
+      #   if: always()                 # Выполняем даже если предыдущие шаги упали
+      #   uses: actions/upload-artifact@v4  # Готовое действие для загрузки файлов-артефактов
+      #   with:                        # Настройки загрузки
+      #     name: playwright-report    # Имя артефакта
+      #     path: playwright-report/   # Путь к папке с отчетом Playwright
