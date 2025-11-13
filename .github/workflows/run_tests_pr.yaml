@@ -21,7 +21,7 @@ jobs:                                # Описываем задания (jobs),
           node-version: 20           # Версия Node.js — 20
 
       - name: Install dependencies   # Шаг установки зависимостей проекта
-        run: npm ci                  # Команда npm ci — быстрая установка зависимостей из package-lock.json
+        run: npm install                  # Команда npm ci — быстрая установка зависимостей из package-lock.json
 
       - name: Install Playwright browsers  # Шаг установки браузеров Playwright
         run: npx playwright install --with-deps  # Устанавливаем браузеры и необходимые системные зависимости
