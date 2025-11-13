@@ -27,7 +27,7 @@ jobs:                                # Описываем задания (jobs),
         run: npx playwright install --with-deps  # Устанавливаем браузеры и необходимые системные зависимости
 
       - name: Run tests              # Шаг запуска тестов
-        run: npx playwright test --grep '@smoke'    # Команда для запуска всех Playwright-тестов
+        run: CI=true npx playwright test --grep '@smoke'    # Команда для запуска всех Playwright-тестов
 
       # - name: Upload test report     # Шаг загрузки отчета о тестах
       #   if: always()                 # Выполняем даже если предыдущие шаги упали
