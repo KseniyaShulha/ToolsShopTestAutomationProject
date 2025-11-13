@@ -1,4 +1,4 @@
-name: Running automated tests on pr                # Название workflow — "Playwright Tests"
+name: Running smoke tests on pr                # Название workflow — "Playwright Tests"
 
 on:                                  # Указываем, при каких событиях запускать workflow
   push:                              # Запуск при push
@@ -27,7 +27,7 @@ jobs:                                # Описываем задания (jobs),
         run: npx playwright install --with-deps  # Устанавливаем браузеры и необходимые системные зависимости
 
       - name: Run tests              # Шаг запуска тестов
-        run: npx playwright test --grep '@test'    # Команда для запуска всех Playwright-тестов
+        run: npx playwright test --grep '@smoke'    # Команда для запуска всех Playwright-тестов
 
       # - name: Upload test report     # Шаг загрузки отчета о тестах
       #   if: always()                 # Выполняем даже если предыдущие шаги упали
