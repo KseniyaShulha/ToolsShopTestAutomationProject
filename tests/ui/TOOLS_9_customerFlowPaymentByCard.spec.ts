@@ -8,45 +8,53 @@ test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer3.json"),
 });
 
-test("TOOLS-9 customer flow - payment by card", async ({ page }) => {
-  // Create instance of AppPageObjects
-  const appPageObjects: AppPageObjects = new AppPageObjects(page);
-  const steps: UserSteps = new UserSteps(page);
+test.describe(
+  "TOOLS_9_customerFlowPaymentByCard",
+  { tag: ["@ui", "@smoke", "@regression", "@payment"] },
+  () => {
+    test("Customer flow - payment by card", async ({ page }) => {
+      // Create instance of AppPageObjects
+      const appPageObjects: AppPageObjects = new AppPageObjects(page);
+      const steps: UserSteps = new UserSteps(page);
 
-  await page.goto("/");
+      await page.goto("/");
 
-  // Customer goes to home page, chooses an item, add it to shopping cart.
-  await steps.addRandomItemFromHomePageToCart();
+      // Customer goes to home page, chooses an item, add it to shopping cart.
+      await steps.addRandomItemFromHomePageToCart();
 
-  await appPageObjects.checkoutPage().proceedToPayment();
+      await appPageObjects.checkoutPage().proceedToPayment();
 
-  // Customer fills in billing data
-  await appPageObjects
-    .checkoutPage()
-    .fillInBillingData(
-      testData_TOOLS_9.billingData.street,
-      testData_TOOLS_9.billingData.city,
-      testData_TOOLS_9.billingData.state,
-      testData_TOOLS_9.billingData.country,
-      testData_TOOLS_9.billingData.postcode,
-    );
+      // Customer fills in billing data
+      await appPageObjects
+        .checkoutPage()
+        .fillInBillingData(
+          testData_TOOLS_9.billingData.street,
+          testData_TOOLS_9.billingData.city,
+          testData_TOOLS_9.billingData.state,
+          testData_TOOLS_9.billingData.country,
+          testData_TOOLS_9.billingData.postcode,
+        );
 
-  // Customer chooses paynment method
-  await appPageObjects.checkoutPage().selectPaymentMethod("credit-card");
+      // Customer chooses paynment method
+      await appPageObjects.checkoutPage().selectPaymentMethod("credit-card");
 
-  // Customer fills in credit card data
-  await appPageObjects
-    .checkoutPage()
-    .fillInCreditCardData(
-      testData_TOOLS_9.creditCard.creditCardNumber,
-      testData_TOOLS_9.creditCard.expirationDate,
-      testData_TOOLS_9.creditCard.cvvCode,
-      testData_TOOLS_9.creditCard.cardHolderName,
-    );
+      // Customer fills in credit card data
+      await appPageObjects
+        .checkoutPage()
+        .fillInCreditCardData(
+          testData_TOOLS_9.creditCard.creditCardNumber,
+          testData_TOOLS_9.creditCard.expirationDate,
+          testData_TOOLS_9.creditCard.cvvCode,
+          testData_TOOLS_9.creditCard.cardHolderName,
+        );
 
-  // Customer confirms payment
-  await appPageObjects.checkoutPage().clickConfirmPaymentButton();
+      // Customer confirms payment
+      await appPageObjects.checkoutPage().clickConfirmPaymentButton();
 
-  // Expect  succsess message is visible
-  await appPageObjects.checkoutPage().assertPaymentSuccsessMessageAppeared();
-});
+      // Expect  succsess message is visible
+      await appPageObjects
+        .checkoutPage()
+        .assertPaymentSuccsessMessageAppeared();
+    });
+  },
+);

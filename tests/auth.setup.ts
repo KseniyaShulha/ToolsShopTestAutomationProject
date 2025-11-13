@@ -73,7 +73,5 @@ for (const setupDataObj of setupDataArr) {
       JSON.stringify(rawObj, null, 2),
       "utf-8",
     );
-
-    // process.env.setupDataObj
   });
 }

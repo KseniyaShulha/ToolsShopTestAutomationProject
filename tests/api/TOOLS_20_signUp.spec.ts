@@ -4,40 +4,46 @@ import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signU
 
 let userID: any;
 
-test("TOOLS-20 POST users/register", async ({ request }) => {
-  // Create instance of UserApi
-  const userApi = new UsersApi(request);
+test.describe(
+  "TOOLS_20_signUp",
+  { tag: ["@api", "@smoke", "@regression", "@auth"] },
+  () => {
+    test("POST users/register", async ({ request }) => {
+      // Create instance of UserApi
+      const userApi = new UsersApi(request);
 
-  // Send post request /users/register and storing the response in variable
-  const signUpResponse: any = await userApi.postSignUp(
-    testData_TOOLS_20_signUp,
-  );
-  expect(signUpResponse.status()).toBe(201);
+      // Send post request /users/register and storing the response in variable
+      const signUpResponse: any = await userApi.postSignUp(
+        testData_TOOLS_20_signUp,
+      );
+      expect(signUpResponse.status()).toBe(201);
 
-  const signUpResponseBody = await signUpResponse.json();
+      const signUpResponseBody = await signUpResponse.json();
 
-  userID = signUpResponseBody.id;
-  console.log("\nuserID: ", userID);
+      userID = signUpResponseBody.id;
+      console.log("\nuserID: ", userID);
 
-  // Create loginBody var with creds
-  const loginBody = {
-    email: testData_TOOLS_20_signUp.email,
-    password: testData_TOOLS_20_signUp.password,
-  };
+      // Create loginBody var with creds
+      const loginBody = {
+        email: testData_TOOLS_20_signUp.email,
+        password: testData_TOOLS_20_signUp.password,
+      };
 
-  // // Send post request /users/login and storing the response in variable
-  const loginResponse = await userApi.postLogin(loginBody);
+      // // Send post request /users/login and storing the response in variable
+      const loginResponse = await userApi.postLogin(loginBody);
 
-  // Assert response status to be 200
-  expect(loginResponse.status()).toBe(200);
+      // Assert response status to be 200
+      expect(loginResponse.status()).toBe(200);
 
-  const loginData = await loginResponse.json();
+      const loginData = await loginResponse.json();
 
-  // Assert login token to be defined
-  expect(loginData.access_token).toBeDefined();
-});
+      // Assert login token to be defined
+      expect(loginData.access_token).toBeDefined();
+    });
 
-// afterEach hook to delete user
-test.afterEach(async ({ adminApi }) => {
-  await adminApi.deleteUser(userID);
-});
+    // afterEach hook to delete user
+    test.afterEach(async ({ adminApi }) => {
+      await adminApi.deleteUser(userID);
+    });
+  },
+);

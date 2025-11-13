@@ -8,37 +8,45 @@ test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer1.json"),
 });
 
-test("TOOLS-12 customer flow - payment by cash on delivery", async ({
-  page,
-}) => {
-  // Create instance of AppPageObjects
-  const appPageObjects: AppPageObjects = new AppPageObjects(page);
-  const steps: UserSteps = new UserSteps(page);
+test.describe(
+  "TOOLS_12_customerFlowPaymentByCashOnDelivery",
+  { tag: ["@ui", "@regression","@payment", "@smoke"] },
+  () => {
+    test("Customer flow - payment by cash on delivery", async ({ page }) => {
+      // Create instance of AppPageObjects
+      const appPageObjects: AppPageObjects = new AppPageObjects(page);
+      const steps: UserSteps = new UserSteps(page);
 
-  await page.goto("/");
+      await page.goto("/");
 
-  // Customer goes to home page, chooses an item, add it to shopping cart.
-  await steps.addRandomItemFromHomePageToCart();
+      // Customer goes to home page, chooses an item, add it to shopping cart.
+      await steps.addRandomItemFromHomePageToCart();
 
-  await appPageObjects.checkoutPage().proceedToPayment();
+      await appPageObjects.checkoutPage().proceedToPayment();
 
-  // Customer fills in billing data
-  await appPageObjects
-    .checkoutPage()
-    .fillInBillingData(
-      testData_TOOLS_12.billingData.street,
-      testData_TOOLS_12.billingData.city,
-      testData_TOOLS_12.billingData.state,
-      testData_TOOLS_12.billingData.country,
-      testData_TOOLS_12.billingData.postcode,
-    );
+      // Customer fills in billing data
+      await appPageObjects
+        .checkoutPage()
+        .fillInBillingData(
+          testData_TOOLS_12.billingData.street,
+          testData_TOOLS_12.billingData.city,
+          testData_TOOLS_12.billingData.state,
+          testData_TOOLS_12.billingData.country,
+          testData_TOOLS_12.billingData.postcode,
+        );
 
-  // Customer chooses paynment method
-  await appPageObjects.checkoutPage().selectPaymentMethod("cash-on-delivery");
+      // Customer chooses paynment method
+      await appPageObjects
+        .checkoutPage()
+        .selectPaymentMethod("cash-on-delivery");
 
-  // Customer confirms payment
-  await appPageObjects.checkoutPage().clickConfirmPaymentButton();
+      // Customer confirms payment
+      await appPageObjects.checkoutPage().clickConfirmPaymentButton();
 
-  // Expect  succsess message is visible
-  await appPageObjects.checkoutPage().assertPaymentSuccsessMessageAppeared();
-});
+      // Expect  succsess message is visible
+      await appPageObjects
+        .checkoutPage()
+        .assertPaymentSuccsessMessageAppeared();
+    });
+  },
+);

@@ -2,10 +2,10 @@ import { test, expect } from "../fixtures/fixtures";
 import { testData_login } from "../../testData/testData_login";
 
 test.describe(
-  "TOOLS_3_login",
-  { tag: ["@ui", "@smoke", "@regression", "@auth"] },
+  "TOOLS_99_login_visualTesting",
+  { tag: ["@ui", "@regression", "@auth"] },
   () => {
-    test("Login as customer", async ({ appPageObjects }) => {
+    test("Login as customer", async ({ appPageObjects, page }) => {
       await appPageObjects.homePage().openHomePage();
 
       await appPageObjects.homePage().clickSignInButton();
@@ -20,12 +20,8 @@ test.describe(
 
       await appPageObjects.loginPage().clickSubmitButton();
 
-      console.log("\nVerify that the customers name apears in id menu");
-      expect(
-        await appPageObjects.headerSection().getDropdownLoginValue(),
-      ).toContain(testData_login.userData.surname);
-
-      await appPageObjects.accountPage().waitPageUrlLoaded("account");
+      const loginForm = page.locator('[class="col-lg-6 auth-form"]');
+      await expect(loginForm).toHaveScreenshot();
     });
   },
 );
