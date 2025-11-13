@@ -5,7 +5,7 @@ import { loginApi } from "../../api/apiHelper";
 
 test.describe(
   "TOOLS_6_signUp",
-  { tag: ["@ui", "@smoke", "@regression", "@critical"] },
+  { tag: ["@ui", "@smoke", "@regression", "@auth"] },
   () => {
     test("Sign up as customer", async ({ page, request }) => {
       const appPageObjects = new AppPageObjects(page);

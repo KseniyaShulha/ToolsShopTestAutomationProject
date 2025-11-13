@@ -9,7 +9,7 @@ let cartId: any;
 
 test.describe(
   "TOOLS_21_cart",
-  { tag: ["@api", "@critical", "@regression"] },
+  { tag: ["@api", "@critical", "@regression", "@cart", "@smoke"] },
   () => {
     test.beforeEach(async ({ request }) => {
       const productApi = new ProductsApi(request);

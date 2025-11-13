@@ -3,7 +3,7 @@ import { testData_login } from "../../testData/testData_login";
 
 test.describe(
   "TOOLS_3_login",
-  { tag: ["@ui", "@smoke", "@regression", "@critical"] },
+  { tag: ["@ui", "@smoke", "@regression", "@auth"] },
   () => {
     test("Login as customer", async ({ appPageObjects }) => {
       await appPageObjects.homePage().openHomePage();

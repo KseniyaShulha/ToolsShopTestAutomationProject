@@ -4,7 +4,7 @@ import { testData_TOOLS_40 } from "../../testData/testData_TOOLS_40";
 
 test.describe(
   "TOOLS_40_paymentByBankTransferNegative",
-  { tag: ["@api", "@negative", "@regression"] },
+  { tag: ["@api", "@negative", "@regression", "@payment", "@smoke"] },
   () => {
     test("POST /api/payment/check (negative)", async ({ request }) => {
       // Create instance of UserApi
@@ -26,7 +26,7 @@ test.describe(
         // Assert response status
         expect
           .soft(postCheckPaymentResponse.status())
-          .toBe(testDataObj.expcetedStatus);
+          .toBe(testDataObj.expectedStatus);
 
         //Assert error message
         expect.soft(responseBody).toStrictEqual(testDataObj.responseBody);

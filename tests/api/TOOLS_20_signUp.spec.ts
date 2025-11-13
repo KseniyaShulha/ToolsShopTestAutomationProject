@@ -6,7 +6,7 @@ let userID: any;
 
 test.describe(
   "TOOLS_20_signUp",
-  { tag: ["@api", "@smoke", "@regression", "@critical"] },
+  { tag: ["@api", "@smoke", "@regression", "@auth"] },
   () => {
     test("POST users/register", async ({ request }) => {
       // Create instance of UserApi

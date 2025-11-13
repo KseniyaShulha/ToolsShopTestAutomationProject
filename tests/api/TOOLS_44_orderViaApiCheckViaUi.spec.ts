@@ -22,7 +22,7 @@ let cartId: any;
 
 test.describe(
   "TOOLS_44_orderViaApiCheckViaUi",
-  { tag: ["@api", "@integration", "@regression", "@critical"] },
+  { tag: ["@api", "@integration", "@regression", "@payment"] },
   () => {
     test("Proceed payment via API and check invoice via UI", async ({
       page,

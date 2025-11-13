@@ -6,8 +6,8 @@ let productsApi: any;
 
 test.describe(
   "TOOLS_34_getProductsWithQueryParameterCategory",
-  { tag: ["@api", "@regression"] },
-  async () => {
+  { tag: ["@api", "@regression", "@products"] },
+  () => {
     test.beforeEach(async ({ request }) => {
       // Create instance of ProductsApi
       productsApi = new ProductsApi(request);

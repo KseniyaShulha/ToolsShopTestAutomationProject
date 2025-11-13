@@ -10,7 +10,7 @@ test.use({
 
 test.describe(
   "TOOLS_14_customerFlowPaymentGiftCard",
-  { tag: ["@ui", "@regression"] },
+  { tag: ["@ui", "@regression", "@payment", "@smoke"] },
   () => {
     test("Customer flow - payment by gift card", async ({ page }) => {
       // Create instance of AppPageObjects

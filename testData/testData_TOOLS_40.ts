@@ -10,7 +10,7 @@ export const testData_TOOLS_40: any = [
       account_name: faker.finance.accountName(),
       account_number: faker.finance.accountNumber(),
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.emptyBankNameFieldError,
   },
   {
@@ -21,7 +21,7 @@ export const testData_TOOLS_40: any = [
       account_name: "",
       account_number: faker.finance.accountNumber(),
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.emptyAccountNameFieldError,
   },
   {
@@ -32,7 +32,7 @@ export const testData_TOOLS_40: any = [
       account_name: faker.finance.accountName(),
       account_number: "",
     },
-    expcetedStatus: 422,
+    expectedStatus: 422,
     responseBody: responseData.emptyAcccountNumberFieldError,
   },
 ];

@@ -10,7 +10,7 @@ test.use({
 
 test.describe(
   "TOOLS_11_customerFlowPaymentByBankTransfer",
-  { tag: ["@ui", "@regression"] },
+  { tag: ["@ui", "@regression", "@payment", "@smoke"] },
   () => {
     test("Customer flow - payment by bank transfer", async ({ page }) => {
       // Create instance of AppPageObjects

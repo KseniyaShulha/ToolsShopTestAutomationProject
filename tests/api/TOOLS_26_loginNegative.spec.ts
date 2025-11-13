@@ -1,10 +1,10 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, APIResponse } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
 import { testData_TOOLS_26 } from "../../testData/testData_TOOLS_26";
 
 test.describe(
   "TOOLS_26_loginNegative",
-  { tag: ["@api", "@negative", "@regression"] },
+  { tag: ["@api", "@negative", "@regression", "@auth"] },
   () => {
     test("POST users/login (negative)", async ({ request }) => {
       // Create instance of UserApi
@@ -14,7 +14,9 @@ test.describe(
         console.log("\nTesting with: ", testDataObj.scenarioName);
 
         // Send post request /users/login and storing the response in variable
-        const loginResponse: any = await userApi.postLogin(testDataObj.body);
+        const loginResponse: APIResponse = await userApi.postLogin(
+          testDataObj.body,
+        );
 
         // Assign body to var
         const responseBody = await loginResponse.json();

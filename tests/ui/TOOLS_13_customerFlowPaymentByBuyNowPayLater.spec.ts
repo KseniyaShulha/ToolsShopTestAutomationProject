@@ -10,7 +10,7 @@ test.use({
 
 test.describe(
   "TOOLS_13_customerFlowPaymentByBuyNowPayLater",
-  { tag: ["@ui", "@regression"] },
+  { tag: ["@ui", "@regression", "@payment", "@smoke"] },
   () => {
     test("Customer flow - payment by buy now pay later", async ({ page }) => {
       // Create instance of AppPageObjects

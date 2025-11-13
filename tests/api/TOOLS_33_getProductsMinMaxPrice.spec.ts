@@ -4,7 +4,7 @@ import { testData_TOOLS_33 } from "../../testData/testData_TOOLS_33";
 
 test.describe(
   "TOOLS_33_getProductsMinMaxPrice",
-  { tag: ["@api", "@regression"] },
+  { tag: ["@api", "@regression", "@products"] },
   () => {
     test("GET products/?q=params&between=min,max price", async ({
       request,

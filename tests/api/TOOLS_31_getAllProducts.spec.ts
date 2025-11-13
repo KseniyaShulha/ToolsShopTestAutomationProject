@@ -3,7 +3,7 @@ import { ProductsApi } from "../../api/productsApi";
 
 test.describe(
   "TOOLS_31_getAllProducts",
-  { tag: ["@api", "@smoke", "@regression"] },
+  { tag: ["@api", "@smoke", "@regression", "@products"] },
   () => {
     test("GET products/?p=params", async ({ request }) => {
       // Create instance of ProductsApi

@@ -11,7 +11,7 @@ let cartId: string;
 
 test.describe(
   "TOOLS_45_updateProductViaApiCheckViaUi",
-  { tag: ["@api", "@integration", "@regression"] },
+  { tag: ["@api", "@integration", "@regression", "@cart"] },
   () => {
     test("Update product quantity via API and check quantity via UI", async ({
       page,

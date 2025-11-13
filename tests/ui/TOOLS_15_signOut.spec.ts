@@ -6,7 +6,7 @@ test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer2.json"),
 });
 
-test.describe("TOOLS_15_signOut", { tag: ["@ui", "@regression"] }, () => {
+test.describe("TOOLS_15_signOut", { tag: ["@ui", "@regression", "@auth"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });

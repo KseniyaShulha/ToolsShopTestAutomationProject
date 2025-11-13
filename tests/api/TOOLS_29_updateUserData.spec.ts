@@ -10,8 +10,8 @@ let clonedTestDataObj: any = { ...testData_TOOLS_29.body };
 
 test.describe(
   "TOOLS_29_updateUserData",
-  { tag: ["@api", "@regression"] },
-  async () => {
+  { tag: ["@api", "@regression", "@user"] },
+  () => {
     test.beforeEach(async ({ request }) => {
       // Send Post request to sign in
       const responseBody = await signUpApi(testData_TOOLS_20_signUp, request);

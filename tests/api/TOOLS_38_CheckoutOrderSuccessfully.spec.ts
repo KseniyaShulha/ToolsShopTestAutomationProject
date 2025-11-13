@@ -6,7 +6,7 @@ import { testData_TOOLS_41 } from "../../testData/testData_TOOLS_41";
 
 test.describe(
   "TOOLS_38_CheckoutOrderSuccessfully",
-  { tag: ["@api", "@smoke", "@regression", "@critical"] },
+  { tag: ["@api", "@smoke", "@regression", "@payment"] },
   () => {
     // Test data for TOOLS-38 & TOOLS-39
     const testDataArr = [

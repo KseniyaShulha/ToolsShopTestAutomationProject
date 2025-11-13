@@ -10,7 +10,7 @@ import { AdminUsersPage } from "../../pages/adminUsers/adminUsers";
 
 test.describe(
   "TOOLS_47_deleteUserViaApiCheckViaUi",
-  { tag: ["@api", "@integration", "@regression"] },
+  { tag: ["@api", "@integration", "@regression", "@user"] },
   () => {
     test("Delete user via API check via UI", async ({
       page,

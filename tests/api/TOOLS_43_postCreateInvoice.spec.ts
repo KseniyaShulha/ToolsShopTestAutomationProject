@@ -11,7 +11,7 @@ let invoiceApi: any;
 
 test.describe(
   "TOOLS_43_postCreateInvoice",
-  { tag: ["@api", "@regression"] },
+  { tag: ["@api", "@regression", "@invoice"] },
   () => {
     test.beforeEach(async ({ request }) => {
       // Create instance of CartApi

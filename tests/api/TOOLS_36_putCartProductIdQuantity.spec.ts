@@ -2,6 +2,7 @@ import { test, expect } from "../fixtures/fixtures";
 import { getTokenFromJson } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 import { ProductsApi } from "../../api/productsApi";
+import { APIResponse } from "@playwright/test";
 
 let token: any;
 let cartId: any;
@@ -11,7 +12,7 @@ let cartApi: any;
 
 test.describe(
   "TOOLS_36_putCartProductIdQuantity",
-  { tag: ["@api", "@regression"] },
+  { tag: ["@api", "@regression", "@cart"] },
   () => {
     test.beforeEach(async ({ request }) => {
       productApi = new ProductsApi(request);
@@ -60,13 +61,13 @@ test.describe(
     });
 
     test("PUT carts/cartId/itemId/quantity", async () => {
-      const newQuantity: any = {
+      const newQuantity: { product_id: string; quantity: number } = {
         product_id: testData_TOOLS_36.product_id,
         quantity: 3,
       };
 
       // Update quantity of products
-      const updateResponse: any = await cartApi.putUpdateQuantity(
+      const updateResponse: APIResponse = await cartApi.putUpdateQuantity(
         token,
         cartId,
         newQuantity,
