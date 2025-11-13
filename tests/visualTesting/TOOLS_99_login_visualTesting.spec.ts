@@ -5,7 +5,7 @@ test.describe(
   "TOOLS_99_login_visualTesting",
   { tag: ["@ui", "@regression", "@auth"] },
   () => {
-    test("Login as customer", async ({ appPageObjects, page }) => {
+    test("Login visual testing", async ({ appPageObjects, page }) => {
       await appPageObjects.homePage().openHomePage();
 
       await appPageObjects.homePage().clickSignInButton();
