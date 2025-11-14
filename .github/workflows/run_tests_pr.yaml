@@ -42,7 +42,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "Playwright tests are completed. Status: ${{ job.status }}. Rerort as artifact. Enviroment: ${{ process.env.ENVIROMENT }}",
+              "text": "Playwright tests are completed. Status: ${{ job.status }}. Rerort as artifact. Enviroment: ${{ env.ENVIROMENT }}",
               "attachments": [
                 {
                   "color": "${{ job.status == 'success' && '#36a64f' || '#ff0000' }}",
