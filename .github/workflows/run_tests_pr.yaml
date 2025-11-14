@@ -42,14 +42,55 @@ jobs:
         with:
           payload: |
             {
-              "text": "Playwright tests are completed. Status: ${{ job.status }}. Rerort as artifact. Enviroment: ${{ env.ENVIROMENT }}",
-              "attachments": [
+              "blocks": [
                 {
-                  "color": "${{ job.status == 'success' && '#36a64f' || '#ff0000' }}",
-                  "title": "Playwright Report",
-                  "title_link": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "⚙️ QA Automation",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Status:* ${{ job.status == 'success' && 'PASSED 🟩' || 'FAILED 🟥' }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Test Report Name:*\nPlaywright Report"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Environment:*\n${{ env.ENVIRONMENT }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered by:*\n${{ github.actor }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*📄 Playwright Report:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts|Click to open report>"
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "Repository: `${{ github.repository }}`  •  Branch: `${{ github.ref_name }}`"
+                    }
+                  ]
                 }
               ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          ENVIRONMENT: CI
+
