@@ -41,60 +41,7 @@ jobs:
         uses: slackapi/slack-github-action@v1.25.0
         with:
           payload: |
-            {
-            "text": "⚙️ QA Automation: Playwright tests completed",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "⚙️ QA Automation",
-                    "emoji": true
-                  }
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Status:* ${{ job.status == 'success' && 'PASSED 🟩' || 'FAILED 🟥' }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Test Report Name:*\nPlaywright Report"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Environment:*\nCI"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Triggered by:*\n${{ github.actor || 'unknown' }}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*📄 Playwright Report:*\n<${{ github.server_url || 'https://github.com' }}/${{ github.repository || 'unknown/unknown' }}/actions/runs/${{ github.run_id || '0' }}#artifacts|Click to open report>"
-                  }
-                },
-                {
-                  "type": "context",
-                  "elements": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "Repository: `${{ github.repository || 'unknown/unknown' }}`  •  Branch: `${{ github.ref_name || 'main' }}`"
-                    }
-                  ]
-                }
-              ]
-            }
+            status: "${{ job.status }}"
+            option: "false"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
