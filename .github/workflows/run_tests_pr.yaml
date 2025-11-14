@@ -1,4 +1,4 @@
-name: Running smoke tests on pr
+name: Running playwright tests on pr
 
 on:
   push:
@@ -61,7 +61,12 @@ jobs:
                     {
                       "type": "mrkdwn",
                       "text": "*Test Report Name:*\nPlaywright Report"
-                    },
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
                     {
                       "type": "mrkdwn",
                       "text": "*Environment:*\n${{ env.ENVIRONMENT }}"
@@ -93,4 +98,3 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           ENVIRONMENT: CI
-
