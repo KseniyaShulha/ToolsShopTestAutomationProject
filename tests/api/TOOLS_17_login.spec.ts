@@ -3,7 +3,7 @@ import { UsersApi } from "../../api/usersApi";
 
 test.describe(
   "TOOLS_17_login",
-  { tag: ["@api", "@smoke", "@regression", "@auth"] },
+  { tag: ["@api", "@smoke", "@regression", "@auth", "@ci"] },
   () => {
     // Test data for TOOLS-17 & TOOLS-18
     const testDataArr = [
