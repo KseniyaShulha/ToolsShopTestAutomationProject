@@ -42,6 +42,7 @@ jobs:
         with:
           payload: |
             {
+            "text": "⚙️ QA Automation: Playwright tests completed",
               "blocks": [
                 {
                   "type": "header",
