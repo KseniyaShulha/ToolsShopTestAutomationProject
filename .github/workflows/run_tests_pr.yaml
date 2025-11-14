@@ -69,7 +69,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Environment:*\n${{ env.ENVIRONMENT || 'CI' }}"
+                      "text": "*Environment:*\nCI"
                     },
                     {
                       "type": "mrkdwn",
@@ -89,7 +89,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": "Repository: `${{ github.repository || 'unknown/unknown' }}`  •  Branch: `${{ github.ref_name || 'unknown' }}`"
+                      "text": "Repository: `${{ github.repository || 'unknown/unknown' }}`  •  Branch: `${{ github.ref_name || 'main' }}`"
                     }
                   ]
                 }
