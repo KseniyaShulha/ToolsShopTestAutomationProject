@@ -1,100 +1,62 @@
-name: Running playwright tests on pr
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test:
-    name: Run Playwright tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
-      - name: Run tests
-        run: CI=true npx playwright test --grep '@invoice'
-
-      - name: Upload test report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
-
-      - name: Send report to Slack
-        if: always()
-        uses: slackapi/slack-github-action@v1.25.0
-        with:
-          payload: |
-            {
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "⚙️ QA Automation",
-                    "emoji": true
-                  }
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Status:* ${{ job.status == 'success' && 'PASSED 🟩' || 'FAILED 🟥' }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Test Report Name:*\nPlaywright Report"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Environment:*\n${{ env.ENVIRONMENT }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Triggered by:*\n${{ github.actor }}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*📄 Playwright Report:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts|Click to open report>"
-                  }
-                },
-                {
-                  "type": "context",
-                  "elements": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "Repository: `${{ github.repository }}`  •  Branch: `${{ github.ref_name }}`"
-                    }
-                  ]
-                }
-              ]
+- name: Send report to Slack
+  if: always()
+  uses: slackapi/slack-github-action@v1.25.0
+  with:
+    payload: |
+      {
+        "blocks": [
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "⚙️ QA Automation",
+              "emoji": true
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          ENVIRONMENT: CI
+          },
+          {
+            "type": "section",
+            "fields": [
+              {
+                "type": "mrkdwn",
+                "text": "*Status:* ${{ job.status == 'success' && 'PASSED 🟩' || 'FAILED 🟥' }}"
+              },
+              {
+                "type": "mrkdwn",
+                "text": "*Test Report Name:*\nPlaywright Report"
+              }
+            ]
+          },
+          {
+            "type": "section",
+            "fields": [
+              {
+                "type": "mrkdwn",
+                "text": "*Environment:*\n${{ env.ENVIRONMENT }}"
+              },
+              {
+                "type": "mrkdwn",
+                "text": "*Triggered by:*\n${{ github.actor }}"
+              }
+            ]
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*📄 Playwright Report:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts|Click to open report>"
+            }
+          },
+          {
+            "type": "context",
+            "elements": [
+              {
+                "type": "mrkdwn",
+                "text": "Repository: `${{ github.repository }}`  •  Branch: `${{ github.ref_name }}`"
+              }
+            ]
+          }
+        ]
+      }
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    ENVIRONMENT: CI
