@@ -1,37 +1,55 @@
-name: Running smoke tests on pr                # Название workflow — "Playwright Tests"
+name: Running smoke tests on pr
 
-on:                                  # Указываем, при каких событиях запускать workflow
-  push:                              # Запуск при push
-    branches: [ main ]               # Только при пушах в ветку main
-  pull_request:                      # И при создании pull request
-    branches: [ main ]               # Также только для ветки main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-jobs:                                # Описываем задания (jobs), которые будут выполняться
-  test:                              # Имя job — test
-    name: Run Playwright tests       # Человекочитаемое имя job
-    runs-on: ubuntu-latest           # Указываем, что запуск будет на последней версии Ubuntu
+jobs:
+  test:
+    name: Run Playwright tests
+    runs-on: ubuntu-latest
 
-    steps:                           # Последовательность шагов (steps) внутри job
-      - name: Checkout code          # Имя шага — "Checkout code"
-        uses: actions/checkout@v4    # Используем готовое действие для клонирования репозитория
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js          # Шаг установки Node.js
-        uses: actions/setup-node@v4  # Готовое действие от GitHub для установки Node.js
-        with:                        # Параметры для этого действия
-          node-version: 20           # Версия Node.js — 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Install dependencies   # Шаг установки зависимостей проекта
-        run: npm install                  # Команда npm ci — быстрая установка зависимостей из package-lock.json
+      - name: Install dependencies
+        run: npm install
 
-      - name: Install Playwright browsers  # Шаг установки браузеров Playwright
-        run: npx playwright install --with-deps  # Устанавливаем браузеры и необходимые системные зависимости
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
-      - name: Run tests              # Шаг запуска тестов
-        run: CI=true npx playwright test --grep '@ci'    # Команда для запуска всех Playwright-тестов
+      - name: Run tests
+        run: CI=true npx playwright test --grep '@invoice'
 
-      - name: Upload test report     # Шаг загрузки отчета о тестах
-        if: always()                 # Выполняем даже если предыдущие шаги упали
-        uses: actions/upload-artifact@v4  # Готовое действие для загрузки файлов-артефактов
-        with:                        # Настройки загрузки
-          name: playwright-report    # Имя артефакта
-          path: playwright-report/   # Путь к папке с отчетом Playwright
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Send report to Slack
+        if: always()
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          payload: |
+            {
+              "text": "Playwright tests are completed. Status: ${{ job.status }}. Rerort as artifact. Enviroment: ${{ process.env.ENVIROMENT }}",
+              "attachments": [
+                {
+                  "color": "${{ job.status == 'success' && '#36a64f' || '#ff0000' }}",
+                  "title": "Playwright Report",
+                  "title_link": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
