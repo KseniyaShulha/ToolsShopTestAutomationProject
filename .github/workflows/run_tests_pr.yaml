@@ -1,4 +1,4 @@
-name: Running Playwright tests on PR
+name: Running Playwright tests on PR 
 
 on:
   push:
@@ -39,28 +39,39 @@ jobs:
       - name: Send report to Slack
         if: always()
         run: |
+          STATUS="${{ job.status }}"
+          if [ "$STATUS" = "success" ]; then
+            STATUS_TEXT="PASSED 🟩"
+          else
+            STATUS_TEXT="FAILED 🟥"
+          fi
+
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          REPORT_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts"
+
           curl -X POST -H "Content-type: application/json" -d "{
-            \"text\": \"⚙️ QA Automation: Playwright tests completed\",
+            \"text\": \"Playwright tests result\",
             \"blocks\": [
               {
                 \"type\": \"header\",
                 \"text\": {
                   \"type\": \"plain_text\",
-                  \"text\": \"⚙️ QA Automation\",
+                  \"text\": \"🚦 Playwright Test Report\",
                   \"emoji\": true
                 }
               },
               {
                 \"type\": \"section\",
                 \"fields\": [
-                  {\"type\": \"mrkdwn\", \"text\": \"*Status:* ${{ job.status == 'success' && 'PASSED 🟩' || 'FAILED 🟥' }}\"},
-                  {\"type\": \"mrkdwn\", \"text\": \"*Test Report Name:*\nPlaywright Report\"}
+                  {\"type\": \"mrkdwn\", \"text\": \"*PR Name:*\n${PR_TITLE}\"},
+                  {\"type\": \"mrkdwn\", \"text\": \"*Commit:*\n${COMMIT_MSG}\"}
                 ]
               },
               {
                 \"type\": \"section\",
                 \"fields\": [
-                  {\"type\": \"mrkdwn\", \"text\": \"*Environment:*\nCI\"},
+                  {\"type\": \"mrkdwn\", \"text\": \"*Status:*\n${STATUS_TEXT}\"},
                   {\"type\": \"mrkdwn\", \"text\": \"*Triggered by:*\n${{ github.actor }}\"}
                 ]
               },
@@ -68,7 +79,7 @@ jobs:
                 \"type\": \"section\",
                 \"text\": {
                   \"type\": \"mrkdwn\",
-                  \"text\": \"*📄 Playwright Report:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts|Click to open report>\"
+                  \"text\": \"*📄 Playwright Report:*\n<${REPORT_URL}|Click to open report>\"
                 }
               },
               {
