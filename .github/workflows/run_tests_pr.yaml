@@ -48,7 +48,6 @@ jobs:
 
           PR_TITLE="${{ github.event.pull_request.title }}"
           
-          # Получаем сообщение коммита в зависимости от события
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             COMMIT_MSG=$(git log -1 --pretty=format:'%s' ${{ github.event.pull_request.head.sha }})
           else
