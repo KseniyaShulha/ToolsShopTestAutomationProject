@@ -47,7 +47,14 @@ jobs:
           fi
 
           PR_TITLE="${{ github.event.pull_request.title }}"
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          
+          # Получаем сообщение коммита в зависимости от события
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            COMMIT_MSG=$(git log -1 --pretty=format:'%s' ${{ github.event.pull_request.head.sha }})
+          else
+            COMMIT_MSG="${{ github.event.head_commit.message }}"
+          fi
+
           REPORT_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts"
 
           curl -X POST -H "Content-type: application/json" -d "{
