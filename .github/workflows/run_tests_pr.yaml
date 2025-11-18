@@ -5,7 +5,20 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+  workflow_dispatch:
+    inputs:
+      input_env:
+          type: choice
+          description: "Environment"
+          options: 
+          - "staging"
+          - "integration"
+          default: "staging"
+      input_scope_to_run:
+        type: field
+        description: "Scope to run"
+        default: "@invoice"
+          
 jobs:
   test:
     name: Run Playwright tests
@@ -29,7 +42,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: CI=true npx playwright test --grep '@invoice'
+        run: CI=true ENVIRONMENT="$ENVIRONMENT npx playwright test --grep "$SCOPE"
 
       - name: Upload test report
         if: always()
@@ -72,28 +85,47 @@ jobs:
               {
                 \"type\": \"section\",
                 \"fields\": [
-                  {\"type\": \"mrkdwn\", \"text\": \"*PR Name:*\n${PR_TITLE}\"},
-                  {\"type\": \"mrkdwn\", \"text\": \"*Commit:*\n${COMMIT_MSG}\"}
+                  {
+                    \"type\": \"mrkdwn\",
+                    \"text\": \"*PR Name:*\\n${PR_TITLE}\"
+                  },
+                  {
+                    \"type\": \"mrkdwn\",
+                    \"text\": \"*Environment:*\\n${ENVIRONMENT}\"
+                  },
+                  {
+                    \"type\": \"mrkdwn\",
+                    \"text\": \"*Commit:*\\n${COMMIT_MSG}\"
+                  }
                 ]
               },
               {
                 \"type\": \"section\",
                 \"fields\": [
-                  {\"type\": \"mrkdwn\", \"text\": \"*Status:*\n${STATUS_TEXT}\"},
-                  {\"type\": \"mrkdwn\", \"text\": \"*Triggered by:*\n${{ github.actor }}\"}
+                  {
+                    \"type\": \"mrkdwn\",
+                    \"text\": \"*Status:*\\n${STATUS_TEXT}\"
+                  },
+                  {
+                    \"type\": \"mrkdwn\",
+                    \"text\": \"*Triggered by:*\\n${{ github.actor }}\"
+                  }
                 ]
               },
               {
                 \"type\": \"section\",
                 \"text\": {
                   \"type\": \"mrkdwn\",
-                  \"text\": \"*📄 Playwright Report:*\n<${REPORT_URL}|Click to open report>\"
+                  \"text\": \"*📄 Playwright Report:*\\n<${REPORT_URL}|Click to open report>\"
                 }
               },
               {
                 \"type\": \"context\",
                 \"elements\": [
-                  {\"type\": \"mrkdwn\", \"text\": \"Repository: '${{ github.repository }}'  •  Branch: '${{ github.ref_name }}'\"}
+                  {
+                    \"type\": \"mrkdwn\",
+                    \"text\": \"Repository: '${{ github.repository }}'  •  Branch: '${{ github.ref_name }}'\"
+                  }
                 ]
               }
             ]
@@ -104,3 +136,5 @@ jobs:
           PR_TITLE_VAR: ${{ github.event.pull_request.title }}
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
+          ENVIRONMENT: ${{ inputs.input_env || "staging" }}
+          SCOPE: ${{ inputs.input_scope_to_run || "@invoice" }}
