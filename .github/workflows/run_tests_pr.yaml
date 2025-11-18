@@ -1,0 +1,106 @@
+name: Running Playwright tests on PR 
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run Playwright tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run tests
+        run: CI=true npx playwright test --grep '@invoice'
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Send report to Slack
+        if: always()
+        run: |
+          STATUS="$JOB_STATUS"
+          if [ "$STATUS" = "success" ]; then
+            STATUS_TEXT="PASSED 🟩"
+          else
+            STATUS_TEXT="FAILED 🟥"
+          fi
+
+          PR_TITLE="$PR_TITLE_VAR"
+          
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            COMMIT_MSG=$(git log -1 --pretty=format:'%s' "$COMMIT_SHA")
+          else
+            COMMIT_MSG="$HEAD_COMMIT_MSG"
+          fi
+
+          REPORT_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts"
+
+          curl -X POST -H "Content-type: application/json" -d "{
+            \"text\": \"Playwright tests result\",
+            \"blocks\": [
+              {
+                \"type\": \"header\",
+                \"text\": {
+                  \"type\": \"plain_text\",
+                  \"text\": \"🚦 Playwright Test Report\",
+                  \"emoji\": true
+                }
+              },
+              {
+                \"type\": \"section\",
+                \"fields\": [
+                  {\"type\": \"mrkdwn\", \"text\": \"*PR Name:*\n${PR_TITLE}\"},
+                  {\"type\": \"mrkdwn\", \"text\": \"*Commit:*\n${COMMIT_MSG}\"}
+                ]
+              },
+              {
+                \"type\": \"section\",
+                \"fields\": [
+                  {\"type\": \"mrkdwn\", \"text\": \"*Status:*\n${STATUS_TEXT}\"},
+                  {\"type\": \"mrkdwn\", \"text\": \"*Triggered by:*\n${{ github.actor }}\"}
+                ]
+              },
+              {
+                \"type\": \"section\",
+                \"text\": {
+                  \"type\": \"mrkdwn\",
+                  \"text\": \"*📄 Playwright Report:*\n<${REPORT_URL}|Click to open report>\"
+                }
+              },
+              {
+                \"type\": \"context\",
+                \"elements\": [
+                  {\"type\": \"mrkdwn\", \"text\": \"Repository: '${{ github.repository }}'  •  Branch: '${{ github.ref_name }}'\"}
+                ]
+              }
+            ]
+          }" $SLACK_WEBHOOK_URL
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_STATUS: ${{ job.status }}
+          PR_TITLE_VAR: ${{ github.event.pull_request.title }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
