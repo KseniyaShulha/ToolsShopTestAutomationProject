@@ -8,7 +8,7 @@ let token: any;
 let cartId: any;
 
 test.describe(
-  "TOOLS_21_cart",
+  "Cart",
   { tag: ["@api", "@critical", "@regression", "@cart", "@smoke"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -35,7 +35,7 @@ test.describe(
       token = await getTokenFromJson("customer2");
     });
 
-    test("POST carts/itemId", async ({ request }) => {
+    test("TOOLS_21 POST carts/itemId", async ({ request }) => {
       // Create instance of CartApi
       const cartApi = new CartApi(request);
 

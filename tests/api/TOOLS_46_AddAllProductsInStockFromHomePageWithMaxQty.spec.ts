@@ -10,10 +10,10 @@ let cartId: any;
 let cartApi: any;
 
 test.describe(
-  "TOOLS_46_AddAllProductsInStockFromHomePageWithMaxQty",
+  "AddAllProductsInStockFromHomePageWithMaxQty",
   { tag: ["@api", "@regression", "@cart"] },
   () => {
-    test("Add each product from home page with in_stock true from homepage via API and check cart via UI", async ({
+    test("TOOLS_46 Add each product from home page with in_stock true from homepage via API and check cart via UI", async ({
       page,
       request,
     }) => {

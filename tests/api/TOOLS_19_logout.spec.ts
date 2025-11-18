@@ -5,7 +5,7 @@ import { getTokenFromJson } from "../../api/apiHelper";
 let token: any;
 
 test.describe(
-  "TOOLS_19_logout",
+  "Logout",
   { tag: ["@api", "@regression", "@auth"] },
   () => {
     test.beforeEach(async () => {
@@ -14,7 +14,7 @@ test.describe(
       console.log("\nToken", token);
     });
 
-    test("GET users/logout", async ({ request }) => {
+    test("TOOLS_19 GET users/logout", async ({ request }) => {
       // Create instance of UserApi
       const userApi = new UsersApi(request);
 

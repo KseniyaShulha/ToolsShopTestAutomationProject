@@ -21,10 +21,10 @@ dayjs.extend(utc);
 let cartId: any;
 
 test.describe(
-  "TOOLS_44_orderViaApiCheckViaUi",
+  "OrderViaApiCheckViaUi",
   { tag: ["@api", "@integration", "@regression", "@payment"] },
   () => {
-    test("Proceed payment via API and check invoice via UI", async ({
+    test("TOOLS_44 Proceed payment via API and check invoice via UI", async ({
       page,
       request,
     }) => {

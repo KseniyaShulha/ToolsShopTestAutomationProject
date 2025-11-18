@@ -5,7 +5,7 @@ let categoryId: any;
 let productsApi: any;
 
 test.describe(
-  "TOOLS_34_getProductsWithQueryParameterCategory",
+  "GetProductsWithQueryParameterCategory",
   { tag: ["@api", "@regression", "@products"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -27,7 +27,7 @@ test.describe(
       categoryId = responseBody.data[0].category.id;
     });
 
-    test("GET products/?by_category=", async () => {
+    test("TOOLS_34 GET products/?by_category=", async () => {
       const getProductsByCategoryResponse = await productsApi.getProducts(
         `?by_category=${categoryId}`,
       );

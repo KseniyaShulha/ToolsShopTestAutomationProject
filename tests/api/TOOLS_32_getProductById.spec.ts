@@ -5,7 +5,7 @@ let productId: any;
 let productsApi: any;
 
 test.describe(
-  "TOOLS_32_getProductById",
+  "GetProductById",
   { tag: ["@api", "@regression", "@products"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -21,7 +21,7 @@ test.describe(
       productId = responseBody.data[0].id;
     });
 
-    test("GET products/productId", async () => {
+    test("TOOLS_32 GET products/productId", async () => {
       // Send get request with querry params and save response in var
       const getProductByIDResponse =
         await productsApi.getProductByID(productId);

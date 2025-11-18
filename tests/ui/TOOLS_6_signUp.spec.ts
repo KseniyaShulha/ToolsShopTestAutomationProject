@@ -4,10 +4,10 @@ import { AppPageObjects } from "../../pages/appPageObjects";
 import { loginApi } from "../../api/apiHelper";
 
 test.describe(
-  "TOOLS_6_signUp",
+  "SignUp",
   { tag: ["@ui", "@smoke", "@regression", "@auth"] },
   () => {
-    test("Sign up as customer", async ({ page, request }) => {
+    test("TOOLS_6 Sign up as customer", async ({ page, request }) => {
       const appPageObjects = new AppPageObjects(page);
 
       console.log("\nCustomer opens the home page");

@@ -5,7 +5,7 @@ let product: any;
 let productsApi: ProductsApi;
 
 test.describe(
-  "TOOLS_35_getProductsWithQueryParameterSearch",
+  "GetProductsWithQueryParameterSearch",
   { tag: ["@api", "@regression", "@products"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -25,7 +25,7 @@ test.describe(
       );
     });
 
-    test("GET products/search?q=", async () => {
+    test("TOOLS_35 GET products/search?q=", async () => {
       const searchCombinations = [
         product.name,
         product.name.split(" ")[0],

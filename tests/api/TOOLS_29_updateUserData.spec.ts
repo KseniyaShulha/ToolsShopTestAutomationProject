@@ -9,7 +9,7 @@ let userID: any;
 let clonedTestDataObj: any = { ...testData_TOOLS_29.body };
 
 test.describe(
-  "TOOLS_29_updateUserData",
+  "UpdateUserData",
   { tag: ["@api", "@regression", "@user"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -33,7 +33,7 @@ test.describe(
       clonedTestDataObj.password = testData_TOOLS_20_signUp.password;
     });
 
-    test("PUT users/userId", async ({ request }) => {
+    test("TOOLS_29 PUT users/userId", async ({ request }) => {
       // Create instance of UserApi
       const userApi = new UsersApi(request);
 

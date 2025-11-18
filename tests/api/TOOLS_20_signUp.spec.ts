@@ -5,10 +5,10 @@ import { testData_TOOLS_20_signUp } from "../../testData/testData_TOOLS_20_signU
 let userID: any;
 
 test.describe(
-  "TOOLS_20_signUp",
+  "SignUp",
   { tag: ["@api", "@smoke", "@regression", "@auth"] },
   () => {
-    test("POST users/register", async ({ request }) => {
+    test("TOOLS_20 POST users/register", async ({ request }) => {
       // Create instance of UserApi
       const userApi = new UsersApi(request);
 

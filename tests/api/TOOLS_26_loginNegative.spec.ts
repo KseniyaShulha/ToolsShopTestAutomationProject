@@ -3,10 +3,10 @@ import { UsersApi } from "../../api/usersApi";
 import { testData_TOOLS_26 } from "../../testData/testData_TOOLS_26";
 
 test.describe(
-  "TOOLS_26_loginNegative",
+  "LoginNegative",
   { tag: ["@api", "@negative", "@regression", "@auth"] },
   () => {
-    test("POST users/login (negative)", async ({ request }) => {
+    test("TOOLS_26 POST users/login (negative)", async ({ request }) => {
       // Create instance of UserApi
       const userApi = new UsersApi(request);
 
