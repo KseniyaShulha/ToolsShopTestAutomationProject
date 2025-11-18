@@ -10,10 +10,10 @@ import { ProductsApi } from "../../api/productsApi";
 let cartId: string;
 
 test.describe(
-  "TOOLS_45_updateProductViaApiCheckViaUi",
+  "UpdateProductViaApiCheckViaUi",
   { tag: ["@api", "@integration", "@regression", "@cart"] },
   () => {
-    test("Update product quantity via API and check quantity via UI", async ({
+    test("TOOLS_45 Update product quantity via API and check quantity via UI", async ({
       page,
       request,
     }) => {

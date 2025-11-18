@@ -11,7 +11,7 @@ let testData_TOOLS_36: any;
 let cartApi: any;
 
 test.describe(
-  "TOOLS_36_putCartProductIdQuantity",
+  "PutCartProductIdQuantity",
   { tag: ["@api", "@regression", "@cart"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -60,7 +60,7 @@ test.describe(
       expect(addToCartResponse.status()).toBe(200);
     });
 
-    test("PUT carts/cartId/itemId/quantity", async () => {
+    test("TOOLS_36 PUT carts/cartId/itemId/quantity", async () => {
       const newQuantity: { product_id: string; quantity: number } = {
         product_id: testData_TOOLS_36.product_id,
         quantity: 3,

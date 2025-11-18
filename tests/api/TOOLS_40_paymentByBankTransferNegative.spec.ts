@@ -3,10 +3,10 @@ import { PaymentApi } from "../../api/paymentApi";
 import { testData_TOOLS_40 } from "../../testData/testData_TOOLS_40";
 
 test.describe(
-  "TOOLS_40_paymentByBankTransferNegative",
+  "PaymentByBankTransferNegative",
   { tag: ["@api", "@negative", "@regression", "@payment", "@smoke"] },
   () => {
-    test("POST /api/payment/check (negative)", async ({ request }) => {
+    test("TOOLS_40 POST /api/payment/check (negative)", async ({ request }) => {
       // Create instance of UserApi
       const paymentApi = new PaymentApi(request);
 

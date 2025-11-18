@@ -7,14 +7,14 @@ test.use({
 });
 
 test.describe(
-  "TOOLS_15_signOut",
+  "SignOut",
   { tag: ["@ui", "@regression", "@auth"] },
   () => {
     test.beforeEach(async ({ page }) => {
       await page.goto("/");
     });
 
-    test("LogOut", async ({ page }) => {
+    test("TOOLS_15 LogOut", async ({ page }) => {
       const steps: UserSteps = new UserSteps(page);
       await steps.signOut();
     });

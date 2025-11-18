@@ -9,10 +9,10 @@ test.use({
 });
 
 test.describe(
-  "TOOLS_14_customerFlowPaymentGiftCard",
+  "CustomerFlowPaymentGiftCard",
   { tag: ["@ui", "@regression", "@payment", "@smoke"] },
   () => {
-    test("Customer flow - payment by gift card", async ({ page }) => {
+    test("TOOLS_14 Customer flow - payment by gift card", async ({ page }) => {
       // Create instance of AppPageObjects
       const appPageObjects: AppPageObjects = new AppPageObjects(page);
       const steps: UserSteps = new UserSteps(page);

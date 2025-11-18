@@ -2,20 +2,20 @@ import { test, expect } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
 
 test.describe(
-  "TOOLS_17_login",
+  "Login",
   { tag: ["@api", "@smoke", "@regression", "@auth", "@ci"] },
   () => {
     // Test data for TOOLS-17 & TOOLS-18
     const testDataArr = [
       {
-        testName: "POST users/login (customer)",
+        testName: "TOOLS_17 POST users/login (customer)",
         creds: {
           email: process.env.CUSTOMER_2_EMAIL,
           password: process.env.CUSTOMER_2_PASSWORD,
         },
       },
       {
-        testName: "POST users/login (admin)",
+        testName: "TOOLS_17 POST users/login (admin)",
         creds: {
           email: process.env.ADMIN_EMAIL,
           password: process.env.ADMIN_PASSWORD,

@@ -9,10 +9,10 @@ test.use({
 });
 
 test.describe(
-  "TOOLS_13_customerFlowPaymentByBuyNowPayLater",
+  "CustomerFlowPaymentByBuyNowPayLater",
   { tag: ["@ui", "@regression", "@payment", "@smoke"] },
   () => {
-    test("Customer flow - payment by buy now pay later", async ({ page }) => {
+    test("TOOLS_13 Customer flow - payment by buy now pay later", async ({ page }) => {
       // Create instance of AppPageObjects
       const appPageObjects: AppPageObjects = new AppPageObjects(page);
       const steps: UserSteps = new UserSteps(page);

@@ -10,7 +10,7 @@ let cartApi: any;
 let invoiceApi: any;
 
 test.describe(
-  "TOOLS_43_postCreateInvoice",
+  "PostCreateInvoice",
   { tag: ["@api", "@regression", "@invoice"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -36,7 +36,7 @@ test.describe(
       testData_TOOLS_43.cart_id = cartId;
     });
 
-    test("POST api/invoice", async ({ request }) => {
+    test("TOOLS_43 POST api/invoice", async ({ request }) => {
       // Create instance of InvoiceApi
       invoiceApi = new InvoicesApi(request);
 

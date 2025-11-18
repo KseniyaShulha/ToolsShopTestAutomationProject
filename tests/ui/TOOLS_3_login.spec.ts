@@ -2,10 +2,10 @@ import { test, expect } from "../fixtures/fixtures";
 import { testData_login } from "../../testData/testData_login";
 
 test.describe(
-  "TOOLS_3_login",
+  "Login",
   { tag: ["@ui", "@smoke", "@regression", "@auth"] },
   () => {
-    test("Login as customer", async ({ appPageObjects }) => {
+    test("TOOLS_3 Login as customer", async ({ appPageObjects }) => {
       await appPageObjects.homePage().openHomePage();
 
       await appPageObjects.homePage().clickSignInButton();

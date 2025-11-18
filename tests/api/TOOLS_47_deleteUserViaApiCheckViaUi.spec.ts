@@ -9,10 +9,10 @@ import { Header } from "../../pages/header/header";
 import { AdminUsersPage } from "../../pages/adminUsers/adminUsers";
 
 test.describe(
-  "TOOLS_47_deleteUserViaApiCheckViaUi",
+  "DeleteUserViaApiCheckViaUi",
   { tag: ["@api", "@integration", "@regression", "@user"] },
   () => {
-    test("Delete user via API check via UI", async ({
+    test("TOOLS_47 Delete user via API check via UI", async ({
       page,
       request,
       adminApi,

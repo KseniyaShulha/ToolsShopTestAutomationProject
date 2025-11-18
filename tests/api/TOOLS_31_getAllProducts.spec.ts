@@ -2,10 +2,10 @@ import { test, expect } from "@playwright/test";
 import { ProductsApi } from "../../api/productsApi";
 
 test.describe(
-  "TOOLS_31_getAllProducts",
+  "GetAllProducts",
   { tag: ["@api", "@smoke", "@regression", "@products"] },
   () => {
-    test("GET products/?p=params", async ({ request }) => {
+    test("TOOLS_31 GET products/?p=params", async ({ request }) => {
       // Create instance of ProductsApi
       const productsApi = new ProductsApi(request);
 

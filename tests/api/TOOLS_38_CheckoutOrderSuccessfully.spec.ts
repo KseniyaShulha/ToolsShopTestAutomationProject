@@ -5,23 +5,23 @@ import { testData_TOOLS_39 } from "../../testData/testData_TOOLS_39";
 import { testData_TOOLS_41 } from "../../testData/testData_TOOLS_41";
 
 test.describe(
-  "TOOLS_38_CheckoutOrderSuccessfully",
+  "CheckoutOrderSuccessfully",
   { tag: ["@api", "@smoke", "@regression", "@payment"] },
   () => {
     // Test data for TOOLS-38 & TOOLS-39
     const testDataArr = [
       {
-        testName: "POST /payment/check_bankTransfer",
+        testName: "TOOLS_38 POST /payment/check_bankTransfer",
         payment_method: "bank-transfer",
         payment_details: testData_TOOLS_38.payment_details,
       },
       {
-        testName: "POST /payment/check_giftCard",
+        testName: "TOOLS_38 POST /payment/check_giftCard",
         payment_method: "gift-card",
         payment_details: testData_TOOLS_39.payment_details,
       },
       {
-        testName: "POST /payment/check_creditCard",
+        testName: "TOOLS_38 POST /payment/check_creditCard",
         payment_method: "credit-card",
         payment_details: testData_TOOLS_41.payment_details,
       },

@@ -6,7 +6,7 @@ let userID: any;
 let createdUserEmail: any;
 
 test.describe(
-  "TOOLS_30_deleteUser",
+  "DeleteUser",
   { tag: ["@api", "@regression", "@user"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -17,7 +17,7 @@ test.describe(
       createdUserEmail = responseBody.email;
     });
 
-    test("DELETE users/userId", async ({ adminApi }) => {
+    test("TOOLS_30 DELETE users/userId", async ({ adminApi }) => {
       // Send put request /users/
       const deleteUserResponse: any = await adminApi.deleteUser(userID);
 

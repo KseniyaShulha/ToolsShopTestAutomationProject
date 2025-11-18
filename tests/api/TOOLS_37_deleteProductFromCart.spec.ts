@@ -12,7 +12,7 @@ let cartApi: any;
 let testData_TOOLS_37: any, product;
 
 test.describe(
-  "TOOLS_37_deleteProductFromCart",
+  "DeleteProductFromCart",
   { tag: ["@api", "@regression", "@cart"] },
   () => {
     test.beforeEach(async ({ request }) => {
@@ -34,7 +34,7 @@ test.describe(
       cartId = await createCartAndAddProduct(token, product.id, 2, request);
     });
 
-    test("DELETE carts/cartId/product/{productId}", async () => {
+    test("TOOLS_37 DELETE carts/cartId/product/{productId}", async () => {
       const deleteProductFromCartResponse = await cartApi.deleteProductFromCart(
         token,
         cartId,
