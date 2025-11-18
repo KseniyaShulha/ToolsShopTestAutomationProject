@@ -41,19 +41,19 @@ jobs:
       - name: Send report to Slack
         if: always()
         run: |
-          STATUS="${{ job.status }}"
+          STATUS="$JOB_STATUS"
           if [ "$STATUS" = "success" ]; then
             STATUS_TEXT="PASSED 🟩"
           else
             STATUS_TEXT="FAILED 🟥"
           fi
 
-          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_TITLE="$PR_TITLE_VAR"
           
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            COMMIT_MSG=$(git log -1 --pretty=format:'%s' ${{ github.event.pull_request.head.sha }})
+            COMMIT_MSG=$(git log -1 --pretty=format:'%s' "$COMMIT_SHA")
           else
-            COMMIT_MSG="${{ github.event.head_commit.message }}"
+            COMMIT_MSG="$HEAD_COMMIT_MSG"
           fi
 
           REPORT_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts"
@@ -100,3 +100,7 @@ jobs:
           }" $SLACK_WEBHOOK_URL
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_STATUS: ${{ job.status }}
+          PR_TITLE_VAR: ${{ github.event.pull_request.title }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
