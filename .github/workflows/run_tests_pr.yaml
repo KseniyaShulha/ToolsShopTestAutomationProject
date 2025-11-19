@@ -15,7 +15,7 @@ on:
           - "integration"
           default: "staging"
       input_scope_to_run:
-        type: field
+        type: string
         description: "Scope to run"
         default: "@invoice"
           
