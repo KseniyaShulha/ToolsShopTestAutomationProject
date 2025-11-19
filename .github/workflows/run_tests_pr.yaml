@@ -1,4 +1,4 @@
-name: Running Playwright tests on PR 
+name: Running Playwright tests on PR
 
 on:
   push:
@@ -8,23 +8,33 @@ on:
   workflow_dispatch:
     inputs:
       input_env:
-          type: choice
-          description: "Environment"
-          options: 
+        type: choice
+        description: "Environment"
+        options:
           - "staging"
           - "integration"
-          default: "staging"
+        default: "staging"
       input_scope_to_run:
-        type: field
+        type: string
         description: "Scope to run"
         default: "@invoice"
-          
+
 jobs:
   test:
     name: Run Playwright tests
     runs-on: ubuntu-latest
 
+    env:
+      ENVIRONMENT: staging
+      SCOPE: "@invoice"
+
     steps:
+      - name: Override env vars for workflow_dispatch
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "ENVIRONMENT=${{ github.event.inputs.input_env }}" >> $GITHUB_ENV
+          echo "SCOPE=${{ github.event.inputs.input_scope_to_run }}" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -42,7 +52,10 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: CI=true ENVIRONMENT=$ENVIRONMENT npx playwright test --grep '$SCOPE'
+        run: |
+          echo "➡ ENVIRONMENT = $ENVIRONMENT"
+          echo "➡ SCOPE       = $SCOPE"
+          CI=true npx playwright test --grep "$SCOPE"
 
       - name: Upload test report
         if: always()
@@ -53,23 +66,35 @@ jobs:
 
       - name: Send report to Slack
         if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_STATUS: ${{ job.status }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_COMMIT: ${{ github.event.head_commit.message }}
+          SERVER_URL: ${{ github.server_url }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          REF_NAME: ${{ github.ref_name }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+          SCOPE: ${{ env.SCOPE }}
+          ACTOR: ${{ github.actor }}
         run: |
-          STATUS="$JOB_STATUS"
-          if [ "$STATUS" = "success" ]; then
+          if [ "$JOB_STATUS" = "success" ]; then
             STATUS_TEXT="PASSED 🟩"
           else
             STATUS_TEXT="FAILED 🟥"
           fi
 
-          PR_TITLE="$PR_TITLE_VAR"
-          
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            COMMIT_MSG=$(git log -1 --pretty=format:'%s' "$COMMIT_SHA")
+            COMMIT_MSG=$(git log -1 --pretty=format:'%s' "$PR_SHA")
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            COMMIT_MSG=$(git log -1 --pretty=format:'%s' "${{ github.sha }}")
           else
-            COMMIT_MSG="$HEAD_COMMIT_MSG"
+            COMMIT_MSG="$HEAD_COMMIT"  
           fi
 
-          REPORT_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts"
+          REPORT_URL="${SERVER_URL}/${REPOSITORY}/actions/runs/${RUN_ID}#artifacts"
 
           curl -X POST -H "Content-type: application/json" -d "{
             \"text\": \"Playwright tests result\",
@@ -85,31 +110,16 @@ jobs:
               {
                 \"type\": \"section\",
                 \"fields\": [
-                  {
-                    \"type\": \"mrkdwn\",
-                    \"text\": \"*PR Name:*\\n${PR_TITLE}\"
-                  },
-                  {
-                    \"type\": \"mrkdwn\",
-                    \"text\": \"*Environment:*\\n${ENVIRONMENT}\"
-                  },
-                  {
-                    \"type\": \"mrkdwn\",
-                    \"text\": \"*Commit:*\\n${COMMIT_MSG}\"
-                  }
+                  { \"type\": \"mrkdwn\", \"text\": \"*PR Name:*\\n${PR_TITLE:-N/A}\" },
+                  { \"type\": \"mrkdwn\", \"text\": \"*Environment:*\\n${ENVIRONMENT}\" },
+                  { \"type\": \"mrkdwn\", \"text\": \"*Commit:*\\n${COMMIT_MSG}\" }
                 ]
               },
               {
                 \"type\": \"section\",
                 \"fields\": [
-                  {
-                    \"type\": \"mrkdwn\",
-                    \"text\": \"*Status:*\\n${STATUS_TEXT}\"
-                  },
-                  {
-                    \"type\": \"mrkdwn\",
-                    \"text\": \"*Triggered by:*\\n${{ github.actor }}\"
-                  }
+                  { \"type\": \"mrkdwn\", \"text\": \"*Status:*\\n${STATUS_TEXT}\" },
+                  { \"type\": \"mrkdwn\", \"text\": \"*Triggered by:*\\n${ACTOR}\" }
                 ]
               },
               {
@@ -122,19 +132,8 @@ jobs:
               {
                 \"type\": \"context\",
                 \"elements\": [
-                  {
-                    \"type\": \"mrkdwn\",
-                    \"text\": \"Repository: '${{ github.repository }}'  •  Branch: '${{ github.ref_name }}'\"
-                  }
+                  { \"type\": \"mrkdwn\", \"text\": \"Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'\" }
                 ]
               }
             ]
           }" $SLACK_WEBHOOK_URL
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          JOB_STATUS: ${{ job.status }}
-          PR_TITLE_VAR: ${{ github.event.pull_request.title }}
-          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
-          HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
-          ENVIRONMENT: ${{ inputs.input_env }}
-          SCOPE: ${{ inputs.input_scope_to_run }}
