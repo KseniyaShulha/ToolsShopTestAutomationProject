@@ -42,7 +42,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: CI=true ENVIRONMENT="$ENVIRONMENT npx playwright test --grep "$SCOPE"
+        run: CI=true ENVIRONMENT="$ENVIRONMENT" npx playwright test --grep "$SCOPE"
 
       - name: Upload test report
         if: always()
@@ -136,5 +136,5 @@ jobs:
           PR_TITLE_VAR: ${{ github.event.pull_request.title }}
           COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
           HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
-          ENVIRONMENT: ${{ inputs.input_env || "staging" }}
-          SCOPE: ${{ inputs.input_scope_to_run || "@invoice" }}
+          ENVIRONMENT: ${{ inputs.input_env || 'staging' }}
+          SCOPE: ${{ inputs.input_scope_to_run || '@invoice' }}
