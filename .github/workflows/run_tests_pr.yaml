@@ -35,33 +35,28 @@ jobs:
           echo "ENVIRONMENT=${{ github.event.inputs.input_env }}" >> $GITHUB_ENV
           echo "SCOPE=${{ github.event.inputs.input_scope_to_run }}" >> $GITHUB_ENV
 
-      # === 2. Checkout ===
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # === 3. Node ===
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # === 4. Install ===
       - name: Install dependencies
         run: npm install
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      # === 5. RUN TESTS ===
       - name: Run tests
         run: |
           echo "➡ ENVIRONMENT = $ENVIRONMENT"
           echo "➡ SCOPE       = $SCOPE"
           CI=true npx playwright test --grep "$SCOPE"
 
-      # === 6. Upload report ===
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v4
@@ -69,7 +64,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
 
-      # === 7. Send report to Slack ===
       - name: Send report to Slack
         if: always()
         env:
