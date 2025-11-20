@@ -7,9 +7,8 @@ import { APIResponse } from "@playwright/test";
 let token: any;
 let cartId: any;
 let productApi: any;
-let testData_TOOLS_36: any;
 let cartApi: any;
-let testData = structuredClone(testData_TOOLS_36);
+let testData: any;
 
 test.describe(
   "PutCartProductIdQuantity",
