@@ -55,7 +55,7 @@ jobs:
         run: |
           echo "➡ ENVIRONMENT = $ENVIRONMENT"
           echo "➡ SCOPE       = $SCOPE"
-          CI=true npx playwright test --grep "$SCOPE"
+          npm run ci:test
 
       - name: Upload test report
         if: always()
