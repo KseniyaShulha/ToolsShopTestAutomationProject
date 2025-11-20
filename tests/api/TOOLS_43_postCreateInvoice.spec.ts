@@ -8,6 +8,7 @@ let token: string | null;
 let cartId: any;
 let cartApi: any;
 let invoiceApi: any;
+let testData = structuredClone(testData_TOOLS_43);
 
 test.describe(
   "PostCreateInvoice",
@@ -33,7 +34,7 @@ test.describe(
 
       // Save cart id from responce body in var and reassign it to cart_id from testData
       cartId = responseBody.id;
-      testData_TOOLS_43.cart_id = cartId;
+      testData.cart_id = cartId;
     });
 
     test("TOOLS_43 POST api/invoice", async ({ request }) => {
@@ -43,7 +44,7 @@ test.describe(
       // Send post request to /api/invoise and store the response in variable
       const postCreateInvoiceResponse = await invoiceApi.postCreateInvoice(
         token,
-        testData_TOOLS_43,
+        testData,
       );
 
       // Save response body in json

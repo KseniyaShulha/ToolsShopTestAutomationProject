@@ -4,6 +4,8 @@ import { testData_TOOLS_14 } from "../../testData/testData_TOOLS-14";
 import { UserSteps } from "../../steps/steps";
 import path from "path";
 
+let testData = structuredClone(testData_TOOLS_14);
+
 test.use({
   storageState: path.resolve(__dirname, "../../.auth/customer2.json"),
 });
@@ -28,11 +30,11 @@ test.describe(
       await appPageObjects
         .checkoutPage()
         .fillInBillingData(
-          testData_TOOLS_14.billingData.street,
-          testData_TOOLS_14.billingData.city,
-          testData_TOOLS_14.billingData.state,
-          testData_TOOLS_14.billingData.country,
-          testData_TOOLS_14.billingData.postcode,
+          testData.billingData.street,
+          testData.billingData.city,
+          testData.billingData.state,
+          testData.billingData.country,
+          testData.billingData.postcode,
         );
 
       // Customer chooses paynment method
@@ -42,13 +44,13 @@ test.describe(
       await appPageObjects
         .checkoutPage()
         .fillInGiftCardNumberField(
-          testData_TOOLS_14.giftCardData.giftCardNumber,
+          testData.giftCardData.giftCardNumber,
         );
 
       await appPageObjects
         .checkoutPage()
         .fillInGiftCardValidationCodeField(
-          testData_TOOLS_14.giftCardData.giftCardValidationCode,
+          testData.giftCardData.giftCardValidationCode,
         );
 
       // Customer confirms payment

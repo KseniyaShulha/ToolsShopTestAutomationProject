@@ -6,10 +6,12 @@ import {
 } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 
+
 let token: any;
 let cartId: any;
 let cartApi: any;
-let testData_TOOLS_37: any, product;
+let product: any;
+let testData: any;
 
 test.describe(
   "DeleteProductFromCart",
@@ -22,7 +24,7 @@ test.describe(
       // Find product in stock and save it in var
       product = await getRandomProductInStock(request);
 
-      testData_TOOLS_37 = {
+      testData = {
         product_id: product.id,
         quantity: 2,
       };
@@ -38,7 +40,7 @@ test.describe(
       const deleteProductFromCartResponse = await cartApi.deleteProductFromCart(
         token,
         cartId,
-        testData_TOOLS_37.product_id,
+        testData.product_id,
       );
 
       // Assert response status is equal to 2**
