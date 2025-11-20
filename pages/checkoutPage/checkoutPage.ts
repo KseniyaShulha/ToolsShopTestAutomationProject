@@ -11,7 +11,6 @@ export class CheckoutPage extends BasePage {
   private readonly countryField: Locator;
   private readonly postalCodeField: Locator;
   private readonly proceedButton2: Locator;
-  private readonly paymentMethodDropDown: Locator;
   private readonly creditCardNumberField: Locator;
   private readonly creditCardExpirationDateField: Locator;
   private readonly creditCardCvvCodeField: Locator;
@@ -22,7 +21,6 @@ export class CheckoutPage extends BasePage {
   private readonly bankNameField: Locator;
   private readonly accountNameField: Locator;
   private readonly accountNumberField: Locator;
-  private readonly monthlyInstallmentsDropDown: Locator;
   private readonly giftCardNumberField: Locator;
   private readonly giftCardValidationCodeField: Locator;
 
@@ -46,7 +44,7 @@ export class CheckoutPage extends BasePage {
     this.paymentSuccsessMessage = page.locator(
       '[data-test="payment-success-message"]',
     );
-    this.proceedButton3 = this.page.locator('button[data-test="proceed-3"]');
+    this.proceedButton3 = this.page.locator('[data-test="proceed-3"]');
     this.bankNameField = this.page.locator('[id="bank_name"]');
     this.accountNameField = this.page.locator('[id="account_name"]');
     this.accountNumberField = this.page.locator('[id="account_number"]');

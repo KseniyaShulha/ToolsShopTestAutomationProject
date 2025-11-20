@@ -19,6 +19,9 @@ import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 let cartId: any;
+let testData = structuredClone(testData_TOOLS_44);
+let testDataLogin = structuredClone(testData_TOOLS_44_login);
+let testDataInvoice = structuredClone(testData_TOOLS_44_invoice);
 
 test.describe(
   "OrderViaApiCheckViaUi",
@@ -48,26 +51,26 @@ test.describe(
 
       // Save response in var
       const postCheckPaymentResponse = await paymentApi.postCheckPayment(
-        testData_TOOLS_44.payment_method,
-        testData_TOOLS_44.payment_details,
+        testData.payment_method,
+        testData.payment_details,
       );
 
       // Assert response status is equal to 2**
       expect(postCheckPaymentResponse.status()).toBe(200);
 
       // Reassign values
-      testData_TOOLS_44_invoice.payment_details.bank_name =
-        testData_TOOLS_44.payment_details.bank_name;
-      testData_TOOLS_44_invoice.payment_details.account_name =
-        testData_TOOLS_44.payment_details.account_name;
-      testData_TOOLS_44_invoice.payment_details.account_number =
-        testData_TOOLS_44.payment_details.account_number;
-      testData_TOOLS_44_invoice.cart_id = cartId;
+      testDataInvoice.payment_details.bank_name =
+        testData.payment_details.bank_name;
+      testDataInvoice.payment_details.account_name =
+        testData.payment_details.account_name;
+      testDataInvoice.payment_details.account_number =
+        testData.payment_details.account_number;
+      testDataInvoice.cart_id = cartId;
 
       // Save response in var
       const postCreateInvoiceResponse = await invoiceApi.postCreateInvoice(
         token,
-        testData_TOOLS_44_invoice,
+        testDataInvoice,
       );
 
       // Save response body in json
@@ -81,9 +84,9 @@ test.describe(
 
       // Login as admin
       await steps.loginUi(
-        testData_TOOLS_44_login.userData.email,
-        testData_TOOLS_44_login.userData.password,
-        testData_TOOLS_44_login.userData.surname,
+        testDataLogin.userData.email,
+        testDataLogin.userData.password,
+        testDataLogin.userData.surname,
         true,
       );
 

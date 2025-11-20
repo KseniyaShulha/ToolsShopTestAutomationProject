@@ -9,6 +9,7 @@ let cartId: any;
 let productApi: any;
 let testData_TOOLS_36: any;
 let cartApi: any;
+let testData = structuredClone(testData_TOOLS_36);
 
 test.describe(
   "PutCartProductIdQuantity",
@@ -28,7 +29,7 @@ test.describe(
       ).id;
       expect(productId).toBeDefined();
 
-      testData_TOOLS_36 = {
+      testData = {
         product_id: productId,
         quantity: 2,
       };
@@ -52,7 +53,7 @@ test.describe(
       // Put a product to a cart
       const addToCartResponse: any = await cartApi.postAddToCart(
         token,
-        testData_TOOLS_36,
+        testData,
         cartId,
       );
 
@@ -62,7 +63,7 @@ test.describe(
 
     test("TOOLS_36 PUT carts/cartId/itemId/quantity", async () => {
       const newQuantity: { product_id: string; quantity: number } = {
-        product_id: testData_TOOLS_36.product_id,
+        product_id: testData.product_id,
         quantity: 3,
       };
 

@@ -6,6 +6,7 @@ import { ProductsApi } from "../../api/productsApi";
 
 let token: any;
 let cartId: any;
+let testData = structuredClone(testData_TOOLS_21);
 
 test.describe(
   "Cart",
@@ -29,7 +30,7 @@ test.describe(
       expect(productId).toBeDefined();
 
       // Reassign testData_TOOLS_21.product_id to productId var
-      testData_TOOLS_21.product_id = productId;
+      testData.product_id = productId;
 
       // Save customer's token after login
       token = await getTokenFromJson("customer2");
@@ -57,7 +58,7 @@ test.describe(
       // Send post request /carts/cart id and storing the response in var
       const addToCartResponse: any = await cartApi.postAddToCart(
         token,
-        testData_TOOLS_21,
+        testData,
         cartId,
       );
 
@@ -78,12 +79,12 @@ test.describe(
 
       // Assert product id in cart to be the same as in testData_addToCart
       expect(getCartResponseBody.cart_items[0].product_id).toBe(
-        testData_TOOLS_21.product_id,
+        testData.product_id,
       );
 
       // Assert quantity of product in cart to be the same as in testData_addToCart
       expect(getCartResponseBody.cart_items[0].quantity).toBe(
-        testData_TOOLS_21.quantity,
+        testData.quantity,
       );
     });
 
