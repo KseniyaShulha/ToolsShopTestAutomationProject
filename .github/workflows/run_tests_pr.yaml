@@ -112,18 +112,38 @@ jobs:
               },
               {
                 \"type\": \"section\",
-                \"fields\": [
-                  { \"type\": \"mrkdwn\", \"text\": \"*PR Name:*\\n${PR_TITLE:-N/A}\" },
-                  { \"type\": \"mrkdwn\", \"text\": \"*Environment:*\\n${ENVIRONMENT}\" },
-                  { \"type\": \"mrkdwn\", \"text\": \"*Commit:*\\n${COMMIT_MSG}\" }
-                ]
+                \"text\": {
+                  \"type\": \"mrkdwn\",
+                  \"text\": \"*PR Name:* ${PR_TITLE:-N/A}\"
+                }
               },
               {
                 \"type\": \"section\",
-                \"fields\": [
-                  { \"type\": \"mrkdwn\", \"text\": \"*Status:*\\n${STATUS_TEXT}\" },
-                  { \"type\": \"mrkdwn\", \"text\": \"*Triggered by:*\\n${ACTOR}\" }
-                ]
+                \"text\": {
+                  \"type\": \"mrkdwn\",
+                  \"text\": \"*Environment:* ${ENVIRONMENT}\"
+                }
+              },
+              {
+                \"type\": \"section\",
+                \"text\": {
+                  \"type\": \"mrkdwn\",
+                  \"text\": \"*Commit:* ${COMMIT_MSG}\"
+                }
+              },
+              {
+                \"type\": \"section\",
+                \"text\": {
+                  \"type\": \"mrkdwn\",
+                  \"text\": \"*Status:* ${STATUS_TEXT}\"
+                }
+              },
+              {
+                \"type\": \"section\",
+                \"text\": {
+                  \"type\": \"mrkdwn\",
+                  \"text\": \"*Triggered by:* ${ACTOR}\"
+                }
               },
               {
                 \"type\": \"section\",
@@ -135,8 +155,12 @@ jobs:
               {
                 \"type\": \"context\",
                 \"elements\": [
-                  { \"type\": \"mrkdwn\", \"text\": \"Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'\" }
+                  {
+                    \"type\": \"mrkdwn\",
+                    \"text\": \"Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'\"
+                  }
                 ]
               }
             ]
           }" $SLACK_WEBHOOK_URL
+
