@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ci:test": "CI=true playwright test --grep \"$SCOPE\""
+    "ci:test": "CI=true playwright test --grep \"$SCOPE\"",
+    "ci:eslint": "CI=true eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
