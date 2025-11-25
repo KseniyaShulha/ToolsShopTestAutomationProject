@@ -5,18 +5,21 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  
   workflow_dispatch:
     inputs:
       input_env:
-        type: choice
         description: "Environment"
+        required: true
+        type: choice
         options:
           - "staging"
           - "integration"
         default: "staging"
       input_scope_to_run:
-        type: string
         description: "Scope to run"
+        required: false
+        type: string
         default: "@invoice"
 
 jobs:
@@ -55,7 +58,7 @@ jobs:
         run: |
           echo "➡ ENVIRONMENT = $ENVIRONMENT"
           echo "➡ SCOPE       = $SCOPE"
-          CI=true npx playwright test --grep "$SCOPE"
+          npm run ci:test
 
       - name: Upload test report
         if: always()
@@ -63,6 +66,10 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
+
+      - name: Short commit SHA
+        run: echo "COMMIT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
+ 
 
       - name: Send report to Slack
         if: always()
@@ -96,44 +103,45 @@ jobs:
 
           REPORT_URL="${SERVER_URL}/${REPOSITORY}/actions/runs/${RUN_ID}#artifacts"
 
-          curl -X POST -H "Content-type: application/json" -d "{
-            \"text\": \"Playwright tests result\",
-            \"blocks\": [
-              {
-                \"type\": \"header\",
-                \"text\": {
-                  \"type\": \"plain_text\",
-                  \"text\": \"🚦 Playwright Test Report\",
-                  \"emoji\": true
+          curl -X POST -H "Content-type: application/json" -d @- $SLACK_WEBHOOK_URL <<EOF
+            {
+              "text": "Playwright tests result",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {"type": "plain_text", "text": "🚦 Playwright Test Report", "emoji": true}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Status:* ${STATUS_TEXT}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*PR Name:* ${PR_TITLE:-N/A}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Environment:* ${ENVIRONMENT}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Commit:* ${COMMIT_MSG} ${COMMIT_SHA}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Triggered by:* ${ACTOR}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Playwright Report:* <${REPORT_URL}|Click to open report>"}
+                },
+                {
+                  "type": "context",
+                  "elements": [{"type": "mrkdwn", "text": "Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'"}]
                 }
-              },
-              {
-                \"type\": \"section\",
-                \"fields\": [
-                  { \"type\": \"mrkdwn\", \"text\": \"*PR Name:*\\n${PR_TITLE:-N/A}\" },
-                  { \"type\": \"mrkdwn\", \"text\": \"*Environment:*\\n${ENVIRONMENT}\" },
-                  { \"type\": \"mrkdwn\", \"text\": \"*Commit:*\\n${COMMIT_MSG}\" }
-                ]
-              },
-              {
-                \"type\": \"section\",
-                \"fields\": [
-                  { \"type\": \"mrkdwn\", \"text\": \"*Status:*\\n${STATUS_TEXT}\" },
-                  { \"type\": \"mrkdwn\", \"text\": \"*Triggered by:*\\n${ACTOR}\" }
-                ]
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*📄 Playwright Report:*\\n<${REPORT_URL}|Click to open report>\"
-                }
-              },
-              {
-                \"type\": \"context\",
-                \"elements\": [
-                  { \"type\": \"mrkdwn\", \"text\": \"Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'\" }
-                ]
-              }
-            ]
-          }" $SLACK_WEBHOOK_URL
+              ]
+          }
+          EOF
+
+
+
