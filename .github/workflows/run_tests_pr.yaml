@@ -68,7 +68,7 @@ jobs:
           path: playwright-report/
 
       - name: Short commit SHA
-        run: echo "COMMIT_SHA=$(echo '${{ github.sha }}' | cut -c1-7)" >> $GITHUB_ENV
+        run: echo "COMMIT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
  
 
       - name: Send report to Slack
