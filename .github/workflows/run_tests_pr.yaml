@@ -103,69 +103,45 @@ jobs:
 
           REPORT_URL="${SERVER_URL}/${REPOSITORY}/actions/runs/${RUN_ID}#artifacts"
 
-           curl -X POST -H "Content-type: application/json" -d "{
-            \"text\": \"Playwright tests result\",
-            \"blocks\": [
-              {
-                \"type\": \"header\",
-                \"text\": {
-                  \"type\": \"plain_text\",
-                  \"text\": \"🚦 Playwright Test Report\",
-                  \"emoji\": true
+           curl -X POST -H "Content-type: application/json" -d @- $SLACK_WEBHOOK_URL <<EOF
+            {
+              "text": "Playwright tests result",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {"type": "plain_text", "text": "🚦 Playwright Test Report", "emoji": true}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Status:* ${STATUS_TEXT}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*PR Name:* ${PR_TITLE:-N/A}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Environment:* ${ENVIRONMENT}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Commit:* ${COMMIT_MSG} ${COMMIT_SHA}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Triggered by:* ${ACTOR}"}
+                },
+                {
+                  "type": "section",
+                  "text": {"type": "mrkdwn", "text": "*Playwright Report:* <${REPORT_URL}|Click to open report>"}
+                },
+                {
+                  "type": "context",
+                  "elements": [{"type": "mrkdwn", "text": "Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'"}]
                 }
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*Status:* ${STATUS_TEXT}\"
-                }
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*PR Name:* ${PR_TITLE:-N/A}\"
-                }
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*Environment:* ${ENVIRONMENT}\"
-                }
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*Commit:* ${COMMIT_MSG//\"/'} ${COMMIT_SHA}\"
-                }
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*Triggered by:* ${ACTOR}\"
-                }
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*Playwright Report:* <${REPORT_URL}|Click to open report>\"
-                }
-              },
-              {
-                \"type\": \"context\",
-                \"elements\": [
-                  {
-                    \"type\": \"mrkdwn\",
-                    \"text\": \"Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'\"
-                  }
-                ]
-              }
-            ]
-          }" $SLACK_WEBHOOK_URL
+              ]
+            }
+            EOF
+
 
 
