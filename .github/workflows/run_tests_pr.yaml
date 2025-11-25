@@ -136,7 +136,7 @@ jobs:
                 \"type\": \"section\",
                 \"text\": {
                   \"type\": \"mrkdwn\",
-                  \"text\": \"*Commit:* \"${COMMIT_MSG//\"/'}\" ${COMMIT_SHA}\"
+                  \"text\": \"*Commit:* ${COMMIT_MSG//\"/'} ${COMMIT_SHA}\"
                 }
               },
               {
