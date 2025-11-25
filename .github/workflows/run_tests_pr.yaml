@@ -75,6 +75,7 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
           HEAD_COMMIT: ${{ github.event.head_commit.message }}
+          COMMIT_SHA: ${{ github.sha }} | cut -c1-7
           SERVER_URL: ${{ github.server_url }}
           REPOSITORY: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
@@ -114,6 +115,13 @@ jobs:
                 \"type\": \"section\",
                 \"text\": {
                   \"type\": \"mrkdwn\",
+                  \"text\": \"*Status:* ${STATUS_TEXT}\"
+                }
+              },
+              {
+                \"type\": \"section\",
+                \"text\": {
+                  \"type\": \"mrkdwn\",
                   \"text\": \"*PR Name:* ${PR_TITLE:-N/A}\"
                 }
               },
@@ -128,14 +136,7 @@ jobs:
                 \"type\": \"section\",
                 \"text\": {
                   \"type\": \"mrkdwn\",
-                  \"text\": \"*Commit:* ${COMMIT_MSG}\"
-                }
-              },
-              {
-                \"type\": \"section\",
-                \"text\": {
-                  \"type\": \"mrkdwn\",
-                  \"text\": \"*Status:* ${STATUS_TEXT}\"
+                  \"text\": \"*Commit:* ${COMMIT_MSG} ${COMMIT_SHA}\"
                 }
               },
               {
@@ -149,7 +150,7 @@ jobs:
                 \"type\": \"section\",
                 \"text\": {
                   \"type\": \"mrkdwn\",
-                  \"text\": \"*📄 Playwright Report:*\\n<${REPORT_URL}|Click to open report>\"
+                  \"text\": \"*Playwright Report:*\<${REPORT_URL}|Click to open report>\"
                 }
               },
               {
