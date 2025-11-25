@@ -16,7 +16,6 @@ on:
           - "staging"
           - "integration"
         default: "staging"
-      
       input_scope_to_run:
         description: "Scope to run"
         required: false
