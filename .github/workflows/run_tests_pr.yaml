@@ -103,7 +103,7 @@ jobs:
 
           REPORT_URL="${SERVER_URL}/${REPOSITORY}/actions/runs/${RUN_ID}#artifacts"
 
-           curl -X POST -H "Content-type: application/json" -d @- $SLACK_WEBHOOK_URL <<EOF
+          curl -X POST -H "Content-type: application/json" -d @- $SLACK_WEBHOOK_URL <<EOF
             {
               "text": "Playwright tests result",
               "blocks": [
@@ -140,8 +140,8 @@ jobs:
                   "elements": [{"type": "mrkdwn", "text": "Repository: '${REPOSITORY}'  •  Branch: '${REF_NAME}'"}]
                 }
               ]
-            }
-            EOF
+          }
+          EOF
 
 
 
