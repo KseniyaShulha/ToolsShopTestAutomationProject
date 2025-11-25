@@ -66,6 +66,10 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
+      
+      - name: Create short commit SHA
+        run: echo "COMMIT_SHA=$(echo '${{ github.sha }}' | cut -c1-7)" >> $GITHUB_ENV
+
 
       - name: Send report to Slack
         if: always()
@@ -75,7 +79,7 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
           HEAD_COMMIT: ${{ github.event.head_commit.message }}
-          COMMIT_SHA: ${{ github.sha }} | cut -c1-7
+          COMMIT_SHA: ${{ env.COMMIT_SHA }}
           SERVER_URL: ${{ github.server_url }}
           REPOSITORY: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
