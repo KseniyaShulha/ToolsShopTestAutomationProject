@@ -3,7 +3,7 @@ import { expect, Page } from "@playwright/test";
 
 export class UserSteps {
   protected page: Page;
-  protected appPageObjects: any;
+  protected appPageObjects: AppPageObjects;
 
   constructor(page: Page) {
     this.page = page;
