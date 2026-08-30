@@ -2,19 +2,6 @@
 
 An automated testing framework for the [Practice Software Testing](https://practicesoftwaretesting.com) e-commerce application (an online tool store). The project is built with TypeScript and Playwright.
 
-## Tech Stack
-
-| Tool | Purpose |
-|------|---------|
-| [Playwright](https://playwright.dev/) | Test automation framework |
-| TypeScript | Programming language |
-| ESLint + Prettier | Code quality and formatting |
-| @faker-js/faker | Random test data generation |
-| dayjs | Date manipulation in test data |
-| tabletojson | Parsing HTML tables into JSON |
-| dotenv | Environment variable management |
-| GitHub Actions | CI/CD automation |
-
 ## Test Coverage
 
 The framework covers three types of tests:
@@ -34,8 +21,11 @@ The framework covers three types of tests:
 │   ├── baseAPI.ts          # Abstract base class for all API classes
 │   ├── apiHelper.ts        # Reusable API helper functions
 │   ├── usersApi.ts         # Users endpoints
+│   ├── adminApi.ts         # Admin endpoints
 │   ├── cartApi.ts          # Cart endpoints
+│   ├── categoryApi.ts      # Category endpoints
 │   ├── productsApi.ts      # Products endpoints
+│   ├── paymentApi.ts       # Payment endpoints
 │   ├── invoiceApi.ts       # Invoice endpoints
 │   └── responseData/       # Expected API response structures
 ├── pages/                  # Page Object Model layer
@@ -139,5 +129,10 @@ The project uses GitHub Actions for continuous integration:
 | `@regression` | Full test suite |
 | `@api` | API tests only |
 | `@ui` | UI tests only |
-| `@invoice` | Invoice-related tests |
 | `@auth` | Authentication tests |
+| `@payment` | Payment-related tests |
+| `@products` | Product-related tests |
+| `@cart` | Cart-related tests |
+| `@invoice` | Invoice-related tests |
+| `@negative` | Negative scenarios |
+| `@integration` | Mixed API + UI tests |
