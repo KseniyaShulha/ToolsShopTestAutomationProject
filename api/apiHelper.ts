@@ -2,8 +2,7 @@ import { APIRequestContext, expect } from "@playwright/test";
 import { UsersApi } from "./usersApi";
 import { ProductsApi } from "./productsApi";
 import { CartApi } from "./cartApi";
-import path from "path";
-import fs from "fs";
+import { TokenStore, UserKey } from "./tokenStore";
 
 // Define function to verify that credentials are correct
 export async function loginApi(
@@ -103,14 +102,6 @@ export async function createCartAndAddProduct(
   return cartId;
 }
 
-export async function getTokenFromJson(
-  fileName: "admin" | "customer1" | "customer2" | "customer3",
-): Promise<string> {
-  const jsonPath = path.resolve(__dirname, `../.auth/${fileName}.json`);
-
-  const raw = fs.readFileSync(jsonPath, "utf-8");
-
-  const storageState = JSON.parse(raw);
-
-  return storageState["origins"][0]["localStorage"][0]["value"];
+export async function getTokenFromJson(fileName: UserKey): Promise<string> {
+  return TokenStore.getInstance().getToken(fileName);
 }
