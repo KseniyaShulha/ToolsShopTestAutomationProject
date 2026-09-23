@@ -21,23 +21,15 @@ test.describe(
 
       await appPageObjects.signUpPage().waitPageUrlLoaded("register");
 
-      await appPageObjects
-        .signUpPage()
-        .fillInFirstName(testData.firstName);
+      await appPageObjects.signUpPage().fillInFirstName(testData.firstName);
 
-      await appPageObjects
-        .signUpPage()
-        .fillInLastName(testData.lastName);
+      await appPageObjects.signUpPage().fillInLastName(testData.lastName);
 
-      await appPageObjects
-        .signUpPage()
-        .fillInDateOfBirth(testData.dateOfBirth);
+      await appPageObjects.signUpPage().fillInDateOfBirth(testData.dateOfBirth);
 
       await appPageObjects.signUpPage().fillInStreet(testData.street);
 
-      await appPageObjects
-        .signUpPage()
-        .fillInPostalCode(testData.postalCode);
+      await appPageObjects.signUpPage().fillInPostalCode(testData.postalCode);
 
       await appPageObjects.signUpPage().fillInCity(testData.city);
 
@@ -49,9 +41,7 @@ test.describe(
 
       await appPageObjects.signUpPage().fillInEmail(testData.email);
 
-      await appPageObjects
-        .signUpPage()
-        .fillInPassword(testData.password);
+      await appPageObjects.signUpPage().fillInPassword(testData.password);
 
       await appPageObjects.signUpPage().clickRegisterButton();
 

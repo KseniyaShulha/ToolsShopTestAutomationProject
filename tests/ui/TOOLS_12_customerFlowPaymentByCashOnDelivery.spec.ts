@@ -14,7 +14,9 @@ test.describe(
   "CustomerFlowPaymentByCashOnDelivery",
   { tag: ["@ui", "@regression", "@payment", "@smoke"] },
   () => {
-    test("TOOLS_12 Customer flow - payment by cash on delivery", async ({ page }) => {
+    test("TOOLS_12 Customer flow - payment by cash on delivery", async ({
+      page,
+    }) => {
       // Create instance of AppPageObjects
       const appPageObjects: AppPageObjects = new AppPageObjects(page);
       const steps: UserSteps = new UserSteps(page);

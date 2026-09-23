@@ -1,7 +1,5 @@
-export const testData_login: any = {
-  userData: {
-    email: process.env.CUSTOMER_2_EMAIL,
-    password: process.env.CUSTOMER_2_PASSWORD,
-    surname: "Howe",
-  },
-};
+import { UserBuilder } from "./userBuilder";
+
+export const testData_login: any = new UserBuilder()
+  .withUserData("CUSTOMER_2")
+  .build();

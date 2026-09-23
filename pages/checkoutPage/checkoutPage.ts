@@ -161,7 +161,7 @@ export class CheckoutPage extends BasePage {
 
   async fillInCountryField(country: string): Promise<void> {
     console.log(`\nUser fills in country field with: ${country}`);
-    await this.countryField.fill(country);
+    await this.countryField.selectOption({ label: country });
   }
 
   async fillInPostalCodeField(postcode: string): Promise<void> {
