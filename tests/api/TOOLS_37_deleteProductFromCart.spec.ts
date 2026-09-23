@@ -6,7 +6,6 @@ import {
 } from "../../api/apiHelper";
 import { CartApi } from "../../api/cartApi";
 
-
 let token: any;
 let cartId: any;
 let cartApi: any;

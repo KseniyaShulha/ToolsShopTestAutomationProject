@@ -6,7 +6,9 @@ test.describe(
   "PaymentByCreditCardNegative",
   { tag: ["@api", "@negative", "@regression", "@payment", "@smoke"] },
   () => {
-    test("TOOLS_42 POST /api/payment/check by card (negative)", async ({ request }) => {
+    test("TOOLS_42 POST /api/payment/check by card (negative)", async ({
+      request,
+    }) => {
       // Create instance of UserApi
       const paymentApi = new PaymentApi(request);
 

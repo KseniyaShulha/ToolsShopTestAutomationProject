@@ -14,7 +14,9 @@ test.describe(
   "CustomerFlowPaymentByBankTransfer",
   { tag: ["@ui", "@regression", "@payment", "@smoke"] },
   () => {
-    test("TOOLS_11 Customer flow - payment by bank transfer", async ({ page }) => {
+    test("TOOLS_11 Customer flow - payment by bank transfer", async ({
+      page,
+    }) => {
       // Create instance of AppPageObjects
       const appPageObjects: AppPageObjects = new AppPageObjects(page);
       const steps: UserSteps = new UserSteps(page);

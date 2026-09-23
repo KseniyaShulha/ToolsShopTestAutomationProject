@@ -43,9 +43,7 @@ test.describe(
       // Customer fills in gift card data
       await appPageObjects
         .checkoutPage()
-        .fillInGiftCardNumberField(
-          testData.giftCardData.giftCardNumber,
-        );
+        .fillInGiftCardNumberField(testData.giftCardData.giftCardNumber);
 
       await appPageObjects
         .checkoutPage()
