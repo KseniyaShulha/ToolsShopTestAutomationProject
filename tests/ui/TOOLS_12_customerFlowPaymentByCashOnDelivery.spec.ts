@@ -37,6 +37,7 @@ test.describe(
           testData.billingData.state,
           testData.billingData.country,
           testData.billingData.postcode,
+          testData.billingData.house_number,
         );
 
       // Customer chooses paynment method

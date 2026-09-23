@@ -23,6 +23,7 @@ export class CheckoutPage extends BasePage {
   private readonly accountNumberField: Locator;
   private readonly giftCardNumberField: Locator;
   private readonly giftCardValidationCodeField: Locator;
+  private readonly houseNumberField: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -38,6 +39,7 @@ export class CheckoutPage extends BasePage {
     this.creditCardExpirationDateField = this.page.locator(
       '[id="expiration_date"]',
     );
+    this.houseNumberField = this.page.locator('[id="house_number"]');
     this.creditCardCvvCodeField = page.locator('[id="cvv"]');
     this.creditCardHolderNameField = page.locator('[id="card_holder_name"]');
     this.confirmPaymentButton = page.locator('[data-test="finish"]');
@@ -87,6 +89,7 @@ export class CheckoutPage extends BasePage {
     state: string,
     country: string,
     postcode: string,
+    house_number: string,
   ): Promise<void> {
     // Customer fills in billing data
     await this.fillInStreetField(street);
@@ -98,6 +101,8 @@ export class CheckoutPage extends BasePage {
     await this.fillInCountryField(country);
 
     await this.fillInPostalCodeField(postcode);
+
+    await this.fillInHouseNumberField(house_number);
 
     // Customer clicks on the "proceed to checkout" button
     await this.clickProceedButton(3);
@@ -167,6 +172,11 @@ export class CheckoutPage extends BasePage {
   async fillInPostalCodeField(postcode: string): Promise<void> {
     console.log(`\nUser fills in postal code field with: ${postcode}`);
     await this.postalCodeField.fill(postcode);
+  }
+
+  async fillInHouseNumberField(house_number: string): Promise<void> {
+    console.log(`\nUser fills in house number field with: ${house_number}`);
+    await this.houseNumberField.fill(house_number);
   }
 
   async selectPaymentMethod(paymentMethod: string): Promise<void> {

@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import dayjs from "dayjs";
 
 type CustomerNumber = 1 | 2 | 3;
 
@@ -12,6 +13,7 @@ export class CheckoutDataBuilder {
       state: faker.location.state(),
       country: faker.location.country(),
       postcode: faker.location.zipCode(),
+      house_number: faker.location.buildingNumber(),
     };
     return this;
   }
@@ -28,9 +30,9 @@ export class CheckoutDataBuilder {
   withCreditCard(): this {
     this.data.creditCard = {
       creditCardNumber: "4242-4242-4242-4242",
-      expirationDate: "12/2025",
+      expirationDate: dayjs().add(2, "year").format("MM/YYYY"),
       cvvCode: "123",
-      cardHolderName: faker.person.fullName(),
+      cardHolderName: `${faker.person.firstName()} ${faker.person.lastName()}`,
     };
     return this;
   }
@@ -46,8 +48,8 @@ export class CheckoutDataBuilder {
 
   withGiftCardData(): this {
     this.data.giftCardData = {
-      giftCardNumber: faker.string.alphanumeric(),
-      giftCardValidationCode: faker.string.alphanumeric(),
+      giftCardNumber: faker.string.alphanumeric({ length: 16 }),
+      giftCardValidationCode: faker.string.alphanumeric({ length: 4 }),
     };
     return this;
   }
