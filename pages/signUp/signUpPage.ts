@@ -5,7 +5,6 @@ export class SignUpPage extends BasePage {
   // Locators
   private readonly firstNameField: Locator;
   private readonly lastNameField: Locator;
-  private readonly dateOfBirthField: Locator;
   private readonly streetField: Locator;
   private readonly postalCodeField: Locator;
   private readonly cityField: Locator;
@@ -15,13 +14,13 @@ export class SignUpPage extends BasePage {
   private readonly emailField: Locator;
   private readonly passwordField: Locator;
   private readonly registerButton: Locator;
+  private readonly houseNumberField: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
     super(page);
     this.firstNameField = this.page.locator(`[id="first_name"]`);
     this.lastNameField = this.page.locator(`[id="last_name"]`);
-    this.dateOfBirthField = this.page.locator("#dob");
     this.streetField = this.page.locator(`[id="street"]`);
     this.postalCodeField = this.page.locator(`[id="postal_code"]`);
     this.cityField = this.page.locator(`[id="city"]`);
@@ -31,6 +30,7 @@ export class SignUpPage extends BasePage {
     this.emailField = this.page.locator(`[id="email"]`);
     this.passwordField = this.page.locator(`[id="password"]`);
     this.registerButton = this.page.locator(`[class="btnSubmit mb-3"]`);
+    this.houseNumberField = this.page.locator(`[id="house_number"]`);
   }
 
   // Methods
@@ -58,6 +58,7 @@ export class SignUpPage extends BasePage {
       },
       await dobInput.elementHandle(),
     );
+    await dobInput.click();
   }
 
   async fillInStreet(street: string): Promise<void> {
@@ -82,7 +83,12 @@ export class SignUpPage extends BasePage {
 
   async fillInCountry(country: string): Promise<void> {
     console.log(`\nCustomer fills in country field with: ${country}`);
-    await this.page.selectOption("#country", country);
+    await this.countryField.selectOption(country);
+  }
+
+  async fillInHouseNumber(house_number: string): Promise<void> {
+    console.log(`\nCustomer fills in house number field with: ${house_number}`);
+    await this.houseNumberField.fill(house_number);
   }
 
   async fillInPhone(phone: string): Promise<void> {
