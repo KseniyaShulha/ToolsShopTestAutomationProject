@@ -9,6 +9,7 @@ export const testData_TOOLS_29 = {
       city: faker.location.city(),
       state: faker.location.state(),
       country: faker.location.country(),
+      house_number: faker.location.buildingNumber(),
       postal_code: faker.location.zipCode(),
     },
     phone: Date.now().toString(),
