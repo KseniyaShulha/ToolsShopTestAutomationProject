@@ -19,7 +19,7 @@ test.describe(
       cartApi = new CartApi(request);
 
       // Get token
-      token = await getTokenFromJson("customer2");
+      token = await getTokenFromJson("customer1");
 
       // Send post request to /api/carts and store the response in variable
       const postCreateCartResponse = await cartApi.postCreateCart(
