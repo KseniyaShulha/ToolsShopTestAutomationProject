@@ -25,9 +25,13 @@ test.describe(
 
       await appPageObjects.signUpPage().fillInLastName(testData.lastName);
 
-      await appPageObjects.signUpPage().fillInDateOfBirth(testData.dateOfBirth);
+      await appPageObjects.signUpPage().fillInDateOfBirth(testData.dob);
 
       await appPageObjects.signUpPage().fillInStreet(testData.street);
+
+      await appPageObjects
+        .signUpPage()
+        .fillInHouseNumber(testData.house_number);
 
       await appPageObjects.signUpPage().fillInPostalCode(testData.postalCode);
 

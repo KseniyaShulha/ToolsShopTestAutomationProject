@@ -9,6 +9,7 @@ export const testData_TOOLS_20_signUp: any = {
     state: faker.location.state(),
     country: faker.location.country(),
     postal_code: faker.location.zipCode(),
+    house_number: faker.location.buildingNumber(),
   },
   phone: Date.now().toString(),
   dob: faker.date.birthdate().toISOString().split("T")[0],
