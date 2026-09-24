@@ -1,7 +1,7 @@
 import { responseData } from "../api/responseData/paymentData";
 
 const VALID_CREDIT_CARD_NUMBER = "4242-4242-4242-4242";
-const VALID_EXPIRATION_DATE = "12/2026";
+const VALID_EXPIRATION_DATE = "12/2030";
 const VALID_CVV = "123";
 const VALID_CARD_HOLDER_NAME = "User Name";
 

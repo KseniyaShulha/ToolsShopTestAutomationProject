@@ -66,10 +66,11 @@ export const responseData = {
   },
   InvalidMonthFormatExpirationDateFieldError: {
     message:
-      "The payment details.expiration date field must match the format m/Y.",
+      "The payment details.expiration date field must match the format m/Y. (and 1 more error)",
     errors: {
       "payment_details.expiration_date": [
         "The payment details.expiration date field must match the format m/Y.",
+        "The payment details.expiration date field must be a date after today.",
       ],
     },
   },
