@@ -7,24 +7,24 @@ setup.use({ headless: true });
 
 // Test data for TOOLS-50
 const setupDataArr = [
-  // {
-  //   setupName: "Customer_1 login",
-  //   creds: {
-  //     email: "customer@practicesoftwaretesting.com",
-  //     password: "welcome01",
-  //   },
-  //   authFile: ".auth/customer1.json",
-  //   surname: "Doe",
-  // },
   {
-    setupName: "Customer_2 login",
+    setupName: "Customer_1 login",
     creds: {
-      email: "customer2@practicesoftwaretesting.com",
+      email: "customer@practicesoftwaretesting.com",
       password: "welcome01",
     },
-    authFile: ".auth/customer2.json",
-    surname: "Howe",
+    authFile: ".auth/customer1.json",
+    surname: "Doe",
   },
+  // {
+  //   setupName: "Customer_2 login",
+  //   creds: {
+  //     email: "customer2@practicesoftwaretesting.com",
+  //     password: "welcome01",
+  //   },
+  //   authFile: ".auth/customer2.json",
+  //   surname: "Howe",
+  // },
   {
     setupName: "Customer_3 login",
     creds: {
