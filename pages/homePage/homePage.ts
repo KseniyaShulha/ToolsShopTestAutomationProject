@@ -25,7 +25,10 @@ export class HomePage extends BasePage {
   }
 
   async chooseFirstItem(): Promise<void> {
-    console.log("\nUser chooses the first item");
-    this.itemChoice.first().click();
+    console.log("\nUser chooses the first in-stock item");
+    const inStockCards = this.page
+      .locator(".card")
+      .filter({ hasNot: this.page.locator('[data-test="out-of-stock"]') });
+    await inStockCards.first().locator('[class="card-img-top"]').click();
   }
 }
