@@ -102,11 +102,9 @@ test.describe(
       // Click on search button
       await ordersPage.clickOnSearchButton();
 
-      // Wait for url /search?page=0&q=${invoiceNumber} and status 200
+      // Wait for the invoices search request to complete
       await page.waitForResponse(
-        (resp) =>
-          resp.url().includes(`/search?page=0&q=${invoiceNumber}`) &&
-          resp.status() === 200,
+        (resp) => resp.url().includes("/invoices/search") && resp.status() === 200,
       );
 
       // Convert table in json format

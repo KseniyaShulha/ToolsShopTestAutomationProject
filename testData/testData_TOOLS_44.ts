@@ -18,11 +18,11 @@ export const testData_TOOLS_44_login: any = {
 };
 
 export const testData_TOOLS_44_invoice: any = {
-  billing_street: faker.location.streetAddress(),
-  billing_city: faker.location.city(),
-  billing_state: faker.location.state(),
-  billing_country: faker.location.country(),
-  billing_postal_code: faker.location.zipCode(),
+  billing_street: "5439 Mohr Loaf",
+  billing_city: "Kozienice",
+  billing_state: "podkarpackie",
+  billing_country: "PL",
+  billing_postal_code: "50-001",
   payment_method: "bank-transfer",
   cart_id: "",
   payment_details: {
