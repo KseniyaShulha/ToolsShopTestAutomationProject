@@ -16,15 +16,15 @@ const setupDataArr = [
     authFile: ".auth/customer1.json",
     surname: "Doe",
   },
-  // {
-  //   setupName: "Customer_2 login",
-  //   creds: {
-  //     email: "customer2@practicesoftwaretesting.com",
-  //     password: "welcome01",
-  //   },
-  //   authFile: ".auth/customer2.json",
-  //   surname: "Howe",
-  // },
+  {
+    setupName: "Customer_2 login",
+    creds: {
+      email: "customer2@practicesoftwaretesting.com",
+      password: "welcome01",
+    },
+    authFile: ".auth/customer2.json",
+    surname: "Howe",
+  },
   {
     setupName: "Customer_3 login",
     creds: {
