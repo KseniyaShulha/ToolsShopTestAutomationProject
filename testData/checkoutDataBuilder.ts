@@ -32,10 +32,11 @@ export class CheckoutDataBuilder {
       creditCardNumber: "4242-4242-4242-4242",
       expirationDate: dayjs().add(2, "year").format("MM/YYYY"),
       cvvCode: "123",
-      cardHolderName: `${faker.person.firstName()} ${faker.person.lastName()}`.replace(
-        /[^a-zA-Z\s]/g,
-        "",
-      ),
+      cardHolderName:
+        `${faker.person.firstName()} ${faker.person.lastName()}`.replace(
+          /[^a-zA-Z\s]/g,
+          "",
+        ),
     };
     return this;
   }
