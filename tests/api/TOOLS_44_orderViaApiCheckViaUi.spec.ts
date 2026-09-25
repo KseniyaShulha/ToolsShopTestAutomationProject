@@ -104,7 +104,8 @@ test.describe(
 
       // Wait for the invoices search request to complete
       await page.waitForResponse(
-        (resp) => resp.url().includes("/invoices/search") && resp.status() === 200,
+        (resp) =>
+          resp.url().includes("/invoices/search") && resp.status() === 200,
       );
 
       // Convert table in json format

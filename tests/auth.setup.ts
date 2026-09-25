@@ -60,18 +60,27 @@ for (const setupDataObj of setupDataArr) {
 
     console.log(JSON.stringify(rawObj, null, 2));
 
-    const token = await loginApi(setupDataObj.creds, request);
+    try {
+      const token = await loginApi(setupDataObj.creds, request);
 
-    console.log("Token", token);
+      console.log("Token", token);
 
-    rawObj["origins"][0]["localStorage"][0]["value"] = token;
+      rawObj["origins"][0]["localStorage"][0]["value"] = token;
 
-    console.log("updatedStorageObj", JSON.stringify(rawObj, null, 2));
+      console.log("updatedStorageObj", JSON.stringify(rawObj, null, 2));
 
-    fs.writeFileSync(
-      setupDataObj.authFile,
-      JSON.stringify(rawObj, null, 2),
-      "utf-8",
-    );
+      fs.writeFileSync(
+        setupDataObj.authFile,
+        JSON.stringify(rawObj, null, 2),
+        "utf-8",
+      );
+    } catch (error) {
+      // Don't let one temporarily locked/unavailable account block the
+      // whole setup (and everything that depends on it) - keep the
+      // previous token for this user and move on to the rest.
+      console.warn(
+        `\n⚠ Login failed for ${setupDataObj.setupName}, keeping previous token. Reason: ${error}`,
+      );
+    }
   });
 }
