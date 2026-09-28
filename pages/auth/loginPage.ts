@@ -7,6 +7,7 @@ export class LoginPage extends BasePage {
   private readonly emailField: Locator;
   private readonly passwordField: Locator;
   private readonly registerButton: Locator;
+  private readonly forgotPasswordLink: Locator;
 
   // Constructor for the class
   constructor(page: Page) {
@@ -15,6 +16,9 @@ export class LoginPage extends BasePage {
     this.emailField = this.page.locator(`[id="email"]`);
     this.passwordField = this.page.locator(`[id="password"]`);
     this.registerButton = this.page.locator(`[href="/auth/register"]`);
+    this.forgotPasswordLink = this.page.locator(
+      `[data-test="forgot-password-link"]`,
+    );
   }
 
   // Methods
@@ -36,5 +40,10 @@ export class LoginPage extends BasePage {
   async clickRegisterButton(): Promise<void> {
     console.log("\nUser clicks registration button");
     await this.registerButton.click();
+  }
+
+  async clickForgotPasswordLink(): Promise<void> {
+    console.log("\nUser clicks forgot password link");
+    await this.forgotPasswordLink.click();
   }
 }
