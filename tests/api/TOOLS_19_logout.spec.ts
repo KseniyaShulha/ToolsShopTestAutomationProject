@@ -6,9 +6,7 @@ let token: string | null;
 
 test.describe("Logout", { tag: ["@api", "@regression", "@auth"] }, () => {
   test.beforeEach(async ({ request }) => {
-    // Log in with a dedicated, fresh token instead of the shared cached
-    // admin token from TokenStore - logging this one out must not
-    // invalidate the admin session the rest of the suite relies on.
+   // Login as admin
     token = await loginApi(
       {
         email: process.env.ADMIN_EMAIL,
