@@ -18,6 +18,18 @@ export class CheckoutDataBuilder {
     return this;
   }
 
+  withValidBillingData(): this {
+    this.data.billingData = {
+      street: "5439 Mohr Loaf",
+      city: "Kozienice",
+      state: "podkarpackie",
+      country: "PL",
+      postcode: "50-001",
+      house_number: faker.location.buildingNumber(),
+    };
+    return this;
+  }
+
   withUserData(customerNumber: CustomerNumber): this {
     this.data.userData = {
       email: process.env[`CUSTOMER_${customerNumber}_EMAIL`],

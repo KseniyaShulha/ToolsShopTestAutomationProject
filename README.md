@@ -66,6 +66,17 @@ BaseAPI (abstract)
 
 **Fixtures:** `fixtures.ts` injects `appPageObjects` and `adminApi` into every test automatically, eliminating boilerplate setup code.
 
+## Design Patterns
+
+| Pattern | Where | Purpose |
+|---------|-------|---------|
+| **Page Object Model (POM)** | `pages/*` | Encapsulates locators and UI interactions per page behind a class API. |
+| **Abstract base class** | `pages/basePage.ts`, `api/baseAPI.ts` | Shared setup (e.g. `page`, `apiUrl`, headers) for all page/API classes via inheritance. |
+| **Factory** | `pages/appPageObjects.ts` | Creates the correct page-object instance on demand (`homePage()`, `checkoutPage()`, etc.) instead of manual `new X(page)` calls scattered across tests. |
+| **Singleton** | `api/tokenStore.ts` | Caches each user's auth token in memory after the first read, so `.auth/*.json` is only read from disk once per run. |
+| **Builder** | `testData/checkoutDataBuilder.ts`, `testData/userBuilder.ts` | Assembles test data step by step (`.withBillingData().withCreditCard().build()`) instead of duplicating literal objects per ticket. |
+| **Dependency Injection (via fixtures)** | `tests/fixtures/fixtures.ts` | Playwright fixtures inject `appPageObjects` and `adminApi` into tests automatically, instead of each test constructing its own dependencies. |
+
 ## Getting Started
 
 ### Prerequisites
@@ -136,3 +147,4 @@ The project uses GitHub Actions for continuous integration:
 | `@invoice` | Invoice-related tests |
 | `@negative` | Negative scenarios |
 | `@integration` | Mixed API + UI tests |
+| `@ci_smoke` | Minimal, stable subset gating PR merges — must pass before merge |

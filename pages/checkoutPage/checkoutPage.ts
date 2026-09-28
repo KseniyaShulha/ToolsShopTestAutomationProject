@@ -166,7 +166,18 @@ export class CheckoutPage extends BasePage {
 
   async fillInCountryField(country: string): Promise<void> {
     console.log(`\nUser fills in country field with: ${country}`);
-    await this.countryField.selectOption({ label: country });
+
+    // The dropdown uses official ISO country names, some with a trailing
+    // "(the)" (e.g. "Sudan (the)", "Lao People's Democratic Republic (the)"),
+    // which faker's plain country names don't always match exactly. Match
+    // by option text containing the given country name instead of requiring
+    // an exact label match.
+    const matchingOption = this.countryField.locator("option", {
+      hasText: country,
+    });
+    const value = await matchingOption.first().getAttribute("value");
+
+    await this.countryField.selectOption(value ?? "");
   }
 
   async fillInPostalCodeField(postcode: string): Promise<void> {
