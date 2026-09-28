@@ -41,7 +41,7 @@ jobs:
 
       - name: Override scope for pull_request (merge gate)
         if: ${{ github.event_name == 'pull_request' }}
-        run: echo "SCOPE=@ci_smoke" >> $GITHUB_ENV
+        run: echo "SCOPE=@api" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4

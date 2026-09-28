@@ -5,7 +5,7 @@ let testData = structuredClone(testData_login);
 
 test.describe(
   "Login",
-  { tag: ["@ui", "@smoke", "@regression", "@auth", "@ci_smoke"] },
+  { tag: ["@ui", "@smoke", "@regression", "@auth"] },
   () => {
     test("TOOLS_3 Login as customer", async ({ appPageObjects }) => {
       await appPageObjects.homePage().openHomePage();
