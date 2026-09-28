@@ -1,8 +1,6 @@
 name: Running Playwright tests on PR
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -40,6 +38,10 @@ jobs:
         run: |
           echo "ENVIRONMENT=${{ github.event.inputs.input_env }}" >> $GITHUB_ENV
           echo "SCOPE=${{ github.event.inputs.input_scope_to_run }}" >> $GITHUB_ENV
+
+      - name: Override scope for pull_request (merge gate)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "SCOPE=@api" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4

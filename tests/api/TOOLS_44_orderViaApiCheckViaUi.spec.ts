@@ -25,7 +25,7 @@ let testDataInvoice = structuredClone(testData_TOOLS_44_invoice);
 
 test.describe(
   "OrderViaApiCheckViaUi",
-  { tag: ["@api", "@integration", "@regression", "@payment"] },
+  { tag: ["@integration", "@regression", "@payment", "@ui"] },
   () => {
     test("TOOLS_44 Proceed payment via API and check invoice via UI", async ({
       page,

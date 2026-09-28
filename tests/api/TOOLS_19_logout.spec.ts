@@ -1,12 +1,19 @@
 import { test, expect } from "@playwright/test";
 import { UsersApi } from "../../api/usersApi";
-import { getTokenFromJson } from "../../api/apiHelper";
+import { loginApi } from "../../api/apiHelper";
 
-let token: any;
+let token: string | null;
 
-test("Logout", { tag: ["@api", "@regression", "@auth"] }, () => {
-  test.beforeEach(async () => {
-    token = await getTokenFromJson("admin");
+test.describe("Logout", { tag: ["@api", "@regression", "@auth"] }, () => {
+  test.beforeEach(async ({ request }) => {
+   // Login as admin
+    token = await loginApi(
+      {
+        email: process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD,
+      },
+      request,
+    );
 
     console.log("\nToken", token);
   });
