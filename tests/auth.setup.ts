@@ -1,5 +1,6 @@
 import { test as setup } from "@playwright/test";
 import { loginApi } from "../api/apiHelper";
+import { Urls } from "../utils/urls";
 import path from "path";
 import fs from "fs";
 
@@ -52,11 +53,23 @@ for (const setupDataObj of setupDataArr) {
     // Resolve a path to a file with cookies
     const cookiesPath = path.resolve(process.cwd(), setupDataObj.authFile);
 
-    // Open the file and convert it into utf-8
-    const raw = fs.readFileSync(cookiesPath, "utf-8");
+    let rawObj: any;
 
-    // Convert file into obj
-    const rawObj = JSON.parse(raw);
+    if (fs.existsSync(cookiesPath)) {
+      const raw = fs.readFileSync(cookiesPath, "utf-8");
+      rawObj = JSON.parse(raw);
+    } else {
+      fs.mkdirSync(path.dirname(cookiesPath), { recursive: true });
+      rawObj = {
+        cookies: [],
+        origins: [
+          {
+            origin: new Urls().getUrls().appUrl,
+            localStorage: [{ name: "auth-token", value: "" }],
+          },
+        ],
+      };
+    }
 
     console.log(JSON.stringify(rawObj, null, 2));
 
